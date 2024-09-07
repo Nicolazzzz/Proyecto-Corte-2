@@ -1,4 +1,5 @@
-package co.edu.unbosque.controller;// es la logica del codigo
+
+package co.edu.unbosque.controller;
 
 public class Controller {
 
