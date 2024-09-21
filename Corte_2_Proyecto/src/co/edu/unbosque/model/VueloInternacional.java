@@ -1,41 +1,47 @@
 package co.edu.unbosque.model;
 
-public class VueloInternacional extends Vuelo {
+import java.io.Serializable;
 
-	private boolean visaRequired;
+public class VueloInternacional extends Vuelo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3L;
+	private boolean requiereVisa;
 
 	public VueloInternacional() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public VueloInternacional(boolean visaRequired) {
+	public VueloInternacional(boolean requiereVisa) {
 		super();
-		this.visaRequired = visaRequired;
+		this.requiereVisa = requiereVisa;
 	}
 
 	public VueloInternacional(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime, boolean visaRequired) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime);
-		this.visaRequired = visaRequired;
+			String arrivalTime, String departureTime, double gas, boolean requiereVisa) {
+		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
+		this.requiereVisa = requiereVisa;
 	}
 
 	public VueloInternacional(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime);
+			String arrivalTime, String departureTime, double gas) {
+		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean isVisaRequired() {
-		return visaRequired;
+	public boolean isRequiereVisa() {
+		return requiereVisa;
 	}
 
-	public void setVisaRequired(boolean visaRequired) {
-		this.visaRequired = visaRequired;
+	public void setRequiereVisa(boolean requiereVisa) {
+		this.requiereVisa = requiereVisa;
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + "\nVisa required: " + visaRequired;
+		return "\nRequiere visa: " + requiereVisa;
 	}
 
 }

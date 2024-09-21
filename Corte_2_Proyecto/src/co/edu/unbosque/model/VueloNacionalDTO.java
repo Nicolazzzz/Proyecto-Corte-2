@@ -2,51 +2,51 @@ package co.edu.unbosque.model;
 
 public class VueloNacionalDTO extends VueloDTO {
 
-	public boolean isTurbine;
-	public boolean isHelix;
+	private boolean esTurbina;
+	private boolean esHelice;
 
 	public VueloNacionalDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public VueloNacionalDTO(boolean isTurbine, boolean isHelix) {
+	public VueloNacionalDTO(boolean esTurbina, boolean esHelice) {
 		super();
-		this.isTurbine = isTurbine;
-		this.isHelix = isHelix;
+		this.esTurbina = esTurbina;
+		this.esHelice = esHelice;
 	}
 
 	public VueloNacionalDTO(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime, boolean isTurbine, boolean isHelix) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime);
-		this.isTurbine = isTurbine;
-		this.isHelix = isHelix;
+			String arrivalTime, String departureTime, double gas, boolean esTurbina, boolean esHelice) {
+		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
+		this.esTurbina = esTurbina;
+		this.esHelice = esHelice;
 	}
 
 	public VueloNacionalDTO(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime);
+			String arrivalTime, String departureTime, double gas) {
+		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean isTurbine() {
-		return isTurbine;
+	public boolean isEsTurbina() {
+		return esTurbina;
 	}
 
-	public void setTurbine(boolean isTurbine) {
-		this.isTurbine = isTurbine;
+	public void setEsTurbina(boolean esTurbina) {
+		this.esTurbina = esTurbina;
 	}
 
-	public boolean isHelix() {
-		return isHelix;
+	public boolean isEsHelice() {
+		return esHelice;
 	}
 
-	public void setHelix(boolean isHelix) {
-		this.isHelix = isHelix;
+	public void setEsHelice(boolean esHelice) {
+		this.esHelice = esHelice;
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + "\nIs Turbine= " + isTurbine + "\nIs Helix= " + isHelix;
+		return super.toString() + "\nTiene turbina: " + esTurbina + "\nTiene Helice: " + esHelice;
 	}
 
 }

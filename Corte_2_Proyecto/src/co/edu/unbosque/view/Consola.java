@@ -26,8 +26,23 @@ public class Consola {
 		return sc.nextInt();
 	}
 
+	public double readDouble() {
+		return sc.nextDouble();
+	}
+
 	public String readLine() {
 		return sc.nextLine();
+	}
+
+	public boolean readBoolean() {
+		String input = sc.next();
+
+		if (input.toLowerCase().equals("si")) {
+			return true;
+		} else if (input.toLowerCase().equals("no")) {
+			return false;
+		}
+		return false;
 	}
 
 }
