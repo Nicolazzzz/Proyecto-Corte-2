@@ -17,14 +17,24 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 
 	@Override
 	public String showAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String content = "";
+		int pos = 1;
+		if (listaVuelosInternacionales.isEmpty()) {
+			return "No hay vuelos registrados";
+
+		} else {
+			for (VueloInternacional vueloInternacional : listaVuelosInternacionales) {
+				content += "Vuelo " + pos;
+				pos++;
+				content += vueloInternacional + "\n" + "\n";
+			}
+			return content;
+		}
 	}
 
 	@Override
 	public ArrayList<VueloInternacionalDTO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return DataMapper.listaVInternacionalesToListaVuelosInternacionalesDTO(listaVuelosInternacionales);
 	}
 
 	@Override
