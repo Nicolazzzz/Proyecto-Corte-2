@@ -63,7 +63,25 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 
 	@Override
 	public void readFile() {
-		// TODO Auto-generated method stub
+		String content = FileHandler.readFile(FILE_NAME);
+		if (content.equals("") || content == null) {
+			listaVuelosInternacionales = new ArrayList<>();
+		} else {
+			listaVuelosInternacionales = new ArrayList<>();
+			String[] rows = content.split("\n");
+			for (String row : rows) {
+				String[] cols = content.split(";");
+				VueloInternacional vI = new VueloInternacional();
+				vI.setCompanyInCharge(cols[0]);
+				vI.setNumPassengers(Integer.parseInt(cols[1]));
+				vI.setCaptain(cols[2]);
+				vI.setSecondInCommand(cols[3]);
+				vI.setArrivalTime(cols[4]);
+				vI.setDepartureTime(cols[5]);
+				vI.setGas(Double.parseDouble(cols[6]));
+				vI.setRequiereVisa(Boolean.parseBoolean(cols[7]));
+			}
+		}
 
 	}
 
@@ -84,8 +102,15 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 		FileHandler.writeFile(FILE_NAME, content);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void readSerialized() {
+		Object content = FileHandler.readSerialized(SERIAL_NAME);
+		if (content == null) {
+			listaVuelosInternacionales = new ArrayList<>();
+		} else {
+			listaVuelosInternacionales = (ArrayList<VueloInternacional>) content;
+		}
 
 	}
 
