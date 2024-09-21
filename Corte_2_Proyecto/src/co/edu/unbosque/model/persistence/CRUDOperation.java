@@ -12,7 +12,7 @@ public interface CRUDOperation<D, E> {
 
 	public boolean delete(D toDelete);
 
-	public E fin(E toFind);
+	public E find(E toFind);
 
 	public boolean update(D previous, D newData);
 

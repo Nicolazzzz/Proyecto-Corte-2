@@ -50,7 +50,7 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 	}
 
 	@Override
-	public VueloInternacional fin(VueloInternacional toFind) {
+	public VueloInternacional find(VueloInternacional toFind) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -69,20 +69,29 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 
 	@Override
 	public void writeFile() {
-		// TODO Auto-generated method stub
-
+		String content = "";
+		for (VueloInternacional vueloInternacional : listaVuelosInternacionales) {
+			content += vueloInternacional.getCompanyInCharge() + ";";
+			content += vueloInternacional.getNumPassengers() + ";";
+			content += vueloInternacional.getCaptain() + ";";
+			content += vueloInternacional.getSecondInCommand() + ";";
+			content += vueloInternacional.getArrivalTime() + ";";
+			content += vueloInternacional.getDepartureTime() + ";";
+			content += vueloInternacional.getGas() + ";";
+			content += vueloInternacional.isRequiereVisa();
+			content += "\n";
+		}
+		FileHandler.writeFile(FILE_NAME, content);
 	}
 
 	@Override
 	public void readSerialized() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void writeSerialized() {
-		// TODO Auto-generated method stub
-
+		FileHandler.writeSerialized(SERIAL_NAME, listaVuelosInternacionales);
 	}
 
 }
