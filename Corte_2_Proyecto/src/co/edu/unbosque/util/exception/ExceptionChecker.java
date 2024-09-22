@@ -28,4 +28,44 @@ public class ExceptionChecker {
 		}
 	}
 
+	public static void notValidTimeFormatException(String time) throws NotValidTimeFormatException {
+
+		boolean punticos = false;
+
+		String contenido = time.charAt(2) + "";
+		if (contenido.equals(":"))
+			punticos = true;
+
+		if (punticos != true)
+			throw new NotValidTimeFormatException();
+
+		if (time.length() < 5 || time.length() > 5) {
+			throw new NotValidTimeFormatException();
+		}
+
+		if (punticos == true) {
+
+			String[] horas = time.split(":");
+			int hora = Integer.parseInt(horas[0]);
+			int minutos = Integer.parseInt(horas[1]);
+
+			if (hora < 0 || hora > 23 || minutos < 0 || minutos > 59)
+				throw new NotValidTimeFormatException();
+		}
+
+	}
+
+	public static void passengerCapacityHeliceException(int passengers) throws PassengerCapacityException {
+
+		if (passengers < 0 || passengers > 555) {
+			throw new PassengerCapacityException();
+		}
+	}
+
+	public static void passengerCapacityTurbinaException(int passengers) throws PassengerCapacityException {
+
+		if (passengers < 0 || passengers > 300) {
+			throw new PassengerCapacityException();
+		}
+	}
 }
