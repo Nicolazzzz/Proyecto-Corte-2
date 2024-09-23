@@ -17,6 +17,8 @@ public class Controller {
 
 	public void run() {
 
+		System.out.println(mf.getComplement().showPilots());
+
 	}
 
 	public double calcularGasHelice(int pasajeros, String horaSalida, String horaLlegada) {
