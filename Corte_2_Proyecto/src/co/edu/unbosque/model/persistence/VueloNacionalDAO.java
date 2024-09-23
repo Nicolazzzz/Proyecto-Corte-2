@@ -82,6 +82,7 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 				vN.setGas(Double.parseDouble(cols[6]));
 				vN.setEsHelice(Boolean.parseBoolean(cols[7]));
 				vN.setEsTurbina(Boolean.parseBoolean(cols[8]));
+				listaVuelosNacionales.add(vN);
 
 			}
 		}
