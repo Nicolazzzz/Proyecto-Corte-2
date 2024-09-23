@@ -119,4 +119,36 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 		FileHandler.writeSerialized(SERIAL_NAME, listaVuelosInternacionales);
 	}
 
+	public boolean validarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
+
+		// hora salida parametro
+		String[] hora1 = horaSalida.split(":");
+		int horaSalidaParamtro = Integer.parseInt(hora1[0]);
+
+		// hora llegada parametro
+		String[] hora2 = horaLlegada.split(":");
+		int horaLlegadaParametro = Integer.parseInt(hora2[0]);
+
+		for (VueloInternacional vI : listaVuelosInternacionales) {
+
+			// hora salida
+			String[] hora3 = vI.getDepartureTime().split(":");
+			int horaSalidaOriginal = Integer.parseInt(hora3[0]);
+
+			// hora llegada
+			String[] hora4 = vI.getArrivalTime().split(":");
+			int horaLlegadaOriginal = Integer.parseInt(hora4[0]);
+	
+			
+
+			if (vI.getCaptain().toLowerCase().equals(captain.toLowerCase())
+					&& vI.getSecondInCommand().toLowerCase().equals(seconOnCommand.toLowerCase())) {
+				return false;
+
+			}
+
+		}
+		return true;
+
+	}
 }

@@ -57,6 +57,6 @@ public class ModelFacade {
 	 */
 	public void setComplement(Complementary complement) {
 		this.complement = complement;
-	}
 
+	}
 }
