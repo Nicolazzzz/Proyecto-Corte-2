@@ -1,7 +1,13 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
+
 public class VueloNacionalDTO extends VueloDTO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
 	private boolean esTurbina;
 	private boolean esHelice;
 
@@ -15,16 +21,17 @@ public class VueloNacionalDTO extends VueloDTO {
 		this.esHelice = esHelice;
 	}
 
-	public VueloNacionalDTO(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime, double gas, boolean esTurbina, boolean esHelice) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
+	public VueloNacionalDTO(String destino, String companyInCharge, int numPassengers, String captain,
+			String secondInCommand, String arrivalTime, String departureTime, double gas, boolean esTurbina,
+			boolean esHelice) {
+		super(destino, companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
 		this.esTurbina = esTurbina;
 		this.esHelice = esHelice;
 	}
 
-	public VueloNacionalDTO(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime, double gas) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
+	public VueloNacionalDTO(String destino, String companyInCharge, int numPassengers, String captain,
+			String secondInCommand, String arrivalTime, String departureTime, double gas) {
+		super(destino, companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
 		// TODO Auto-generated constructor stub
 	}
 

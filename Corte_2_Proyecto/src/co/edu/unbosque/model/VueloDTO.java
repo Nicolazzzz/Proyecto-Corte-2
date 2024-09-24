@@ -1,13 +1,12 @@
 package co.edu.unbosque.model;
 
-import java.io.Serializable;
-
-public abstract class VueloDTO implements Serializable {
+public abstract class VueloDTO {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
+	private String destino;
 	private String companyInCharge;
 	private int numPassengers;
 	private String captain;
@@ -20,9 +19,10 @@ public abstract class VueloDTO implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public VueloDTO(String companyInCharge, int numPassengers, String captain, String secondInCommand,
+	public VueloDTO(String destino, String companyInCharge, int numPassengers, String captain, String secondInCommand,
 			String arrivalTime, String departureTime, double gas) {
 		super();
+		this.destino = destino;
 		this.companyInCharge = companyInCharge;
 		this.numPassengers = numPassengers;
 		this.captain = captain;
@@ -32,67 +32,130 @@ public abstract class VueloDTO implements Serializable {
 		this.gas = gas;
 	}
 
+	/**
+	 * @return the destino
+	 */
+	public String getDestino() {
+		return destino;
+	}
+
+	/**
+	 * @param destino the destino to set
+	 */
+	public void setDestino(String destino) {
+		this.destino = destino;
+	}
+
+	/**
+	 * @return the companyInCharge
+	 */
 	public String getCompanyInCharge() {
 		return companyInCharge;
 	}
 
+	/**
+	 * @param companyInCharge the companyInCharge to set
+	 */
 	public void setCompanyInCharge(String companyInCharge) {
 		this.companyInCharge = companyInCharge;
 	}
 
+	/**
+	 * @return the numPassengers
+	 */
 	public int getNumPassengers() {
 		return numPassengers;
 	}
 
+	/**
+	 * @param numPassengers the numPassengers to set
+	 */
 	public void setNumPassengers(int numPassengers) {
 		this.numPassengers = numPassengers;
 	}
 
+	/**
+	 * @return the captain
+	 */
 	public String getCaptain() {
 		return captain;
 	}
 
+	/**
+	 * @param captain the captain to set
+	 */
 	public void setCaptain(String captain) {
 		this.captain = captain;
 	}
 
+	/**
+	 * @return the secondInCommand
+	 */
 	public String getSecondInCommand() {
 		return secondInCommand;
 	}
 
+	/**
+	 * @param secondInCommand the secondInCommand to set
+	 */
 	public void setSecondInCommand(String secondInCommand) {
 		this.secondInCommand = secondInCommand;
 	}
 
+	/**
+	 * @return the arrivalTime
+	 */
 	public String getArrivalTime() {
 		return arrivalTime;
 	}
 
+	/**
+	 * @param arrivalTime the arrivalTime to set
+	 */
 	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
+	/**
+	 * @return the departureTime
+	 */
 	public String getDepartureTime() {
 		return departureTime;
 	}
 
+	/**
+	 * @param departureTime the departureTime to set
+	 */
 	public void setDepartureTime(String departureTime) {
 		this.departureTime = departureTime;
 	}
 
+	/**
+	 * @return the gas
+	 */
 	public double getGas() {
 		return gas;
 	}
 
+	/**
+	 * @param gas the gas to set
+	 */
 	public void setGas(double gas) {
 		this.gas = gas;
 	}
 
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
-		return "\nCompañia a cargo: " + companyInCharge + "\nNumero de pasajeros: " + numPassengers + "\nCapitan: "
-				+ captain + "\nSegundo al mando: " + secondInCommand + "\nHora de llegada: " + arrivalTime
-				+ "\nHora de salida: " + departureTime + "\nCombustible: " + gas;
+		return "\nDestino: " + destino + "\nCompañia a cargo: " + companyInCharge + "\nNumero de pasajeros: "
+				+ numPassengers + "\nCapitan: " + captain + "\nSegundo al mando: " + secondInCommand
+				+ "\nHora de llegada: " + arrivalTime + "\nHora de salida: " + departureTime + "\nCombustible: " + gas;
 	}
 
 }

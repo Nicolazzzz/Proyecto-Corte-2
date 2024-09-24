@@ -3,6 +3,7 @@ package co.edu.unbosque.model.persistence;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.Vuelo;
+import co.edu.unbosque.model.VueloInternacional;
 import co.edu.unbosque.model.VueloNacional;
 import co.edu.unbosque.model.VueloNacionalDTO;
 
@@ -73,15 +74,16 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 			for (String row : rows) {
 				String[] cols = row.split(";");
 				VueloNacional vN = new VueloNacional();
-				vN.setCompanyInCharge(cols[0]);
-				vN.setNumPassengers(Integer.parseInt(cols[1]));
-				vN.setCaptain(cols[2]);
-				vN.setSecondInCommand(cols[3]);
-				vN.setArrivalTime(cols[4]);
-				vN.setDepartureTime(cols[5]);
-				vN.setGas(Double.parseDouble(cols[6]));
-				vN.setEsHelice(Boolean.parseBoolean(cols[7]));
-				vN.setEsTurbina(Boolean.parseBoolean(cols[8]));
+				vN.setDestino(cols[0]);
+				vN.setCompanyInCharge(cols[1]);
+				vN.setNumPassengers(Integer.parseInt(cols[2]));
+				vN.setCaptain(cols[3]);
+				vN.setSecondInCommand(cols[4]);
+				vN.setArrivalTime(cols[5]);
+				vN.setDepartureTime(cols[6]);
+				vN.setGas(Double.parseDouble(cols[7]));
+				vN.setEsHelice(Boolean.parseBoolean(cols[8]));
+				vN.setEsTurbina(Boolean.parseBoolean(cols[9]));
 				listaVuelosNacionales.add(vN);
 
 			}
@@ -92,6 +94,7 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 	public void writeFile() {
 		String content = "";
 		for (VueloNacional vueloNacional : listaVuelosNacionales) {
+			content += vueloNacional.getDestino() + ";";
 			content += vueloNacional.getCompanyInCharge() + ";";
 			content += vueloNacional.getNumPassengers() + ";";
 			content += vueloNacional.getCaptain() + ";";
@@ -120,6 +123,44 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 	@Override
 	public void writeSerialized() {
 		FileHandler.writeSerialized(SERIAL_NAME, listaVuelosNacionales);
+	}
+
+	public boolean validarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
+
+		boolean valido = true;
+
+		// hora salida parametro
+		String[] hora1 = horaSalida.split(":");
+		int horaSalidaParametro = Integer.parseInt(hora1[0]);
+
+		// hora llegada parametro
+		String[] hora2 = horaLlegada.split(":");
+		int horaLlegadaParametro = Integer.parseInt(hora2[0]);
+
+		for (VueloNacional vN : listaVuelosNacionales) {
+
+			// hora salida del vuelo original
+			String[] hora3 = vN.getDepartureTime().split(":");
+			int horaSalidaOriginal = Integer.parseInt(hora3[0]);
+
+			// hora llegada del vuelo original
+			String[] hora4 = vN.getArrivalTime().split(":");
+			int horaLlegadaOriginal = Integer.parseInt(hora4[0]);
+
+			boolean hayInterseccion = (horaSalidaParametro < horaLlegadaOriginal)
+					&& (horaLlegadaParametro > horaSalidaOriginal);
+
+			boolean pilotoRepetido = vN.getCaptain().equalsIgnoreCase(captain)
+					|| vN.getSecondInCommand().equalsIgnoreCase(seconOnCommand)
+					|| vN.getCaptain().equalsIgnoreCase(seconOnCommand)
+					|| vN.getSecondInCommand().equalsIgnoreCase(captain);
+
+			if (hayInterseccion && pilotoRepetido) {
+				return false;
+			}
+		}
+
+		return valido;
 	}
 
 }

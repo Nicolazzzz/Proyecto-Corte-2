@@ -72,14 +72,15 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 			for (String row : rows) {
 				String[] cols = content.split(";");
 				VueloInternacional vI = new VueloInternacional();
-				vI.setCompanyInCharge(cols[0]);
-				vI.setNumPassengers(Integer.parseInt(cols[1]));
-				vI.setCaptain(cols[2]);
-				vI.setSecondInCommand(cols[3]);
-				vI.setArrivalTime(cols[4]);
-				vI.setDepartureTime(cols[5]);
-				vI.setGas(Double.parseDouble(cols[6]));
-				vI.setRequiereVisa(Boolean.parseBoolean(cols[7]));
+				vI.setDestino(cols[0]);
+				vI.setCompanyInCharge(cols[1]);
+				vI.setNumPassengers(Integer.parseInt(cols[2]));
+				vI.setCaptain(cols[3]);
+				vI.setSecondInCommand(cols[4]);
+				vI.setArrivalTime(cols[5]);
+				vI.setDepartureTime(cols[6]);
+				vI.setGas(Double.parseDouble(cols[7]));
+				vI.setRequiereVisa(Boolean.parseBoolean(cols[8]));
 			}
 		}
 
@@ -89,6 +90,7 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 	public void writeFile() {
 		String content = "";
 		for (VueloInternacional vueloInternacional : listaVuelosInternacionales) {
+			content += vueloInternacional.getDestino() + ";";
 			content += vueloInternacional.getCompanyInCharge() + ";";
 			content += vueloInternacional.getNumPassengers() + ";";
 			content += vueloInternacional.getCaptain() + ";";
@@ -121,9 +123,11 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 
 	public boolean validarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
 
+		boolean valido = true;
+
 		// hora salida parametro
 		String[] hora1 = horaSalida.split(":");
-		int horaSalidaParamtro = Integer.parseInt(hora1[0]);
+		int horaSalidaParametro = Integer.parseInt(hora1[0]);
 
 		// hora llegada parametro
 		String[] hora2 = horaLlegada.split(":");
@@ -131,24 +135,27 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 
 		for (VueloInternacional vI : listaVuelosInternacionales) {
 
-			// hora salida
+			// hora salida del vuelo original
 			String[] hora3 = vI.getDepartureTime().split(":");
 			int horaSalidaOriginal = Integer.parseInt(hora3[0]);
 
-			// hora llegada
+			// hora llegada del vuelo original
 			String[] hora4 = vI.getArrivalTime().split(":");
 			int horaLlegadaOriginal = Integer.parseInt(hora4[0]);
-	
-			
 
-			if (vI.getCaptain().toLowerCase().equals(captain.toLowerCase())
-					&& vI.getSecondInCommand().toLowerCase().equals(seconOnCommand.toLowerCase())) {
+			boolean hayInterseccion = (horaSalidaParametro < horaLlegadaOriginal)
+					&& (horaLlegadaParametro > horaSalidaOriginal);
+
+			boolean pilotoRepetido = vI.getCaptain().equalsIgnoreCase(captain)
+					|| vI.getSecondInCommand().equalsIgnoreCase(seconOnCommand)
+					|| vI.getCaptain().equalsIgnoreCase(seconOnCommand)
+					|| vI.getSecondInCommand().equalsIgnoreCase(captain);
+
+			if (hayInterseccion && pilotoRepetido) {
 				return false;
-
 			}
-
 		}
-		return true;
 
+		return valido;
 	}
 }

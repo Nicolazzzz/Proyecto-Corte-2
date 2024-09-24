@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class VueloInternacional extends Vuelo implements Serializable{
+public class VueloInternacional extends Vuelo implements Serializable {
 
 	/**
 	 * 
@@ -19,24 +19,37 @@ public class VueloInternacional extends Vuelo implements Serializable{
 		this.requiereVisa = requiereVisa;
 	}
 
-	public VueloInternacional(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime, double gas, boolean requiereVisa) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
+	public VueloInternacional(String destino, String companyInCharge, int numPassengers, String captain,
+			String secondInCommand, String arrivalTime, String departureTime, double gas, boolean requiereVisa) {
+		super(destino, companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
 		this.requiereVisa = requiereVisa;
 	}
 
-	public VueloInternacional(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime, double gas) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
+	public VueloInternacional(String destino, String companyInCharge, int numPassengers, String captain,
+			String secondInCommand, String arrivalTime, String departureTime, double gas) {
+		super(destino, companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @return the requiereVisa
+	 */
 	public boolean isRequiereVisa() {
 		return requiereVisa;
 	}
 
+	/**
+	 * @param requiereVisa the requiereVisa to set
+	 */
 	public void setRequiereVisa(boolean requiereVisa) {
 		this.requiereVisa = requiereVisa;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

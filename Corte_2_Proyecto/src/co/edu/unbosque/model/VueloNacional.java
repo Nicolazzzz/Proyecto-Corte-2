@@ -21,16 +21,17 @@ public class VueloNacional extends Vuelo implements Serializable {
 		this.esHelice = esHelice;
 	}
 
-	public VueloNacional(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime, double gas, boolean esTurbina, boolean esHelice) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
+	public VueloNacional(String destino, String companyInCharge, int numPassengers, String captain,
+			String secondInCommand, String arrivalTime, String departureTime, double gas, boolean esTurbina,
+			boolean esHelice) {
+		super(destino, companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
 		this.esTurbina = esTurbina;
 		this.esHelice = esHelice;
 	}
 
-	public VueloNacional(String companyInCharge, int numPassengers, String captain, String secondInCommand,
-			String arrivalTime, String departureTime, double gas) {
-		super(companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
+	public VueloNacional(String destino, String companyInCharge, int numPassengers, String captain,
+			String secondInCommand, String arrivalTime, String departureTime, double gas) {
+		super(destino, companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
 		// TODO Auto-generated constructor stub
 	}
 
