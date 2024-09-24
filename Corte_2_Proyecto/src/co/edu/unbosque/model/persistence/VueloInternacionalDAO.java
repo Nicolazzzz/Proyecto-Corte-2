@@ -13,6 +13,7 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 
 	public VueloInternacionalDAO() {
 		FileHandler.checkFolder();
+		readSerialized();
 	}
 
 	@Override
@@ -39,25 +40,54 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 
 	@Override
 	public boolean add(VueloInternacionalDTO newData) {
-		// TODO Auto-generated method stub
+		if (find(DataMapper.vueloInternacionalDTOToVueloInternacional(newData)) == null) {
+			listaVuelosInternacionales.add(DataMapper.vueloInternacionalDTOToVueloInternacional(newData));
+			writeFile();
+			writeSerialized();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean delete(VueloInternacionalDTO toDelete) {
-		// TODO Auto-generated method stub
+		VueloInternacional found = find(DataMapper.vueloInternacionalDTOToVueloInternacional(toDelete));
+		if (found != null) {
+			listaVuelosInternacionales.remove(found);
+			writeFile();
+			writeSerialized();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public VueloInternacional find(VueloInternacional toFind) {
-		// TODO Auto-generated method stub
+		VueloInternacional found = null;
+		if (!listaVuelosInternacionales.isEmpty()) {
+			for (VueloInternacional vI : listaVuelosInternacionales) {
+				if (vI.getCompanyInCharge().equalsIgnoreCase(toFind.getCompanyInCharge())
+						&& vI.getArrivalTime().equalsIgnoreCase(toFind.getArrivalTime())
+						&& vI.getDestino().equalsIgnoreCase(toFind.getDestino())) {
+					found = vI;
+					return found;
+				}
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public boolean update(VueloInternacionalDTO previous, VueloInternacionalDTO newData) {
-		// TODO Auto-generated method stub
+		VueloInternacional found = find(DataMapper.vueloInternacionalDTOToVueloInternacional(previous));
+		if (found != null) {
+			listaVuelosInternacionales.remove(found);
+			listaVuelosInternacionales.add(DataMapper.vueloInternacionalDTOToVueloInternacional(newData));
+			writeFile();
+			writeSerialized();
+			return true;
+		}
+
 		return false;
 	}
 
@@ -123,39 +153,44 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 
 	public boolean validarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
 
-		boolean valido = true;
+		if (listaVuelosInternacionales.isEmpty()) {
+			return true;
+		} else {
 
-		// hora salida parametro
-		String[] hora1 = horaSalida.split(":");
-		int horaSalidaParametro = Integer.parseInt(hora1[0]);
+			boolean valido = true;
 
-		// hora llegada parametro
-		String[] hora2 = horaLlegada.split(":");
-		int horaLlegadaParametro = Integer.parseInt(hora2[0]);
+			// hora salida parametro
+			String[] hora1 = horaSalida.split(":");
+			int horaSalidaParametro = Integer.parseInt(hora1[0]);
 
-		for (VueloInternacional vI : listaVuelosInternacionales) {
+			// hora llegada parametro
+			String[] hora2 = horaLlegada.split(":");
+			int horaLlegadaParametro = Integer.parseInt(hora2[0]);
 
-			// hora salida del vuelo original
-			String[] hora3 = vI.getDepartureTime().split(":");
-			int horaSalidaOriginal = Integer.parseInt(hora3[0]);
+			for (VueloInternacional vI : listaVuelosInternacionales) {
 
-			// hora llegada del vuelo original
-			String[] hora4 = vI.getArrivalTime().split(":");
-			int horaLlegadaOriginal = Integer.parseInt(hora4[0]);
+				// hora salida del vuelo original
+				String[] hora3 = vI.getDepartureTime().split(":");
+				int horaSalidaOriginal = Integer.parseInt(hora3[0]);
 
-			boolean hayInterseccion = (horaSalidaParametro < horaLlegadaOriginal)
-					&& (horaLlegadaParametro > horaSalidaOriginal);
+				// hora llegada del vuelo original
+				String[] hora4 = vI.getArrivalTime().split(":");
+				int horaLlegadaOriginal = Integer.parseInt(hora4[0]);
 
-			boolean pilotoRepetido = vI.getCaptain().equalsIgnoreCase(captain)
-					|| vI.getSecondInCommand().equalsIgnoreCase(seconOnCommand)
-					|| vI.getCaptain().equalsIgnoreCase(seconOnCommand)
-					|| vI.getSecondInCommand().equalsIgnoreCase(captain);
+				boolean hayInterseccion = (horaSalidaParametro < horaLlegadaOriginal)
+						&& (horaLlegadaParametro > horaSalidaOriginal);
 
-			if (hayInterseccion && pilotoRepetido) {
-				return false;
+				boolean pilotoRepetido = vI.getCaptain().equalsIgnoreCase(captain)
+						|| vI.getSecondInCommand().equalsIgnoreCase(seconOnCommand)
+						|| vI.getCaptain().equalsIgnoreCase(seconOnCommand)
+						|| vI.getSecondInCommand().equalsIgnoreCase(captain);
+
+				if (hayInterseccion && pilotoRepetido) {
+					return false;
+				}
 			}
-		}
 
-		return valido;
+			return valido;
+		}
 	}
 }

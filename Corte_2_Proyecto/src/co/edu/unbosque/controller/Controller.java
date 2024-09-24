@@ -1,10 +1,11 @@
 
 package co.edu.unbosque.controller;
 
-import java.util.ArrayList;
-
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.Piloto;
+import co.edu.unbosque.model.VueloNacionalDTO;
+import co.edu.unbosque.util.exception.ExceptionChecker;
+import co.edu.unbosque.util.exception.NotValidTimeFormatException;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller {
@@ -15,7 +16,7 @@ public class Controller {
 	public Controller() {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
-		run();
+		mostrarMenuPrincipal();
 	}
 
 	public void run() {
@@ -100,85 +101,6 @@ public class Controller {
 
 	}
 
-	public double calcularGasHelice(int pasajeros, String horaSalida, String horaLlegada) {
-
-		int horaResultante = 0;
-		int minutoResultante = 0;
-		int duracionVuelo = 0;
-		int consumoAvion = 0; // litro / hora
-		double RESERVA = 1.2; // siempre hay reservas del 20%
-		double gas = 0;
-
-		String[] tiempoSalida = horaSalida.split(":");
-		int horaS = Integer.parseInt(tiempoSalida[0]);
-		int minutoS = Integer.parseInt(tiempoSalida[1]);
-
-		String[] tiempoLlegada = horaLlegada.split(":");
-		int horaL = Integer.parseInt(tiempoLlegada[0]);
-		int minutoL = Integer.parseInt(tiempoLlegada[1]);
-
-		horaResultante = horaL - horaS;
-		minutoResultante = minutoL - minutoS;
-
-		if (pasajeros < 100) {
-			duracionVuelo = horaResultante + (minutoResultante / 60);
-			consumoAvion = 2500; // ejemplo por el BOMBARDIER Q300 o el EMBRAER EMB-120
-			gas = (duracionVuelo * consumoAvion) * RESERVA;
-		}
-
-		if (pasajeros < 300 && pasajeros > 100) {
-			duracionVuelo = horaResultante + (minutoResultante / 60);
-			consumoAvion = 5000;
-			gas = (duracionVuelo * consumoAvion) * RESERVA;
-
-		}
-
-		return gas;
-	}
-
-	public double calcularGasTurbina(int pasajeros, String horaSalida, String horaLlegada) {
-
-		int horaResultante = 0;
-		int minutoResultante = 0;
-		int duracionVuelo = 0;
-		int consumoAvion = 0; // litro / hora
-		double RESERVA = 1.2; // siempre hay reservas del 20%
-		double gas = 0;
-
-		String[] tiempoSalida = horaSalida.split(":");
-		int horaS = Integer.parseInt(tiempoSalida[0]);
-		int minutoS = Integer.parseInt(tiempoSalida[1]);
-
-		String[] tiempoLlegada = horaLlegada.split(":");
-		int horaL = Integer.parseInt(tiempoLlegada[0]);
-		int minutoL = Integer.parseInt(tiempoLlegada[1]);
-
-		horaResultante = horaL - horaS;
-		minutoResultante = minutoL - minutoS;
-
-		if (pasajeros < 100) {
-			duracionVuelo = horaResultante + (minutoResultante / 60);
-			consumoAvion = 4000; // ATR 72
-			gas = (duracionVuelo * consumoAvion) * RESERVA;
-		}
-
-		if (pasajeros < 300 && pasajeros > 100) {
-			duracionVuelo = horaResultante + (minutoResultante / 60);
-			consumoAvion = 6000; // airbus A320 o Boeing 737
-			gas = (duracionVuelo * consumoAvion) * RESERVA;
-
-		}
-
-		if (pasajeros > 300) {
-			duracionVuelo = horaResultante + (minutoResultante / 60);
-			consumoAvion = 12000;
-			gas = (duracionVuelo * consumoAvion) * RESERVA;
-
-		}
-
-		return gas;
-	}
-
 	public void mostrarMenuNacional() {
 		nacionloop: while (true) {
 
@@ -194,21 +116,74 @@ public class Controller {
 					""";
 			vf.getCon().printLine(menuNacional);
 			int op = vf.getCon().readInt();
+			vf.getCon().burnLine();
 			switch (op) {
 			case 1:
 
-				String companyInCharge = vf.getCon().readLine();
-				int passenger = vf.getCon().readInt();
-				String captain = vf.getCon().readLine();
-				String secondOnCommand = vf.getCon().readLine();
-				String arrivalTime = vf.getCon().readLine();
-				String departureTime = vf.getCon().readLine();
-				double gas = vf.getCon().readDouble();
-				boolean esHelice = vf.getCon().readBoolean();
-				boolean esTurbina = vf.getCon().readBoolean();
+				try {
+					boolean validarRandom = true;
+					vf.getCon().printLine("AGREGANDO");
 
-				break;
+					vf.getCon().printLine("DESTINO");
+					String destino = vf.getCon().readLine();
+
+					vf.getCon().printLine("COMPANIA");
+					String companyInCharge = vf.getCon().readLine();
+					vf.getCon().printLine("Pasajeros");
+					int passenger = vf.getCon().readInt();
+					vf.getCon().burnLine();
+
+					vf.getCon().printLine("hora salida");
+					String departureTime = vf.getCon().readLine();
+					ExceptionChecker.notValidTimeFormatException(departureTime);
+
+					vf.getCon().printLine("hora llegada");
+					String arrivalTime = vf.getCon().readLine();
+					ExceptionChecker.notValidTimeFormatException(arrivalTime);
+
+					if (!verificarTiempo(departureTime, arrivalTime)) {
+						vf.getCon().printLine("Hora invalida");
+						break;
+					}
+
+					vf.getCon().printLine("es helice");
+					boolean esHelice = vf.getCon().readBoolean();
+
+					vf.getCon().printLine("es turbina");
+					boolean esTurbina = vf.getCon().readBoolean();
+
+					String captain = mf.getComplement().randomizer();
+					String secondOnCommand = mf.getComplement().randomizer();
+
+					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+
+					while (validarRandom == false) {
+						captain = mf.getComplement().randomizer();
+						secondOnCommand = mf.getComplement().randomizer();
+						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+					}
+
+					double gas = 0;
+					if (esHelice)
+						gas = calcularGasHelice(passenger, departureTime, arrivalTime);
+					if (esTurbina)
+						gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
+
+					if (mf.getvNacionalDAO().add(new VueloNacionalDTO(destino, companyInCharge, passenger, captain,
+							secondOnCommand, arrivalTime, departureTime, gas, esTurbina, esHelice)) == true) {
+						vf.getCon().printLine("CREADO EXITOSAMENTE");
+					} else {
+						vf.getCon().printLine("NO SE PUDO CREAR");
+					}
+					break;
+
+				} catch (NotValidTimeFormatException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
+					break;
+//					e.printStackTrace();
+				}
 			case 2:
+				vf.getCon().printLine(mf.getvNacionalDAO().showAll());
 
 				break;
 			case 3:
@@ -292,6 +267,113 @@ public class Controller {
 				break;
 
 			}
+		}
+	}
+
+	public double calcularGasHelice(int pasajeros, String horaSalida, String horaLlegada) {
+
+		int horaResultante = 0;
+		int minutoResultante = 0;
+		int duracionVuelo = 0;
+		int consumoAvion = 0; // litro / hora
+		double RESERVA = 1.2; // siempre hay reservas del 20%
+		double gas = 0;
+
+		String[] tiempoSalida = horaSalida.split(":");
+		int horaS = Integer.parseInt(tiempoSalida[0]);
+		int minutoS = Integer.parseInt(tiempoSalida[1]);
+
+		String[] tiempoLlegada = horaLlegada.split(":");
+		int horaL = Integer.parseInt(tiempoLlegada[0]);
+		int minutoL = Integer.parseInt(tiempoLlegada[1]);
+
+		horaResultante = horaL - horaS;
+		minutoResultante = minutoL - minutoS;
+
+		if (pasajeros < 100) {
+			duracionVuelo = horaResultante + (minutoResultante / 60);
+			consumoAvion = 2500; // ejemplo por el BOMBARDIER Q300 o el EMBRAER EMB-120
+			gas = (duracionVuelo * consumoAvion) * RESERVA;
+		}
+
+		if (pasajeros < 300 && pasajeros > 100) {
+			duracionVuelo = horaResultante + (minutoResultante / 60);
+			consumoAvion = 5000;
+			gas = (duracionVuelo * consumoAvion) * RESERVA;
+
+		}
+
+		return gas;
+	}
+
+	public double calcularGasTurbina(int pasajeros, String horaSalida, String horaLlegada) {
+
+		int horaResultante = 0;
+		int minutoResultante = 0;
+		int duracionVuelo = 0;
+		int consumoAvion = 0; // litro / hora
+		double RESERVA = 1.2; // siempre hay reservas del 20%
+		double gas = 0;
+
+		String[] tiempoSalida = horaSalida.split(":");
+		int horaS = Integer.parseInt(tiempoSalida[0]);
+		int minutoS = Integer.parseInt(tiempoSalida[1]);
+
+		String[] tiempoLlegada = horaLlegada.split(":");
+		int horaL = Integer.parseInt(tiempoLlegada[0]);
+		int minutoL = Integer.parseInt(tiempoLlegada[1]);
+
+		horaResultante = horaL - horaS;
+		minutoResultante = minutoL - minutoS;
+
+		if (pasajeros < 100) {
+			duracionVuelo = horaResultante + (minutoResultante / 60);
+			consumoAvion = 4000; // ATR 72
+			gas = (duracionVuelo * consumoAvion) * RESERVA;
+		}
+
+		if (pasajeros < 300 && pasajeros > 100) {
+			duracionVuelo = horaResultante + (minutoResultante / 60);
+			consumoAvion = 6000; // airbus A320 o Boeing 737
+			gas = (duracionVuelo * consumoAvion) * RESERVA;
+
+		}
+
+		if (pasajeros > 300) {
+			duracionVuelo = horaResultante + (minutoResultante / 60);
+			consumoAvion = 12000;
+			gas = (duracionVuelo * consumoAvion) * RESERVA;
+
+		}
+
+		return gas;
+	}
+
+	public boolean verificarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
+		boolean valido = true;
+
+		if (mf.getvInternacionalDAO().validarRandom(captain, seconOnCommand, horaSalida, horaLlegada) == false
+				|| mf.getvNacionalDAO().validarRandom(captain, seconOnCommand, horaSalida, horaLlegada) == false)
+			valido = false;
+
+		return valido;
+
+	}
+
+	public boolean verificarTiempo(String timeSalida, String timeLlegada) {
+
+		String[] salida = timeSalida.split(":");
+		int hora = Integer.parseInt(salida[0]);
+		int minutos = Integer.parseInt(salida[1]);
+
+		String[] llegada = timeLlegada.split(":");
+		int hora2 = Integer.parseInt(llegada[0]);
+		int minutos2 = Integer.parseInt(llegada[1]);
+
+		if (hora > hora2 && minutos > minutos2 || hora > hora2) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 

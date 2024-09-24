@@ -15,6 +15,7 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 
 	public VueloNacionalDAO() {
 		FileHandler.checkFolder();
+		readSerialized();
 	}
 
 	@Override
@@ -41,25 +42,55 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 
 	@Override
 	public boolean add(VueloNacionalDTO newData) {
-		// TODO Auto-generated method stub
+		if (find(DataMapper.vueloNacionalDTOToVueloNacional(newData)) == null) {
+			listaVuelosNacionales.add(DataMapper.vueloNacionalDTOToVueloNacional(newData));
+			writeFile();
+			writeSerialized();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean delete(VueloNacionalDTO toDelete) {
-		// TODO Auto-generated method stub
+		VueloNacional found = find(DataMapper.vueloNacionalDTOToVueloNacional(toDelete));
+		if (found != null) {
+			listaVuelosNacionales.remove(found);
+			writeFile();
+			writeSerialized();
+			return true;
+		}
+
 		return false;
 	}
 
 	@Override
 	public VueloNacional find(VueloNacional toFind) {
-		// TODO Auto-generated method stub
+		VueloNacional found = null;
+		if (!listaVuelosNacionales.isEmpty()) {
+			for (VueloNacional vN : listaVuelosNacionales) {
+				if (vN.getCompanyInCharge().equalsIgnoreCase(toFind.getCompanyInCharge())
+						&& vN.getArrivalTime().equalsIgnoreCase(toFind.getArrivalTime())
+						&& vN.getDestino().equalsIgnoreCase(toFind.getDestino())) {
+					found = vN;
+					return found;
+				}
+			}
+		}
+
 		return null;
 	}
 
 	@Override
 	public boolean update(VueloNacionalDTO previous, VueloNacionalDTO newData) {
-		// TODO Auto-generated method stub
+		VueloNacional found = find(DataMapper.vueloNacionalDTOToVueloNacional(previous));
+		if (found != null) {
+			listaVuelosNacionales.remove(found);
+			listaVuelosNacionales.add(DataMapper.vueloNacionalDTOToVueloNacional(newData));
+			writeFile();
+			writeSerialized();
+			return true;
+		}
 		return false;
 	}
 
@@ -126,41 +157,45 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 	}
 
 	public boolean validarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
+		if (listaVuelosNacionales.isEmpty()) {
+			return true;
+		} else {
 
-		boolean valido = true;
+			boolean valido = true;
 
-		// hora salida parametro
-		String[] hora1 = horaSalida.split(":");
-		int horaSalidaParametro = Integer.parseInt(hora1[0]);
+			// hora salida parametro
+			String[] hora1 = horaSalida.split(":");
+			int horaSalidaParametro = Integer.parseInt(hora1[0]);
 
-		// hora llegada parametro
-		String[] hora2 = horaLlegada.split(":");
-		int horaLlegadaParametro = Integer.parseInt(hora2[0]);
+			// hora llegada parametro
+			String[] hora2 = horaLlegada.split(":");
+			int horaLlegadaParametro = Integer.parseInt(hora2[0]);
 
-		for (VueloNacional vN : listaVuelosNacionales) {
+			for (VueloNacional vN : listaVuelosNacionales) {
 
-			// hora salida del vuelo original
-			String[] hora3 = vN.getDepartureTime().split(":");
-			int horaSalidaOriginal = Integer.parseInt(hora3[0]);
+				// hora salida del vuelo original
+				String[] hora3 = vN.getDepartureTime().split(":");
+				int horaSalidaOriginal = Integer.parseInt(hora3[0]);
 
-			// hora llegada del vuelo original
-			String[] hora4 = vN.getArrivalTime().split(":");
-			int horaLlegadaOriginal = Integer.parseInt(hora4[0]);
+				// hora llegada del vuelo original
+				String[] hora4 = vN.getArrivalTime().split(":");
+				int horaLlegadaOriginal = Integer.parseInt(hora4[0]);
 
-			boolean hayInterseccion = (horaSalidaParametro < horaLlegadaOriginal)
-					&& (horaLlegadaParametro > horaSalidaOriginal);
+				boolean hayInterseccion = (horaSalidaParametro < horaLlegadaOriginal)
+						&& (horaLlegadaParametro > horaSalidaOriginal);
 
-			boolean pilotoRepetido = vN.getCaptain().equalsIgnoreCase(captain)
-					|| vN.getSecondInCommand().equalsIgnoreCase(seconOnCommand)
-					|| vN.getCaptain().equalsIgnoreCase(seconOnCommand)
-					|| vN.getSecondInCommand().equalsIgnoreCase(captain);
+				boolean pilotoRepetido = vN.getCaptain().equalsIgnoreCase(captain)
+						|| vN.getSecondInCommand().equalsIgnoreCase(seconOnCommand)
+						|| vN.getCaptain().equalsIgnoreCase(seconOnCommand)
+						|| vN.getSecondInCommand().equalsIgnoreCase(captain);
 
-			if (hayInterseccion && pilotoRepetido) {
-				return false;
+				if (hayInterseccion && pilotoRepetido) {
+					return false;
+				}
 			}
-		}
 
-		return valido;
+			return valido;
+		}
 	}
 
 }
