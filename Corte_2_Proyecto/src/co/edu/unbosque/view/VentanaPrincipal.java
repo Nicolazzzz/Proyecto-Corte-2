@@ -15,7 +15,7 @@ public class VentanaPrincipal extends JFrame {
 		setVisible(true);
 		setTitle("EL DORADO");
 
-		ImageIcon logoApp = new ImageIcon("src/media/logo.jpg");
+		ImageIcon logoApp = new ImageIcon("src/media/Logo.jpg");
 		setIconImage(logoApp.getImage());
 
 	}
