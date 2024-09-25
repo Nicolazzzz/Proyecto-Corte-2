@@ -2,25 +2,71 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
+/**
+ * La clase {@code VueloNacional} representa un vuelo nacional. Esta clase
+ * extiende a {@code Vuelo} e incluye información adicional sobre el tipo de
+ * propulsión del vuelo, ya sea turbina o hélice.
+ * <p>
+ * Esta clase es útil para modelar vuelos que se realizan dentro de un país y
+ * proporciona información específica sobre los diferentes tipos de aeronaves
+ * utilizadas.
+ * </p>
+ * 
+ * @author Emmanuel
+ * @since 2024-09-24
+ * @version 1.0
+ */
 public class VueloNacional extends Vuelo implements Serializable {
 
-	/**
-	 * 
-	 */
+	/** Identificador único para la serialización. */
 	private static final long serialVersionUID = 4L;
+
+	/** Indica si el vuelo utiliza un motor a turbina. */
 	private boolean esTurbina;
+
+	/** Indica si el vuelo utiliza un motor a hélice. */
 	private boolean esHelice;
 
+	/**
+	 * Constructor por defecto para crear una instancia vacía de
+	 * {@code VueloNacional}.
+	 */
 	public VueloNacional() {
-		// TODO Auto-generated constructor stub
+		// Constructor vacío
 	}
 
+	/**
+	 * Constructor para crear una instancia de {@code VueloNacional} especificando
+	 * el tipo de propulsión.
+	 * 
+	 * @param esTurbina {@code true} si el vuelo tiene motor a turbina,
+	 *                  {@code false} en caso contrario.
+	 * @param esHelice  {@code true} si el vuelo tiene motor a hélice, {@code false}
+	 *                  en caso contrario.
+	 */
 	public VueloNacional(boolean esTurbina, boolean esHelice) {
 		super();
 		this.esTurbina = esTurbina;
 		this.esHelice = esHelice;
 	}
 
+	/**
+	 * Constructor con parámetros para crear una instancia de {@code VueloNacional}
+	 * con todos los atributos especificados.
+	 * 
+	 * @param destino         El destino del vuelo.
+	 * @param companyInCharge La compañía a cargo del vuelo.
+	 * @param numPassengers   El número de pasajeros a bordo.
+	 * @param captain         El capitán del vuelo.
+	 * @param secondInCommand El segundo al mando del vuelo.
+	 * @param arrivalTime     La hora de llegada del vuelo.
+	 * @param departureTime   La hora de salida del vuelo.
+	 * @param gas             La cantidad de combustible del vuelo.
+	 * @param esTurbina       {@code true} si el vuelo tiene motor a turbina,
+	 *                        {@code false} en caso contrario.
+	 * @param esHelice        {@code true} si el vuelo tiene motor a hélice,
+	 *                        {@code false} en caso contrario.
+	 */
 	public VueloNacional(String destino, String companyInCharge, int numPassengers, String captain,
 			String secondInCommand, String arrivalTime, String departureTime, double gas, boolean esTurbina,
 			boolean esHelice) {
@@ -29,31 +75,74 @@ public class VueloNacional extends Vuelo implements Serializable {
 		this.esHelice = esHelice;
 	}
 
+	/**
+	 * Constructor con parámetros para crear una instancia de {@code VueloNacional}
+	 * sin especificar el tipo de propulsión.
+	 * 
+	 * @param destino         El destino del vuelo.
+	 * @param companyInCharge La compañía a cargo del vuelo.
+	 * @param numPassengers   El número de pasajeros a bordo.
+	 * @param captain         El capitán del vuelo.
+	 * @param secondInCommand El segundo al mando del vuelo.
+	 * @param arrivalTime     La hora de llegada del vuelo.
+	 * @param departureTime   La hora de salida del vuelo.
+	 * @param gas             La cantidad de combustible del vuelo.
+	 */
 	public VueloNacional(String destino, String companyInCharge, int numPassengers, String captain,
 			String secondInCommand, String arrivalTime, String departureTime, double gas) {
 		super(destino, companyInCharge, numPassengers, captain, secondInCommand, arrivalTime, departureTime, gas);
-		// TODO Auto-generated constructor stub
+		// Constructor vacío
 	}
 
+	/**
+	 * Obtiene si el vuelo tiene motor a turbina.
+	 * 
+	 * @return {@code true} si el vuelo tiene motor a turbina, {@code false} en caso
+	 *         contrario.
+	 */
 	public boolean isEsTurbina() {
 		return esTurbina;
 	}
 
+	/**
+	 * Establece si el vuelo tiene motor a turbina.
+	 * 
+	 * @param esTurbina {@code true} si el vuelo debe tener motor a turbina,
+	 *                  {@code false} en caso contrario.
+	 */
 	public void setEsTurbina(boolean esTurbina) {
 		this.esTurbina = esTurbina;
 	}
 
+	/**
+	 * Obtiene si el vuelo tiene motor a hélice.
+	 * 
+	 * @return {@code true} si el vuelo tiene motor a hélice, {@code false} en caso
+	 *         contrario.
+	 */
 	public boolean isEsHelice() {
 		return esHelice;
 	}
 
+	/**
+	 * Establece si el vuelo tiene motor a hélice.
+	 * 
+	 * @param esHelice {@code true} si el vuelo debe tener motor a hélice,
+	 *                 {@code false} en caso contrario.
+	 */
 	public void setEsHelice(boolean esHelice) {
 		this.esHelice = esHelice;
 	}
 
+	/**
+	 * Devuelve una representación en cadena de texto de los detalles del vuelo
+	 * nacional, incluyendo información sobre el tipo de propulsión.
+	 * 
+	 * @return Una cadena que representa los detalles del vuelo nacional, incluyendo
+	 *         si tiene turbina y hélice.
+	 */
 	@Override
 	public String toString() {
-		return super.toString() + "\nTiene turbina: " + esTurbina + "\nTiene Helice: " + esHelice;
+		return super.toString() + "\nTiene turbina: " + esTurbina + "\nTiene hélice: " + esHelice;
 	}
-
 }
