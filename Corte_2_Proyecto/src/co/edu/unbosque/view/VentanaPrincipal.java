@@ -29,6 +29,7 @@ public class VentanaPrincipal extends JFrame {
 		managePanel = new ManagePanel();
 		welcomePanel = new WelcomePanel();
 
+
 	}
 
 	public void mostrarPanelManage() {
@@ -51,6 +52,27 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public void setManagePanel(ManagePanel managePanel) {
 		this.managePanel = managePanel;
+	}
+
+	/**
+	 * @return the welcomePanel
+	 */
+	public WelcomePanel getWelcomePanel() {
+		return welcomePanel;
+	}
+
+	/**
+	 * @param welcomePanel the welcomePanel to set
+	 */
+	public void setWelcomePanel(WelcomePanel welcomePanel) {
+		this.welcomePanel = welcomePanel;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

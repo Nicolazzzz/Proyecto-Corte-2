@@ -32,13 +32,21 @@ public class Controller implements ActionListener {
 	public Controller() {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
-		mostrarMenuPrincipal();
 		asignarLectores();
-		vp = new VentanaPrincipal();
+		vf.getVp().mostrarPanelWelcome();
+		mostrarMenuPrincipal();
 	}
 
 	public void asignarLectores() {
 		// WELCOME
+		vf.getVp().getWelcomePanel().getAdminBtn().addActionListener(this);
+		vf.getVp().getWelcomePanel().getAdminBtn().setActionCommand("ADMIN");
+
+		vf.getVp().getWelcomePanel().getUserBtn().addActionListener(this);
+		vf.getVp().getWelcomePanel().getUserBtn().setActionCommand("USER");
+
+		vf.getVp().getWelcomePanel().getBackgroungBtn().addActionListener(this);
+		vf.getVp().getWelcomePanel().getBackgroungBtn().setActionCommand("FONDO");
 
 		// MANAGE
 		vf.getVp().getManagePanel().getInternacionalBtn().addActionListener(this);
@@ -76,6 +84,7 @@ public class Controller implements ActionListener {
 			break;
 
 		case "ADMIN":
+			vf.getVp().mostrarPanelManage();
 			break;
 
 		case "USER":

@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 
 public class WelcomePanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel imgDark, imgWhite;
 	private JButton adminBtn, userBtn, backgroungBtn;
 
@@ -33,17 +37,17 @@ public class WelcomePanel extends JPanel {
 
 		adminBtn = new JButton("ADMIN BTN");
 		adminBtn.setOpaque(true);
-		adminBtn.setBounds(10, 10, 50, 50);
+		adminBtn.setBounds(10, 10, 200, 50);
 		adminBtn.setActionCommand("ADMIN");
 
 		userBtn = new JButton("USER BTN");
 		userBtn.setOpaque(true);
-		userBtn.setBounds(10, 60, 50, 50);
+		userBtn.setBounds(10, 60, 200, 50);
 		userBtn.setActionCommand("USER");
 
 		backgroungBtn = new JButton("BACKGROUND");
 		backgroungBtn.setOpaque(true);
-		backgroungBtn.setBounds(10, 110, 50, 50);
+		backgroungBtn.setBounds(10, 110, 200, 50);
 		backgroungBtn.setActionCommand("FONDO");
 
 		add(imgDark);
