@@ -40,7 +40,78 @@ public class Controller implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		switch (e.getActionCommand()) {
+
+		// BIENVENIDA
+		case "FONDO":
+			if (white == true) {
+				white = false;
+				dark = true;
+
+			}
+
+			if (dark == true) {
+				white = true;
+				dark = false;
+
+			}
+
+			break;
+
+		case "ADMIN":
+			break;
+
+		case "USUARIO":
+			break;
+
+		// USUARIO
+		case "BUSCAR":
+
+			break;
+
+		case "VOLVERUSER":
+			break;
+
+		// ADMIN
+		case "INTERNACIONAL":
+			break;
+
+		case "NACIONAL":
+			break;
+
+		case "GENERARFILE":
+			break;
+
+		case "VOLVERADMIN":
+			break;
+
+		// CRUD
+		case "AGREGAR":
+			break;
+
+		case "MOSTRAR":
+			break;
+
+		case "ELIMINAR":
+			break;
+
+		case "ACTUALIZAR":
+			break;
+
+		// INPUT
+
+		case "COMPANY":
+			break;
+
+		case "VOLVERINPUT":
+			break;
+
+		case "GUARDAR":
+			break;
+			
+			
+
+		}
 
 	}
 
