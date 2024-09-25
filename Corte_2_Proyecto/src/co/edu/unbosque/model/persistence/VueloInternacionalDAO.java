@@ -52,11 +52,45 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 		}
 	}
 
+
 	/**
 	 * Obtiene una lista de todos los vuelos internacionales en formato DTO.
 	 * 
 	 * @return ArrayList de VueloInternacionalDTO.
 	 */
+
+	/**
+	 * Muestra los vuelos internacionales disponibles para un destino específico.
+	 *
+	 * @param destino El destino para el cual se desea mostrar los vuelos internacionales.
+	 * @return Una cadena que contiene la lista de vuelos internacionales disponibles para el destino especificado,
+	 *         o un mensaje indicando que no hay vuelos disponibles o que no se encontraron vuelos.
+	 */
+	public String showSelected(String destino) {
+	    boolean siHubo = false;
+	    String content = "";
+	    int pos = 1;
+	    if (listaVuelosInternacionales.isEmpty()) {
+	        return "No hay vuelos internacionales disponibles";
+	    } else {
+	        content += "\nVuelos Internacionales Disponibles" + "\n";
+	        for (VueloInternacional vI : listaVuelosInternacionales) {
+	            if (vI.getDestino().equalsIgnoreCase(destino)) {
+	                content += "\n--------------------------------------------------------";
+	                content += "\nVuelo " + pos;
+	                content += "\n--------------------------------------------------------";
+	                content += vI + "\n" + "\n";
+	                pos++;
+	                siHubo = true;
+	            }
+	        }
+	        if (!siHubo)
+	            content += "No se encontraron vuelos disponibles";
+
+	        return content;
+	    }
+	}
+
 	@Override
 	public ArrayList<VueloInternacionalDTO> getAll() {
 		return DataMapper.listaVInternacionalesToListaVuelosInternacionalesDTO(listaVuelosInternacionales);

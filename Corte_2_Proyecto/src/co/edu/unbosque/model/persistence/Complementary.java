@@ -29,6 +29,7 @@ public class Complementary {
 		readSerialized();
 	}
 
+
 	/**
 	 * Agrega un nuevo piloto a la lista si no existe previamente.
 	 * 
@@ -98,6 +99,7 @@ public class Complementary {
 	/**
 	 * Lee la lista de pilotos desde un archivo CSV.
 	 */
+
 	public void readFile() {
 		String content = FileHandler.readFile(FILE_NAME);
 		if (content.equals("") || content == null) {
@@ -113,6 +115,7 @@ public class Complementary {
 			}
 		}
 	}
+
 
 	/**
 	 * Muestra la lista de pilotos en formato de cadena.
@@ -145,6 +148,7 @@ public class Complementary {
 	/**
 	 * Lee la lista de pilotos desde un archivo serializado.
 	 */
+
 	@SuppressWarnings("unchecked")
 	public void readSerialized() {
 		Object content = FileHandler.readSerialized(SERIAL_NAME);

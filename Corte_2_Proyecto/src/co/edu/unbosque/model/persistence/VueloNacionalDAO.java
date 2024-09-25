@@ -53,11 +53,46 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 		}
 	}
 
+
+
+
+	/**
+	 * Muestra los vuelos nacionales disponibles para un destino específico.
+	 *
+	 * @param destino El destino para el cual se desea mostrar los vuelos nacionales.
+	 * @return Una cadena que contiene la lista de vuelos nacionales disponibles para el destino especificado,
+	 *         o un mensaje indicando que no hay vuelos disponibles o que no se encontraron vuelos.
+	 */
+	public String showSelected(String destino) {
+	    boolean siHubo = false;
+	    String content = "";
+	    int pos = 1;
+	    if (listaVuelosNacionales.isEmpty()) {
+	        return "No hay vuelos nacionales disponibles";
+	    } else {
+	        content += "\nVuelos Nacionales Disponibles" + "\n";
+	        for (VueloNacional vN : listaVuelosNacionales) {
+	            if (vN.getDestino().equalsIgnoreCase(destino)) {
+	                content += "\n--------------------------------------------------------";
+	                content += "\nVuelo " + pos;
+	                content += "\n--------------------------------------------------------";
+	                content += vN + "\n" + "\n";
+	                pos++;
+	                siHubo = true;
+	            }
+	        }
+	        if (!siHubo)
+	            content += "No se encontraron vuelos disponibles";
+	    }
+	    return content;
+	}
+
 	/**
 	 * Obtiene una lista de todos los DTOs de vuelos nacionales.
 	 *
 	 * @return Lista de objetos VueloNacionalDTO.
 	 */
+
 	@Override
 	public ArrayList<VueloNacionalDTO> getAll() {
 		return DataMapper.listaVuelosNacionalesToListaVuelosNacionalesDTO(listaVuelosNacionales);
