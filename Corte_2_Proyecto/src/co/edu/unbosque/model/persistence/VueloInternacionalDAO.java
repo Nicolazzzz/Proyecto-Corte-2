@@ -49,15 +49,14 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 					content += vI + "\n" + "\n";
 					pos++;
 					siHubo = true;
-				} else {
-					if (!siHubo)
-						content += "No se encontraron vuelos disponibles";
 				}
 
 			}
+			if (!siHubo)
+				content += "No se encontraron vuelos disponibles";
 
+			return content;
 		}
-		return content;
 	}
 
 	@Override

@@ -51,12 +51,11 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 					content += vN + "\n" + "\n";
 					pos++;
 					siHubo = true;
-				} else {
-					if (!siHubo)
-						content += "No se encontraron vuelos disponibles";
 				}
 
 			}
+			if (!siHubo)
+				content += "No se encontraron vuelos disponibles";
 
 		}
 		return content;

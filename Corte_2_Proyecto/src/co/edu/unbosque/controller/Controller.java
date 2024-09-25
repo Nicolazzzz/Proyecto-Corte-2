@@ -198,13 +198,13 @@ public class Controller {
 					companiaA = vf.getCon().readLine();
 					ExceptionChecker.notValidInputException(companiaA);
 
-					vf.getCon().printLine("llegada");
-					llegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(llegadaA);
-
 					vf.getCon().printLine("destino");
 					destinoA = vf.getCon().readLine();
 					ExceptionChecker.notValidInputException(destinoA);
+
+					vf.getCon().printLine("llegada");
+					llegadaA = vf.getCon().readLine();
+					ExceptionChecker.notValidTimeFormatException(llegadaA);
 
 					if (mf.getvNacionalDAO().find(new VueloNacional(destinoA, companiaA, 0, null, null, llegadaA, null,
 							0, false, false)) == null) {
@@ -455,13 +455,13 @@ public class Controller {
 					companiaA = vf.getCon().readLine();
 					ExceptionChecker.notValidInputException(companiaA);
 
-					vf.getCon().printLine("llegada");
-					llegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(llegadaA);
-
 					vf.getCon().printLine("destino");
 					destinoA = vf.getCon().readLine();
 					ExceptionChecker.notValidInputException(destinoA);
+
+					vf.getCon().printLine("llegada");
+					llegadaA = vf.getCon().readLine();
+					ExceptionChecker.notValidTimeFormatException(llegadaA);
 
 					if (mf.getvInternacionalDAO().find(new VueloInternacional(destinoA, companiaA, 0, null, null,
 							llegadaA, null, 0, false)) == null) {
