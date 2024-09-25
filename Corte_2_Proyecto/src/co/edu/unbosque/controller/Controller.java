@@ -3,8 +3,11 @@ package co.edu.unbosque.controller;
 
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.Piloto;
+import co.edu.unbosque.model.VueloNacional;
 import co.edu.unbosque.model.VueloNacionalDTO;
 import co.edu.unbosque.util.exception.ExceptionChecker;
+import co.edu.unbosque.util.exception.NotValidBooleanException;
+import co.edu.unbosque.util.exception.NotValidInputException;
 import co.edu.unbosque.util.exception.NotValidTimeFormatException;
 import co.edu.unbosque.view.ViewFacade;
 
@@ -20,39 +23,22 @@ public class Controller {
 	}
 
 	public void run() {
-
-		mainloop: while (true) {
-			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
-			switch (op) {
-			case 1:
-				System.out.println("agregando");
-				String name = vf.getCon().readLine();
-				mf.getComplement().add(new Piloto(name));
-				break;
-			case 2:
-				System.out.println("Eliminando");
-				String nameD = vf.getCon().readLine();
-				mf.getComplement().delete(new Piloto(nameD));
-				break;
-
-			case 3:
-				System.out.println("Mueche");
-				System.out.println(mf.getComplement().showPilots());
-				break;
-
-			case 4:
-				System.out.println("BYE BYE BITCHS");
-				break mainloop;
-			case 5:
-				System.out.println(mf.getComplement().randomizer());
-				break;
-			default:
-				break;
-			}
-
-		}
-
+		/*
+		 * mainloop: while (true) { int op = vf.getCon().readInt();
+		 * vf.getCon().burnLine(); switch (op) { case 1:
+		 * System.out.println("agregando"); String name = vf.getCon().readLine();
+		 * mf.getComplement().add(new Piloto(name)); break; case 2:
+		 * System.out.println("Eliminando"); String nameD = vf.getCon().readLine();
+		 * mf.getComplement().delete(new Piloto(nameD)); break;
+		 * 
+		 * case 3: System.out.println("Mueche");
+		 * System.out.println(mf.getComplement().showPilots()); break;
+		 * 
+		 * case 4: System.out.println("BYE BYE BITCHS"); break mainloop; case 5:
+		 * System.out.println(mf.getComplement().randomizer()); break; default: break; }
+		 * 
+		 * }
+		 */
 	}
 
 	public void mostrarMenuPrincipal() {
@@ -97,8 +83,6 @@ public class Controller {
 			}
 		}
 
-		System.out.println(mf.getComplement().showPilots());
-
 	}
 
 	public void mostrarMenuNacional() {
@@ -126,9 +110,12 @@ public class Controller {
 
 					vf.getCon().printLine("DESTINO");
 					String destino = vf.getCon().readLine();
+					ExceptionChecker.notValidInputException(destino);
 
 					vf.getCon().printLine("COMPANIA");
 					String companyInCharge = vf.getCon().readLine();
+					ExceptionChecker.notValidInputException(companyInCharge);
+
 					vf.getCon().printLine("Pasajeros");
 					int passenger = vf.getCon().readInt();
 					vf.getCon().burnLine();
@@ -148,9 +135,11 @@ public class Controller {
 
 					vf.getCon().printLine("es helice");
 					boolean esHelice = vf.getCon().readBoolean();
+					ExceptionChecker.notValidBooleanException(esHelice);
 
 					vf.getCon().printLine("es turbina");
 					boolean esTurbina = vf.getCon().readBoolean();
+					ExceptionChecker.notValidBooleanException(esTurbina);
 
 					String captain = mf.getComplement().randomizer();
 					String secondOnCommand = mf.getComplement().randomizer();
@@ -175,32 +164,140 @@ public class Controller {
 					} else {
 						vf.getCon().printLine("NO SE PUDO CREAR");
 					}
+				} catch (NotValidInputException e) {
+					vf.getCon().printLine(
+							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
 					break;
 
+				} catch (NumberFormatException e) {
+					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
+					break;
 				} catch (NotValidTimeFormatException e) {
 					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 					break;
 //					e.printStackTrace();
+				} catch (NotValidBooleanException e) {
+					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
+					break;
 				}
+				break;
+
 			case 2:
 				vf.getCon().printLine(mf.getvNacionalDAO().showAll());
-
 				break;
+				
 			case 3:
 
-				String companyInChargeA = vf.getCon().readLine();
-				int passengerA = vf.getCon().readInt();
-				String captainA = vf.getCon().readLine();
-				String secondOnCommandA = vf.getCon().readLine();
-				String arrivalTimeA = vf.getCon().readLine();
-				String departureTimeA = vf.getCon().readLine();
-				double gasA = vf.getCon().readDouble();
-				boolean esHeliceA = vf.getCon().readBoolean();
-				boolean esTurbinaA = vf.getCon().readBoolean();
+				try {
+					vf.getCon().printLine("VALIDAR UPDATE");
+					vf.getCon().printLine("compania");
+					String companiaA = vf.getCon().readLine();
+					ExceptionChecker.notValidInputException(companiaA);
 
+					vf.getCon().printLine("llegada");
+					String hLlegadaA = vf.getCon().readLine();
+					ExceptionChecker.notValidTimeFormatException(hLlegadaA);
+
+					vf.getCon().printLine("destino");
+					String destinoA = vf.getCon().readLine();
+					ExceptionChecker.notValidInputException(destinoA);
+
+					if (mf.getvNacionalDAO().find(new VueloNacional(destinoA, companiaA, 0, null, null, hLlegadaA, null,
+							0, false, false)) == null) {
+						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
+						break;
+					}
+				} catch (NotValidTimeFormatException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
+					break;
+//					e.printStackTrace();
+
+				} catch (NotValidInputException e) {
+					vf.getCon().printLine(
+							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+					break;
+				}
+
+				try {
+					boolean validarRandom = true;
+					vf.getCon().printLine("AGREGANDO");
+
+					vf.getCon().printLine("DESTINO");
+					String destino = vf.getCon().readLine();
+					ExceptionChecker.notValidInputException(destino);
+
+					vf.getCon().printLine("COMPANIA");
+					String companyInCharge = vf.getCon().readLine();
+					ExceptionChecker.notValidInputException(companyInCharge);
+
+					vf.getCon().printLine("Pasajeros");
+					int passenger = vf.getCon().readInt();
+					vf.getCon().burnLine();
+
+					vf.getCon().printLine("hora salida");
+					String departureTime = vf.getCon().readLine();
+					ExceptionChecker.notValidTimeFormatException(departureTime);
+
+					vf.getCon().printLine("hora llegada");
+					String arrivalTime = vf.getCon().readLine();
+					ExceptionChecker.notValidTimeFormatException(arrivalTime);
+
+					if (!verificarTiempo(departureTime, arrivalTime)) {
+						vf.getCon().printLine("Hora invalida");
+						break;
+					}
+
+					vf.getCon().printLine("es helice");
+					boolean esHelice = vf.getCon().readBoolean();
+					ExceptionChecker.notValidBooleanException(esHelice);
+
+					vf.getCon().printLine("es turbina");
+					boolean esTurbina = vf.getCon().readBoolean();
+					ExceptionChecker.notValidBooleanException(esTurbina);
+
+					String captain = mf.getComplement().randomizer();
+					String secondOnCommand = mf.getComplement().randomizer();
+
+					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+
+					while (validarRandom == false) {
+						captain = mf.getComplement().randomizer();
+						secondOnCommand = mf.getComplement().randomizer();
+						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+					}
+
+					double gas = 0;
+					if (esHelice)
+						gas = calcularGasHelice(passenger, departureTime, arrivalTime);
+					if (esTurbina)
+						gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
+
+					if (mf.getvNacionalDAO().add(new VueloNacionalDTO(destino, companyInCharge, passenger, captain,
+							secondOnCommand, arrivalTime, departureTime, gas, esTurbina, esHelice)) == true) {
+						vf.getCon().printLine("CREADO EXITOSAMENTE");
+					} else {
+						vf.getCon().printLine("NO SE PUDO CREAR");
+					}
+
+				} catch (NotValidInputException e) {
+					vf.getCon().printLine(
+							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+					break;
+
+				} catch (NumberFormatException e) {
+					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
+					break;
+				} catch (NotValidTimeFormatException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
+					break;
+//					e.printStackTrace();
+				} catch (NotValidBooleanException e) {
+					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
+					break;
+				}
 				break;
-			case 4:
 
+			case 4:
 				break;
 			case 5:
 

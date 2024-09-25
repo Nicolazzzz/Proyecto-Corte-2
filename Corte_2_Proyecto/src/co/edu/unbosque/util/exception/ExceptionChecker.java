@@ -30,6 +30,13 @@ public class ExceptionChecker {
 
 	public static void notValidTimeFormatException(String time) throws NotValidTimeFormatException {
 
+		Pattern p = Pattern.compile("[^0-9: ]");
+		Matcher m = p.matcher(time);
+
+		if (m.find()) {
+			throw new NotValidTimeFormatException();
+		}
+
 		boolean punticos = false;
 
 		String contenido = time.charAt(2) + "";
