@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import co.edu.unbosque.model.ModelFacade;
-import co.edu.unbosque.model.Piloto;
 import co.edu.unbosque.model.VueloInternacional;
 import co.edu.unbosque.model.VueloInternacionalDTO;
 import co.edu.unbosque.model.VueloNacional;
@@ -34,16 +33,101 @@ public class Controller implements ActionListener {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
 		mostrarMenuPrincipal();
+		asignarLectores();
 		vp = new VentanaPrincipal();
 	}
 
 	public void asignarLectores() {
+		// WELCOME
+
+		// MANAGE
+		vf.getVp().getManagePanel().getInternacionalBtn().addActionListener(this);
+		vf.getVp().getManagePanel().getInternacionalBtn().setActionCommand("INTERNACIONAL");
+
+		vf.getVp().getManagePanel().getNacionalBtn().addActionListener(this);
+		vf.getVp().getManagePanel().getNacionalBtn().setActionCommand("NACIONAL");
+
+		vf.getVp().getManagePanel().getGenerarBtn().addActionListener(this);
+		vf.getVp().getManagePanel().getGenerarBtn().setActionCommand("GENERARFILE");
+
+		vf.getVp().getManagePanel().getVolverBtn().addActionListener(this);
+		vf.getVp().getManagePanel().getVolverBtn().setActionCommand("VOLVERADMIN");
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		switch (e.getActionCommand()) {
+
+		// BIENVENIDA
+		case "FONDO":
+			if (white == true) {
+				white = false;
+				dark = true;
+
+			}
+
+			if (dark == true) {
+				white = true;
+				dark = false;
+
+			}
+
+			break;
+
+		case "ADMIN":
+			break;
+
+		case "USER":
+			break;
+
+		// USUARIO
+		case "BUSCAR":
+
+			break;
+
+		case "VOLVERUSER":
+			break;
+
+		// ADMIN
+		case "INTERNACIONAL":
+			break;
+
+		case "NACIONAL":
+			break;
+
+		case "GENERARFILE":
+			break;
+
+		case "VOLVERADMIN":
+			vf.getVp().mostrarPanelWelcome();
+			break;
+
+		// CRUD
+		case "AGREGAR":
+			break;
+
+		case "MOSTRAR":
+			break;
+
+		case "ELIMINAR":
+			break;
+
+		case "ACTUALIZAR":
+			break;
+
+		// INPUT
+
+		case "COMPANY":
+			break;
+
+		case "VOLVERINPUT":
+			break;
+
+		case "GUARDAR":
+			break;
+
+		}
 
 	}
 
