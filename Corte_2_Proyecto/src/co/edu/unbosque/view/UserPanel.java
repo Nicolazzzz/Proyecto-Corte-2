@@ -1,8 +1,6 @@
 package co.edu.unbosque.view;
 
 import java.awt.Image;
-import java.sql.BatchUpdateException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,6 +10,10 @@ import javax.swing.SwingConstants;
 
 public class UserPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel imgDark, imgWhite;
 	private JTextField destinoField;
 	private JButton volverBtn, buscarBtn;
