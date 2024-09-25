@@ -10,6 +10,11 @@ import javax.swing.JTextField;
 
 public class InputPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JLabel imgCompania, imgInputIOscuro, imgInputIClaro, imgInputNClaro, imgInputNOscuro, imgAvianca, imgLatam,
 			imgWingo, imgSatena, imgClic, imgCopaA, imgAmericanA, imgIberia, imgAirF, imgDeltaA;
 
@@ -175,6 +180,7 @@ public class InputPanel extends JPanel {
 		add(imgInputIClaro);
 		add(imgInputNOscuro);
 		add(imgInputNClaro);
+		add(imgCompania);
 		add(imgAvianca);
 		add(imgLatam);
 		add(imgWingo);
