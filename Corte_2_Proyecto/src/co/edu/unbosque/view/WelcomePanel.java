@@ -36,18 +36,18 @@ public class WelcomePanel extends JPanel {
 		imgWhite.setVisible(true);
 
 		adminBtn = new JButton("ADMIN BTN");
-		adminBtn.setOpaque(true);
-		adminBtn.setBounds(10, 10, 200, 50);
+		adminBtn.setOpaque(false);
+		adminBtn.setBounds(480, 406, 320, 70);
 		adminBtn.setActionCommand("ADMIN");
 
 		userBtn = new JButton("USER BTN");
-		userBtn.setOpaque(true);
-		userBtn.setBounds(10, 60, 200, 50);
+		userBtn.setOpaque(false);
+		userBtn.setBounds(480, 530, 320, 70);
 		userBtn.setActionCommand("USER");
 
 		backgroungBtn = new JButton("BACKGROUND");
-		backgroungBtn.setOpaque(true);
-		backgroungBtn.setBounds(10, 110, 200, 50);
+		backgroungBtn.setOpaque(false);
+		backgroungBtn.setBounds(1148, 29, 102, 102);
 		backgroungBtn.setActionCommand("FONDO");
 
 		add(imgDark);

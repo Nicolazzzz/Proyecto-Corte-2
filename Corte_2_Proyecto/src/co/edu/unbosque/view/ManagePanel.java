@@ -36,23 +36,23 @@ public class ManagePanel extends JPanel {
 		imgDark.setVisible(true);
 
 		internacionalBtn = new JButton("INTERNACIONAL BTN");
-		internacionalBtn.setOpaque(true);
-		internacionalBtn.setBounds(10, 10, 200, 50);
+		internacionalBtn.setOpaque(false);
+		internacionalBtn.setBounds(848, 533, 94, 94);
 		internacionalBtn.setActionCommand("INTERNACIONAL");
 
 		nacionalBtn = new JButton("NACIONAL BTN");
-		nacionalBtn.setOpaque(true);
-		nacionalBtn.setBounds(10, 60, 200, 50);
+		nacionalBtn.setOpaque(false);
+		nacionalBtn.setBounds(480, 324, 321, 71);
 		nacionalBtn.setActionCommand("NACIONAL");
 
 		generarBtn = new JButton("GENERAR FILE");
-		generarBtn.setOpaque(true);
-		generarBtn.setBounds(10, 110, 200, 50);
+		generarBtn.setOpaque(false);
+		generarBtn.setBounds(480, 433, 321, 71);
 		generarBtn.setActionCommand("GENERARFILE");
 
 		volverBtn = new JButton("VOLVER BUTTON");
-		volverBtn.setOpaque(true);
-		volverBtn.setBounds(10, 160, 200, 50);
+		volverBtn.setOpaque(false);
+		volverBtn.setBounds(480, 544, 321, 71);
 		volverBtn.setActionCommand("VOLVERADMIN");
 
 		add(imgWhite);
