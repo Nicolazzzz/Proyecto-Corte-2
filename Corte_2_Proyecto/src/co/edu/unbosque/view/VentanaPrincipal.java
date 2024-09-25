@@ -10,7 +10,9 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private WelcomePanel welcomePanel;
+	private UserPanel userPanel;
 	private ManagePanel managePanel;
+	private CrudPanel crudPanel;
 
 //
 	public VentanaPrincipal() {
@@ -28,7 +30,8 @@ public class VentanaPrincipal extends JFrame {
 
 		managePanel = new ManagePanel();
 		welcomePanel = new WelcomePanel();
-
+		userPanel = new UserPanel();
+		crudPanel = new CrudPanel();
 
 	}
 
@@ -38,6 +41,28 @@ public class VentanaPrincipal extends JFrame {
 
 	public void mostrarPanelWelcome() {
 		setContentPane(welcomePanel);
+	}
+
+	public void mostrarPanelUser() {
+		setContentPane(userPanel);
+	}
+
+	public void mostrarPanelCrud() {
+		setContentPane(crudPanel);
+	}
+
+	/**
+	 * @return the crudPanel
+	 */
+	public CrudPanel getCrudPanel() {
+		return crudPanel;
+	}
+
+	/**
+	 * @param crudPanel the crudPanel to set
+	 */
+	public void setCrudPanel(CrudPanel crudPanel) {
+		this.crudPanel = crudPanel;
 	}
 
 	/**
@@ -73,6 +98,20 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the userPanel
+	 */
+	public UserPanel getUserPanel() {
+		return userPanel;
+	}
+
+	/**
+	 * @param userPanel the userPanel to set
+	 */
+	public void setUserPanel(UserPanel userPanel) {
+		this.userPanel = userPanel;
 	}
 
 }

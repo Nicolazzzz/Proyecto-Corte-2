@@ -48,6 +48,13 @@ public class Controller implements ActionListener {
 		vf.getVp().getWelcomePanel().getBackgroungBtn().addActionListener(this);
 		vf.getVp().getWelcomePanel().getBackgroungBtn().setActionCommand("FONDO");
 
+		// USER
+		vf.getVp().getUserPanel().getBuscarBtn().addActionListener(this);
+		vf.getVp().getUserPanel().getBuscarBtn().setActionCommand("BUSCAR");
+
+		vf.getVp().getUserPanel().getVolverBtn().addActionListener(this);
+		vf.getVp().getUserPanel().getVolverBtn().setActionCommand("VOLVERUSER");
+
 		// MANAGE
 		vf.getVp().getManagePanel().getInternacionalBtn().addActionListener(this);
 		vf.getVp().getManagePanel().getInternacionalBtn().setActionCommand("INTERNACIONAL");
@@ -60,6 +67,22 @@ public class Controller implements ActionListener {
 
 		vf.getVp().getManagePanel().getVolverBtn().addActionListener(this);
 		vf.getVp().getManagePanel().getVolverBtn().setActionCommand("VOLVERADMIN");
+
+		// CRUD
+		vf.getVp().getCrudPanel().getAddBtn().addActionListener(this);
+		vf.getVp().getCrudPanel().getAddBtn().setActionCommand("AGREGAR");
+
+		vf.getVp().getCrudPanel().getDeleteBtn().addActionListener(this);
+		vf.getVp().getCrudPanel().getDeleteBtn().setActionCommand("ELIMINAR");
+
+		vf.getVp().getCrudPanel().getShowBtn().addActionListener(this);
+		vf.getVp().getCrudPanel().getShowBtn().setActionCommand("MOSTRAR");
+
+		vf.getVp().getCrudPanel().getUpdateBtn().addActionListener(this);
+		vf.getVp().getCrudPanel().getUpdateBtn().setActionCommand("ACTUALIZAR");
+
+		vf.getVp().getCrudPanel().getVolverBtn().addActionListener(this);
+		vf.getVp().getCrudPanel().getVolverBtn().setActionCommand("VOLVERCRUD");
 
 	}
 
@@ -88,21 +111,28 @@ public class Controller implements ActionListener {
 			break;
 
 		case "USER":
+			vf.getVp().mostrarPanelUser();
 			break;
 
 		// USUARIO
 		case "BUSCAR":
 
+			String vuelos = vf.getVp().getUserPanel().getDestinoField().getText();
+			vf.getCon().mostrarMensajeEmergenteConScrollWhite(
+					mf.getvInternacionalDAO().showSelected(vuelos) + mf.getvNacionalDAO().showSelected(vuelos));
 			break;
 
 		case "VOLVERUSER":
+			vf.getVp().mostrarPanelWelcome();
 			break;
 
 		// ADMIN
 		case "INTERNACIONAL":
+			vf.getVp().mostrarPanelCrud();
 			break;
 
 		case "NACIONAL":
+			vf.getVp().mostrarPanelCrud();
 			break;
 
 		case "GENERARFILE":
@@ -123,6 +153,10 @@ public class Controller implements ActionListener {
 			break;
 
 		case "ACTUALIZAR":
+			break;
+
+		case "VOLVERCRUD":
+			vf.getVp().mostrarPanelManage();
 			break;
 
 		// INPUT
