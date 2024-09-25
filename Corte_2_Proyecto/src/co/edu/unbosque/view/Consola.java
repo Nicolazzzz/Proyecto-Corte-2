@@ -118,7 +118,7 @@ public class Consola {
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		JOptionPane.showMessageDialog(null, scrollPane, "Listado de productos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, scrollPane, "Listado de vuelos", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class Consola {
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		JOptionPane.showMessageDialog(null, scrollPane, "Listado de productos", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, scrollPane, "Listado de vuelos", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
