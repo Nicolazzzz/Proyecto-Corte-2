@@ -25,7 +25,7 @@ public class InputPanel extends JPanel {
 		
 		//IMAGENES--------------------------------------
 		//TODAS ESTÁN EN FALSE!!!!!!!
-		//<<DISCLAMER>> imgCompania FALTA, no tengo idea de que hacerle
+		//<<DISCLAMER>> imgCompania FALTA, no tengo idea de que hacerle, está mas abajo
 		imgInputIOscuro = new JLabel();
 		ImageIcon inputO = new ImageIcon("src/media/InputInterOscuro.png");
 		Image inputI = inputO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -123,6 +123,8 @@ public class InputPanel extends JPanel {
 		imgDeltaA.setIcon(new ImageIcon(inputsx));
 		imgDeltaA.setBounds(0, 0, 1270, 720);
 		imgDeltaA.setVisible(false);
+		
+		imgCompania = new JLabel();//<--- AQUI ESTÁ
 		
 		//BOTONES--------------------------------------
 		volverBtn = new JButton("Volver");
