@@ -22,89 +22,413 @@ public class InputPanel extends JPanel {
 		setSize(1280, 720);
 		setLayout(null);
 		setVisible(true);
-		//IMAGENES--------------------------------------
+		// IMAGENES--------------------------------------
 		imgInputIOscuro = new JLabel();
 		ImageIcon inputO = new ImageIcon("src/media/InputInterOscuro.png");
 		Image inputI = inputO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgInputIOscuro.setIcon(new ImageIcon(inputI));
 		imgInputIOscuro.setBounds(0, 0, 1270, 720);
 		imgInputIOscuro.setVisible(false);
-		
+
 		imgInputIClaro = new JLabel();
 		ImageIcon inputC = new ImageIcon("src/media/InputInterClaro.png");
 		Image inputIC = inputC.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgInputIClaro.setIcon(new ImageIcon(inputIC));
 		imgInputIClaro.setBounds(0, 0, 1270, 720);
 		imgInputIClaro.setVisible(false);
-		
+
 		imgInputNOscuro = new JLabel();
 		ImageIcon inputON = new ImageIcon("src/media/InputNacionalOscuro.png");
 		Image inputIN = inputON.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgInputNOscuro.setIcon(new ImageIcon(inputIN));
 		imgInputNOscuro.setBounds(0, 0, 1270, 720);
 		imgInputNOscuro.setVisible(false);
-		
-		imgInputNClaro= new JLabel();
+
+		imgInputNClaro = new JLabel();
 		ImageIcon inputOC = new ImageIcon("src/media/InputNacionalClaro.png");
 		Image inputIN1 = inputOC.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgInputNClaro.setIcon(new ImageIcon(inputIN1));
 		imgInputNClaro.setBounds(0, 0, 1270, 720);
 		imgInputNClaro.setVisible(false);
-		
+
 		imgAvianca = new JLabel();
 		ImageIcon inputA = new ImageIcon("src/logo/logoavianca.png");
 		Image inputIA = inputA.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgAvianca.setIcon(new ImageIcon(inputIA));
 		imgAvianca.setBounds(0, 0, 1270, 720);
 		imgAvianca.setVisible(false);
-		
+
 		imgLatam = new JLabel();
 		ImageIcon inputL = new ImageIcon("src/logo/latam.png");
 		Image inputIL = inputL.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgLatam.setIcon(new ImageIcon(inputIL));
 		imgLatam.setBounds(0, 0, 1270, 720);
 		imgLatam.setVisible(false);
-		
+
 		imgWingo = new JLabel();
 		ImageIcon inputW = new ImageIcon("src/logo/wingo.png");
 		Image inputIW = inputW.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgWingo.setIcon(new ImageIcon(inputIW));
 		imgWingo.setBounds(0, 0, 1270, 720);
 		imgWingo.setVisible(false);
-		
+
 		imgSatena = new JLabel();
 		ImageIcon inputS = new ImageIcon("src/logo/Satena.png");
 		Image inputIS = inputS.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgSatena.setIcon(new ImageIcon(inputIS));
 		imgSatena.setBounds(0, 0, 1270, 720);
 		imgSatena.setVisible(false);
-		
+
 		imgClic = new JLabel();
 		ImageIcon inputCc = new ImageIcon("src/logo/clic.png");
 		Image inputICc = inputCc.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgClic.setIcon(new ImageIcon(inputICc));
 		imgClic.setBounds(0, 0, 1270, 720);
 		imgClic.setVisible(false);
-		
-		
-		//BOTONES--------------------------------------
+
+		// BOTONES--------------------------------------
 		volverBtn = new JButton("Volver");
 		volverBtn.setOpaque(false);
 		volverBtn.setBounds(30, 30, 300, 400);
 		volverBtn.setActionCommand("VOLVERINPUT");
 		volverBtn.setToolTipText("VOLVER AL MENÚ");
-		
+
 		saveBtn = new JButton("Guardar");
 		saveBtn.setOpaque(false);
 		saveBtn.setBounds(30, 30, 300, 300);
 		saveBtn.setActionCommand("GUARDARINPUT");
 		saveBtn.setToolTipText("GUARDAR SELECCIÓN");
-		
+
 		companiaBtn = new JButton("Compañia");
 		companiaBtn.setOpaque(false);
 		companiaBtn.setBounds(30, 30, 300, 200);
 		companiaBtn.setActionCommand("COMPAÑIAINPUT");
 		companiaBtn.setToolTipText("SELECCIONAR COMPAÑIA ENCARGADA DEL VUELO");
-		
+
+		add(imgInputIOscuro);
+		add(imgInputIClaro);
 	}
+
+	/**
+	 * @return the imgCompania
+	 */
+	public JLabel getImgCompania() {
+		return imgCompania;
+	}
+
+	/**
+	 * @param imgCompania the imgCompania to set
+	 */
+	public void setImgCompania(JLabel imgCompania) {
+		this.imgCompania = imgCompania;
+	}
+
+	/**
+	 * @return the imgInputIOscuro
+	 */
+	public JLabel getImgInputIOscuro() {
+		return imgInputIOscuro;
+	}
+
+	/**
+	 * @param imgInputIOscuro the imgInputIOscuro to set
+	 */
+	public void setImgInputIOscuro(JLabel imgInputIOscuro) {
+		this.imgInputIOscuro = imgInputIOscuro;
+	}
+
+	/**
+	 * @return the imgInputIClaro
+	 */
+	public JLabel getImgInputIClaro() {
+		return imgInputIClaro;
+	}
+
+	/**
+	 * @param imgInputIClaro the imgInputIClaro to set
+	 */
+	public void setImgInputIClaro(JLabel imgInputIClaro) {
+		this.imgInputIClaro = imgInputIClaro;
+	}
+
+	/**
+	 * @return the imgInputNClaro
+	 */
+	public JLabel getImgInputNClaro() {
+		return imgInputNClaro;
+	}
+
+	/**
+	 * @param imgInputNClaro the imgInputNClaro to set
+	 */
+	public void setImgInputNClaro(JLabel imgInputNClaro) {
+		this.imgInputNClaro = imgInputNClaro;
+	}
+
+	/**
+	 * @return the imgInputNOscuro
+	 */
+	public JLabel getImgInputNOscuro() {
+		return imgInputNOscuro;
+	}
+
+	/**
+	 * @param imgInputNOscuro the imgInputNOscuro to set
+	 */
+	public void setImgInputNOscuro(JLabel imgInputNOscuro) {
+		this.imgInputNOscuro = imgInputNOscuro;
+	}
+
+	/**
+	 * @return the imgAvianca
+	 */
+	public JLabel getImgAvianca() {
+		return imgAvianca;
+	}
+
+	/**
+	 * @param imgAvianca the imgAvianca to set
+	 */
+	public void setImgAvianca(JLabel imgAvianca) {
+		this.imgAvianca = imgAvianca;
+	}
+
+	/**
+	 * @return the imgLatam
+	 */
+	public JLabel getImgLatam() {
+		return imgLatam;
+	}
+
+	/**
+	 * @param imgLatam the imgLatam to set
+	 */
+	public void setImgLatam(JLabel imgLatam) {
+		this.imgLatam = imgLatam;
+	}
+
+	/**
+	 * @return the imgWingo
+	 */
+	public JLabel getImgWingo() {
+		return imgWingo;
+	}
+
+	/**
+	 * @param imgWingo the imgWingo to set
+	 */
+	public void setImgWingo(JLabel imgWingo) {
+		this.imgWingo = imgWingo;
+	}
+
+	/**
+	 * @return the imgSatena
+	 */
+	public JLabel getImgSatena() {
+		return imgSatena;
+	}
+
+	/**
+	 * @param imgSatena the imgSatena to set
+	 */
+	public void setImgSatena(JLabel imgSatena) {
+		this.imgSatena = imgSatena;
+	}
+
+	/**
+	 * @return the imgClic
+	 */
+	public JLabel getImgClic() {
+		return imgClic;
+	}
+
+	/**
+	 * @param imgClic the imgClic to set
+	 */
+	public void setImgClic(JLabel imgClic) {
+		this.imgClic = imgClic;
+	}
+
+	/**
+	 * @return the imgCopaA
+	 */
+	public JLabel getImgCopaA() {
+		return imgCopaA;
+	}
+
+	/**
+	 * @param imgCopaA the imgCopaA to set
+	 */
+	public void setImgCopaA(JLabel imgCopaA) {
+		this.imgCopaA = imgCopaA;
+	}
+
+	/**
+	 * @return the imgAmericanA
+	 */
+	public JLabel getImgAmericanA() {
+		return imgAmericanA;
+	}
+
+	/**
+	 * @param imgAmericanA the imgAmericanA to set
+	 */
+	public void setImgAmericanA(JLabel imgAmericanA) {
+		this.imgAmericanA = imgAmericanA;
+	}
+
+	/**
+	 * @return the imgIberia
+	 */
+	public JLabel getImgIberia() {
+		return imgIberia;
+	}
+
+	/**
+	 * @param imgIberia the imgIberia to set
+	 */
+	public void setImgIberia(JLabel imgIberia) {
+		this.imgIberia = imgIberia;
+	}
+
+	/**
+	 * @return the imgAirF
+	 */
+	public JLabel getImgAirF() {
+		return imgAirF;
+	}
+
+	/**
+	 * @param imgAirF the imgAirF to set
+	 */
+	public void setImgAirF(JLabel imgAirF) {
+		this.imgAirF = imgAirF;
+	}
+
+	/**
+	 * @return the imgDeltaA
+	 */
+	public JLabel getImgDeltaA() {
+		return imgDeltaA;
+	}
+
+	/**
+	 * @param imgDeltaA the imgDeltaA to set
+	 */
+	public void setImgDeltaA(JLabel imgDeltaA) {
+		this.imgDeltaA = imgDeltaA;
+	}
+
+	/**
+	 * @return the volverBtn
+	 */
+	public JButton getVolverBtn() {
+		return volverBtn;
+	}
+
+	/**
+	 * @param volverBtn the volverBtn to set
+	 */
+	public void setVolverBtn(JButton volverBtn) {
+		this.volverBtn = volverBtn;
+	}
+
+	/**
+	 * @return the saveBtn
+	 */
+	public JButton getSaveBtn() {
+		return saveBtn;
+	}
+
+	/**
+	 * @param saveBtn the saveBtn to set
+	 */
+	public void setSaveBtn(JButton saveBtn) {
+		this.saveBtn = saveBtn;
+	}
+
+	/**
+	 * @return the companiaBtn
+	 */
+	public JButton getCompaniaBtn() {
+		return companiaBtn;
+	}
+
+	/**
+	 * @param companiaBtn the companiaBtn to set
+	 */
+	public void setCompaniaBtn(JButton companiaBtn) {
+		this.companiaBtn = companiaBtn;
+	}
+
+	/**
+	 * @return the destinoField
+	 */
+	public JTextField getDestinoField() {
+		return destinoField;
+	}
+
+	/**
+	 * @param destinoField the destinoField to set
+	 */
+	public void setDestinoField(JTextField destinoField) {
+		this.destinoField = destinoField;
+	}
+
+	/**
+	 * @return the pasajerosField
+	 */
+	public JTextField getPasajerosField() {
+		return pasajerosField;
+	}
+
+	/**
+	 * @param pasajerosField the pasajerosField to set
+	 */
+	public void setPasajerosField(JTextField pasajerosField) {
+		this.pasajerosField = pasajerosField;
+	}
+
+	/**
+	 * @return the salidaField
+	 */
+	public JTextField getSalidaField() {
+		return salidaField;
+	}
+
+	/**
+	 * @param salidaField the salidaField to set
+	 */
+	public void setSalidaField(JTextField salidaField) {
+		this.salidaField = salidaField;
+	}
+
+	/**
+	 * @return the llegadaField
+	 */
+	public JTextField getLlegadaField() {
+		return llegadaField;
+	}
+
+	/**
+	 * @param llegadaField the llegadaField to set
+	 */
+	public void setLlegadaField(JTextField llegadaField) {
+		this.llegadaField = llegadaField;
+	}
+
+	/**
+	 * @return the visaField
+	 */
+	public JTextField getVisaField() {
+		return visaField;
+	}
+
+	/**
+	 * @param visaField the visaField to set
+	 */
+	public void setVisaField(JTextField visaField) {
+		this.visaField = visaField;
+	}
+
 }

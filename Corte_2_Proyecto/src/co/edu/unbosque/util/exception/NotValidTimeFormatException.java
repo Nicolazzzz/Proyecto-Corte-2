@@ -15,6 +15,11 @@ package co.edu.unbosque.util.exception;
 public class NotValidTimeFormatException extends Exception {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Constructor por defecto que inicializa la excepción con un mensaje
 	 * predeterminado que indica que el formato de horas no es válido.
 	 */

@@ -13,6 +13,11 @@ package co.edu.unbosque.util.exception;
  * @version 1.0
  */
 public class NegativeIntNumberException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public NegativeIntNumberException() {
 		super("NO PUEDE INGRESAR NÚMEROS NEGATIVOS");
 	}
