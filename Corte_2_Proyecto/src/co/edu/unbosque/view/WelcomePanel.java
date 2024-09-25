@@ -1,12 +1,13 @@
 package co.edu.unbosque.view;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class WelcomePanel extends JPanel {
 
-	private JLabel img;
+	private JLabel imgDark, imgWhite;
 	private JButton adminBtn, userBtn, backgroungBtn;
 
 	public WelcomePanel() {
@@ -14,20 +15,23 @@ public class WelcomePanel extends JPanel {
 		setLayout(null);
 		setVisible(true);
 
+		imgDark = new JLabel();
+		ImageIcon imgIcon = new ImageIcon("src/media/");
+		
 	}
 
 	/**
 	 * @return the img
 	 */
 	public JLabel getImg() {
-		return img;
+		return imgDark;
 	}
 
 	/**
 	 * @param img the img to set
 	 */
 	public void setImg(JLabel img) {
-		this.img = img;
+		this.imgDark = img;
 	}
 
 	/**
