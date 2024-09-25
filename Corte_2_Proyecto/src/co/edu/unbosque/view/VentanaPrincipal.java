@@ -13,6 +13,7 @@ public class VentanaPrincipal extends JFrame {
 	private UserPanel userPanel;
 	private ManagePanel managePanel;
 	private CrudPanel crudPanel;
+	private InputPanel inputPanel;
 
 //
 	public VentanaPrincipal() {
@@ -32,6 +33,7 @@ public class VentanaPrincipal extends JFrame {
 		welcomePanel = new WelcomePanel();
 		userPanel = new UserPanel();
 		crudPanel = new CrudPanel();
+		inputPanel = new InputPanel();
 
 	}
 

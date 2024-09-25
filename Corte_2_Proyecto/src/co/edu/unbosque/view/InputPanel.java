@@ -22,7 +22,10 @@ public class InputPanel extends JPanel {
 		setSize(1280, 720);
 		setLayout(null);
 		setVisible(true);
+		
 		//IMAGENES--------------------------------------
+		//TODAS ESTÁN EN FALSE!!!!!!!
+		//<<DISCLAMER>> imgCompania FALTA, no tengo idea de que hacerle
 		imgInputIOscuro = new JLabel();
 		ImageIcon inputO = new ImageIcon("src/media/InputInterOscuro.png");
 		Image inputI = inputO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -86,6 +89,40 @@ public class InputPanel extends JPanel {
 		imgClic.setBounds(0, 0, 1270, 720);
 		imgClic.setVisible(false);
 		
+		imgCopaA = new JLabel();
+		ImageIcon inputa = new ImageIcon("src/logo/copaAirlines.png");
+		Image inputaa = inputa.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgCopaA.setIcon(new ImageIcon(inputaa));
+		imgCopaA.setBounds(0, 0, 1270, 720);
+		imgCopaA.setVisible(false);
+		
+		imgAmericanA = new JLabel();
+		ImageIcon inputas = new ImageIcon("src/logo/americanAirlines.png");
+		Image inputaas = inputas.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgAmericanA.setIcon(new ImageIcon(inputaas));
+		imgAmericanA.setBounds(0, 0, 1270, 720);
+		imgAmericanA.setVisible(false);
+
+		imgIberia = new JLabel();
+		ImageIcon inputxd = new ImageIcon("src/logo/iberiaAirlines.png");
+		Image inputxxd = inputxd.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgIberia.setIcon(new ImageIcon(inputxxd));
+		imgIberia.setBounds(0, 0, 1270, 720);
+		imgIberia.setVisible(false);
+		
+		imgAirF = new JLabel();
+		ImageIcon inputt = new ImageIcon("src/logo/airFrance.png");
+		Image inputs = inputt.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgAirF.setIcon(new ImageIcon(inputs));
+		imgAirF.setBounds(0, 0, 1270, 720);
+		imgAirF.setVisible(false);
+
+		imgDeltaA = new JLabel();
+		ImageIcon inputtx = new ImageIcon("src/logo/deltaAirlines.png");
+		Image inputsx = inputtx.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgDeltaA.setIcon(new ImageIcon(inputsx));
+		imgDeltaA.setBounds(0, 0, 1270, 720);
+		imgDeltaA.setVisible(false);
 		
 		//BOTONES--------------------------------------
 		volverBtn = new JButton("Volver");
@@ -106,5 +143,53 @@ public class InputPanel extends JPanel {
 		companiaBtn.setActionCommand("COMPAÑIAINPUT");
 		companiaBtn.setToolTipText("SELECCIONAR COMPAÑIA ENCARGADA DEL VUELO");
 		
+		//ETIQUETAS-------------------------------------
+		destinoField = new JTextField();
+		destinoField.setBounds(248, 255, 300, 60);
+		destinoField.setOpaque(true);
+		destinoField.setVisible(false);
+		
+		pasajerosField = new JTextField();
+		pasajerosField.setBounds(248, 255, 300, 60);
+		pasajerosField.setOpaque(true);
+		pasajerosField.setVisible(false);
+		
+		salidaField = new JTextField();
+		salidaField.setBounds(248, 255, 300, 60);
+		salidaField.setOpaque(true);
+		salidaField.setVisible(false);
+		
+		llegadaField = new JTextField();
+		llegadaField.setBounds(248, 255, 300, 60);
+		llegadaField.setOpaque(true);
+		llegadaField.setVisible(false);
+		
+		visaField = new JTextField();
+		visaField.setBounds(248, 255, 300, 60);
+		visaField.setOpaque(true);
+		visaField.setVisible(false);
+		
+		add(imgInputIOscuro);
+		add(imgInputIClaro);
+		add(imgInputNOscuro);
+		add(imgInputNClaro);
+		add(imgAvianca);
+		add(imgLatam);
+		add(imgWingo);
+		add(imgSatena);
+		add(imgClic);
+		add(imgCopaA);
+		add(imgAmericanA);
+		add(imgIberia);
+		add(imgAirF);
+		add(imgDeltaA);
+		add(volverBtn);
+		add(saveBtn);
+		add(companiaBtn);
+		add(destinoField);
+		add(pasajerosField);
+		add(salidaField);
+		add(llegadaField);
+		add(visaField);
 	}
 }
