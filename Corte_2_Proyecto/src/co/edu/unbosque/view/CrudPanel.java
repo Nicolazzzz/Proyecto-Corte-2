@@ -38,27 +38,27 @@ public class CrudPanel extends JPanel {
 
 		addBtn = new JButton("Agregar");
 		addBtn.setOpaque(true);
-		addBtn.setBounds(50, 50, 100, 100);
+		addBtn.setBounds(350, 350, 260, 70);
 		addBtn.setActionCommand("AGREGAR");
 
 		deleteBtn = new JButton("Eliminar");
 		deleteBtn.setOpaque(true);
-		deleteBtn.setBounds(50, 50, 200, 200);
+		deleteBtn.setBounds(350, 471, 260, 70);
 		deleteBtn.setActionCommand("ELIMINAR");
 
 		showBtn = new JButton("Mostrar");
 		showBtn.setOpaque(true);
-		showBtn.setBounds(50, 50, 300, 300);
+		showBtn.setBounds(200, 50, 260, 70);
 		showBtn.setActionCommand("MOSTRAR");
 
 		updateBtn = new JButton("Actualizar");
 		updateBtn.setOpaque(true);
-		updateBtn.setBounds(50, 50, 400, 400);
+		updateBtn.setBounds(50, 50, 260, 70);
 		updateBtn.setActionCommand("ACTUALIZAR");
 
 		volverBtn = new JButton("Volver");
 		volverBtn.setOpaque(true);
-		volverBtn.setBounds(100, 50, 400, 400);
+		volverBtn.setBounds(50, 200, 100, 100);
 		volverBtn.setActionCommand("VOLVERCRUD");
 
 		add(imgCrudClaro);
