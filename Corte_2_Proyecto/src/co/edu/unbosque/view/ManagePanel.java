@@ -36,7 +36,7 @@ public class ManagePanel extends JPanel {
 		imgDark.setVisible(true);
 
 		internacionalBtn = new JButton("INTERNACIONAL BTN");
-		internacionalBtn.setOpaque(true);
+		internacionalBtn.setOpaque(false);
 		internacionalBtn.setBounds(480, 433, 321, 71);
 		internacionalBtn.setActionCommand("INTERNACIONAL");
 
