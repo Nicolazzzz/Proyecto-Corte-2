@@ -14,7 +14,7 @@ public class CrudPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton addBtn, deleteBtn, showBtn, updateBtn, volverBtn;
-	private JLabel imgCrudClaro, imgCrudOscuro;
+	private JLabel imgInterCrudClaro, imgInterCrudOscuro, imgNacionalCrudOscuro, imgNacionalCrudClaro;
 
 	public CrudPanel() {
 
@@ -22,19 +22,33 @@ public class CrudPanel extends JPanel {
 		setLayout(null);
 		setVisible(true);
 
-		imgCrudClaro = new JLabel();
+		imgInterCrudClaro = new JLabel();
 		ImageIcon crudC = new ImageIcon("src/media/InterClaro.png");
 		Image crudCU = crudC.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
-		imgCrudClaro.setIcon(new ImageIcon(crudCU));
-		imgCrudClaro.setBounds(0, 0, 1280, 720);
-		imgCrudClaro.setVisible(true);
+		imgInterCrudClaro.setIcon(new ImageIcon(crudCU));
+		imgInterCrudClaro.setBounds(0, 0, 1280, 720);
+		imgInterCrudClaro.setVisible(true);
 
-		imgCrudOscuro = new JLabel();
+		imgInterCrudOscuro = new JLabel();
 		ImageIcon crudO = new ImageIcon("src/media/InterOscuro.png");
 		Image crudOU = crudO.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
-		imgCrudClaro.setIcon(new ImageIcon(crudOU));
-		imgCrudClaro.setBounds(0, 0, 1280, 720);
-		imgCrudClaro.setVisible(true);
+		imgInterCrudOscuro.setIcon(new ImageIcon(crudOU));
+		imgInterCrudOscuro.setBounds(0, 0, 1280, 720);
+		imgInterCrudOscuro.setVisible(true);
+
+		imgNacionalCrudClaro = new JLabel();
+		ImageIcon crudNC = new ImageIcon("src/media/NacionalesClaro.png");
+		Image crudNCU = crudNC.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		imgNacionalCrudClaro.setIcon(new ImageIcon(crudNCU));
+		imgNacionalCrudClaro.setBounds(0, 0, 1280, 720);
+		imgNacionalCrudClaro.setVisible(true);
+
+		imgNacionalCrudOscuro = new JLabel();
+		ImageIcon crudNO = new ImageIcon("src/media/NacionalesOscuro.png");
+		Image crudNOU = crudNO.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		imgNacionalCrudOscuro.setIcon(new ImageIcon(crudNOU));
+		imgNacionalCrudOscuro.setBounds(0, 0, 1280, 720);
+		imgNacionalCrudOscuro.setVisible(true);
 
 		addBtn = new JButton("Agregar");
 		addBtn.setOpaque(false);
@@ -61,35 +75,16 @@ public class CrudPanel extends JPanel {
 		volverBtn.setBounds(595, 550, 94, 94);
 		volverBtn.setActionCommand("VOLVERCRUD");
 
-		add(imgCrudClaro);
-		add(imgCrudOscuro);
+		add(imgInterCrudClaro);
+		add(imgInterCrudOscuro);
+		add(imgNacionalCrudClaro);
+		add(imgNacionalCrudOscuro);
 		add(addBtn);
 		add(deleteBtn);
 		add(showBtn);
 		add(updateBtn);
 		add(volverBtn);
 
-	}
-
-	/**
-	 * @return the volverBtn
-	 */
-	public JButton getVolverBtn() {
-		return volverBtn;
-	}
-
-	/**
-	 * @param volverBtn the volverBtn to set
-	 */
-	public void setVolverBtn(JButton volverBtn) {
-		this.volverBtn = volverBtn;
-	}
-
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	/**
@@ -149,31 +144,80 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
-	 * @return the imgCrudClaro
+	 * @return the volverBtn
 	 */
-	public JLabel getImgCrudClaro() {
-		return imgCrudClaro;
+	public JButton getVolverBtn() {
+		return volverBtn;
 	}
 
 	/**
-	 * @param imgCrudClaro the imgCrudClaro to set
+	 * @param volverBtn the volverBtn to set
 	 */
-	public void setImgCrudClaro(JLabel imgCrudClaro) {
-		this.imgCrudClaro = imgCrudClaro;
+	public void setVolverBtn(JButton volverBtn) {
+		this.volverBtn = volverBtn;
 	}
 
 	/**
-	 * @return the imgCrudOscuro
+	 * @return the imgInterCrudClaro
 	 */
-	public JLabel getImgCrudOscuro() {
-		return imgCrudOscuro;
+	public JLabel getImgInterCrudClaro() {
+		return imgInterCrudClaro;
 	}
 
 	/**
-	 * @param imgCrudOscuro the imgCrudOscuro to set
+	 * @param imgInterCrudClaro the imgInterCrudClaro to set
 	 */
-	public void setImgCrudOscuro(JLabel imgCrudOscuro) {
-		this.imgCrudOscuro = imgCrudOscuro;
+	public void setImgInterCrudClaro(JLabel imgInterCrudClaro) {
+		this.imgInterCrudClaro = imgInterCrudClaro;
+	}
+
+	/**
+	 * @return the imgInterCrudOscuro
+	 */
+	public JLabel getImgInterCrudOscuro() {
+		return imgInterCrudOscuro;
+	}
+
+	/**
+	 * @param imgInterCrudOscuro the imgInterCrudOscuro to set
+	 */
+	public void setImgInterCrudOscuro(JLabel imgInterCrudOscuro) {
+		this.imgInterCrudOscuro = imgInterCrudOscuro;
+	}
+
+	/**
+	 * @return the imgNacionalCrudOscuro
+	 */
+	public JLabel getImgNacionalCrudOscuro() {
+		return imgNacionalCrudOscuro;
+	}
+
+	/**
+	 * @param imgNacionalCrudOscuro the imgNacionalCrudOscuro to set
+	 */
+	public void setImgNacionalCrudOscuro(JLabel imgNacionalCrudOscuro) {
+		this.imgNacionalCrudOscuro = imgNacionalCrudOscuro;
+	}
+
+	/**
+	 * @return the imgNacionalCrudClaro
+	 */
+	public JLabel getImgNacionalCrudClaro() {
+		return imgNacionalCrudClaro;
+	}
+
+	/**
+	 * @param imgNacionalCrudClaro the imgNacionalCrudClaro to set
+	 */
+	public void setImgNacionalCrudClaro(JLabel imgNacionalCrudClaro) {
+		this.imgNacionalCrudClaro = imgNacionalCrudClaro;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

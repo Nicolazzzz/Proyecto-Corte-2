@@ -53,6 +53,24 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(crudPanel);
 	}
 
+	public void mostrarPanelInput() {
+		setContentPane(inputPanel);
+	}
+
+	/**
+	 * @return the inputPanel
+	 */
+	public InputPanel getInputPanel() {
+		return inputPanel;
+	}
+
+	/**
+	 * @param inputPanel the inputPanel to set
+	 */
+	public void setInputPanel(InputPanel inputPanel) {
+		this.inputPanel = inputPanel;
+	}
+
 	/**
 	 * @return the crudPanel
 	 */

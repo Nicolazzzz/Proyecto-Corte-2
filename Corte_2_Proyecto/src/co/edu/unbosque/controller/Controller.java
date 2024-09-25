@@ -26,15 +26,18 @@ public class Controller implements ActionListener {
 	private String destinoA = "";
 	private String llegadaA = "";
 
-	private boolean dark = false;
-	private boolean white = true;
+	private boolean dark = true;
+	private boolean white = false;
+
+	private boolean nacional = false;
+	private boolean internacional = false;
 
 	public Controller() {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
 		asignarLectores();
 		vf.getVp().mostrarPanelWelcome();
-		mostrarMenuPrincipal();
+		// mostrarMenuPrincipal();
 	}
 
 	public void asignarLectores() {
@@ -84,6 +87,16 @@ public class Controller implements ActionListener {
 		vf.getVp().getCrudPanel().getVolverBtn().addActionListener(this);
 		vf.getVp().getCrudPanel().getVolverBtn().setActionCommand("VOLVERCRUD");
 
+		// INPUT
+		vf.getVp().getInputPanel().getVolverBtn().addActionListener(this);
+		vf.getVp().getInputPanel().getVolverBtn().setActionCommand("VOLVERINPUT");
+
+		vf.getVp().getInputPanel().getSaveBtn().addActionListener(this);
+		vf.getVp().getInputPanel().getSaveBtn().setActionCommand("GUARDARINPUT");
+
+		vf.getVp().getInputPanel().getCompaniaBtn().addActionListener(this);
+		vf.getVp().getInputPanel().getCompaniaBtn().setActionCommand("COMPANIAINPUT");
+
 	}
 
 	@Override
@@ -92,25 +105,30 @@ public class Controller implements ActionListener {
 
 		// BIENVENIDA
 		case "FONDO":
-			if (white == true) {
+
+			if (white == true && dark == false) {
 				white = false;
 				dark = true;
-
+				setearFondo();
+				break;
 			}
 
-			if (dark == true) {
+			if (dark == true && white == false) {
 				white = true;
 				dark = false;
-
+				setearFondo();
+				break;
 			}
 
 			break;
 
 		case "ADMIN":
+			setearFondo();
 			vf.getVp().mostrarPanelManage();
 			break;
 
 		case "USER":
+			setearFondo();
 			vf.getVp().mostrarPanelUser();
 			break;
 
@@ -119,7 +137,7 @@ public class Controller implements ActionListener {
 
 			String vuelos = vf.getVp().getUserPanel().getDestinoField().getText();
 			vf.getCon().mostrarMensajeEmergenteConScrollWhite(
-					mf.getvInternacionalDAO().showSelected(vuelos) + mf.getvNacionalDAO().showSelected(vuelos));
+					mf.getvInternacionalDAO().showSelected(vuelos) + "\n" + mf.getvNacionalDAO().showSelected(vuelos));
 			break;
 
 		case "VOLVERUSER":
@@ -128,10 +146,17 @@ public class Controller implements ActionListener {
 
 		// ADMIN
 		case "INTERNACIONAL":
+			internacional = true;
+			nacional = false;
+			setearPorTipo();
 			vf.getVp().mostrarPanelCrud();
+
 			break;
 
 		case "NACIONAL":
+			internacional = false;
+			nacional = true;
+			setearPorTipo();
 			vf.getVp().mostrarPanelCrud();
 			break;
 
@@ -144,15 +169,34 @@ public class Controller implements ActionListener {
 
 		// CRUD
 		case "AGREGAR":
+			vf.getVp().mostrarPanelInput();
 			break;
 
 		case "MOSTRAR":
+			if (white == true) {
+				if (nacional == true)
+					vf.getCon().mostrarMensajeEmergenteConScrollDark(mf.getvNacionalDAO().showAll());
+				if (internacional == true)
+					vf.getCon().mostrarMensajeEmergenteConScrollDark(mf.getvInternacionalDAO().showAll());
+				break;
+			}
+
+			if (dark == true) {
+				if (nacional == true)
+					vf.getCon().mostrarMensajeEmergenteConScrollWhite(mf.getvNacionalDAO().showAll());
+				if (internacional == true)
+					vf.getCon().mostrarMensajeEmergenteConScrollWhite(mf.getvInternacionalDAO().showAll());
+				break;
+			}
+
 			break;
 
 		case "ELIMINAR":
+			vf.getVp().mostrarPanelInput();
 			break;
 
 		case "ACTUALIZAR":
+			vf.getVp().mostrarPanelInput();
 			break;
 
 		case "VOLVERCRUD":
@@ -161,13 +205,14 @@ public class Controller implements ActionListener {
 
 		// INPUT
 
-		case "COMPANY":
+		case "COMPANIAINPUT":
 			break;
 
 		case "VOLVERINPUT":
+			vf.getVp().mostrarPanelCrud();
 			break;
 
-		case "GUARDAR":
+		case "GUARDARINPUT":
 			break;
 
 		}
@@ -846,4 +891,192 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	public void setearFondo() {
+
+		if (dark == true && white == false) {
+			// WELCOME
+			vf.getVp().getWelcomePanel().getImgDark().setVisible(true);
+			vf.getVp().getWelcomePanel().getImgWhite().setVisible(false);
+
+			// ADMIN
+			vf.getVp().getManagePanel().getImgDark().setVisible(true);
+			vf.getVp().getManagePanel().getImgWhite().setVisible(false);
+
+			// USER
+			vf.getVp().getUserPanel().getImgDark().setVisible(true);
+			vf.getVp().getUserPanel().getImgWhite().setVisible(false);
+
+			// CRUD
+			vf.getVp().getCrudPanel().getImgInterCrudOscuro().setVisible(true);
+			vf.getVp().getCrudPanel().getImgInterCrudClaro().setVisible(false);
+
+			vf.getVp().getCrudPanel().getImgNacionalCrudOscuro().setVisible(true);
+			vf.getVp().getCrudPanel().getImgNacionalCrudClaro().setVisible(false);
+
+			// INPUT
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+
+		}
+
+		if (dark == false && white == true) {
+			// WELCOME
+			vf.getVp().getWelcomePanel().getImgDark().setVisible(false);
+			vf.getVp().getWelcomePanel().getImgWhite().setVisible(true);
+
+			// ADMIN
+			vf.getVp().getManagePanel().getImgDark().setVisible(false);
+			vf.getVp().getManagePanel().getImgWhite().setVisible(true);
+
+			// USER
+			vf.getVp().getUserPanel().getImgDark().setVisible(false);
+			vf.getVp().getUserPanel().getImgWhite().setVisible(true);
+
+			// CRUD
+			vf.getVp().getCrudPanel().getImgInterCrudOscuro().setVisible(false);
+			vf.getVp().getCrudPanel().getImgInterCrudClaro().setVisible(true);
+
+			vf.getVp().getCrudPanel().getImgNacionalCrudOscuro().setVisible(false);
+			vf.getVp().getCrudPanel().getImgNacionalCrudClaro().setVisible(true);
+
+			// INPUT
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(true);
+
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(true);
+
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(true);
+
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(true);
+
+		}
+
+	}
+
+	public void setearPorTipo() {
+
+		if (nacional == true && internacional == false && dark == true && white == false) {
+			// CRUD
+			vf.getVp().getCrudPanel().getImgNacionalCrudOscuro().setVisible(true);
+			vf.getVp().getCrudPanel().getImgNacionalCrudClaro().setVisible(false);
+
+			vf.getVp().getCrudPanel().getImgInterCrudOscuro().setVisible(false);
+			vf.getVp().getCrudPanel().getImgInterCrudClaro().setVisible(false);
+
+			// INPUT
+
+			// ------AGREGAR--------
+
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
+
+			// =====ELIMINAR========
+
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+
+		}
+
+		if (nacional == true && internacional == false && dark == false && white == true) {
+			// CRUD
+			vf.getVp().getCrudPanel().getImgNacionalCrudOscuro().setVisible(false);
+			vf.getVp().getCrudPanel().getImgNacionalCrudClaro().setVisible(true);
+
+			vf.getVp().getCrudPanel().getImgInterCrudOscuro().setVisible(false);
+			vf.getVp().getCrudPanel().getImgInterCrudClaro().setVisible(false);
+
+			// INPUT
+
+			// ------AGREGAR--------
+
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(true);
+
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
+
+			// =====ELIMINAR========
+
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(true);
+
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+		}
+
+		if (nacional == false && internacional == true && dark == true && white == false) {
+			// CRUD
+			vf.getVp().getCrudPanel().getImgNacionalCrudOscuro().setVisible(false);
+			vf.getVp().getCrudPanel().getImgNacionalCrudClaro().setVisible(false);
+
+			vf.getVp().getCrudPanel().getImgInterCrudOscuro().setVisible(true);
+			vf.getVp().getCrudPanel().getImgInterCrudClaro().setVisible(false);
+
+			// INPUT
+
+			// ------AGREGAR--------
+
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
+
+			// =====ELIMINAR========
+
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+		}
+
+		if (nacional == false && internacional == true && dark == false && white == true) {
+			// CRUD
+			vf.getVp().getCrudPanel().getImgNacionalCrudOscuro().setVisible(false);
+			vf.getVp().getCrudPanel().getImgNacionalCrudClaro().setVisible(false);
+
+			vf.getVp().getCrudPanel().getImgInterCrudOscuro().setVisible(false);
+			vf.getVp().getCrudPanel().getImgInterCrudClaro().setVisible(true);
+			// INPUT
+
+			// ------AGREGAR--------
+
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(true);
+
+			// =====ELIMINAR========
+
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(true);
+
+			// =====ACTUALIZAR======
+
+		}
+
+	}
 }
