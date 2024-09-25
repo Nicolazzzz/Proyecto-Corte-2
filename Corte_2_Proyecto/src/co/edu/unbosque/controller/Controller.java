@@ -13,12 +13,14 @@ import co.edu.unbosque.util.exception.ExceptionChecker;
 import co.edu.unbosque.util.exception.NotValidBooleanException;
 import co.edu.unbosque.util.exception.NotValidInputException;
 import co.edu.unbosque.util.exception.NotValidTimeFormatException;
+import co.edu.unbosque.view.VentanaPrincipal;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller implements ActionListener {
 
 	private ModelFacade mf;
 	private ViewFacade vf;
+	private VentanaPrincipal vp;
 
 	private String companiaA = "";
 	private String destinoA = "";
@@ -32,6 +34,7 @@ public class Controller implements ActionListener {
 		mf = new ModelFacade();
 		mostrarMenuPrincipal();
 		asignarLectores();
+		vp = new VentanaPrincipal();
 	}
 
 	public void asignarLectores() {
@@ -75,7 +78,7 @@ public class Controller implements ActionListener {
 		case "ADMIN":
 			break;
 
-		case "USUARIO":
+		case "USER":
 			break;
 
 		// USUARIO
