@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class ManagePanel extends JPanel {
 
 	/**
-	 * 
+	 * a
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton internacionalBtn, nacionalBtn, generarBtn, volverBtn;
@@ -37,22 +37,22 @@ public class ManagePanel extends JPanel {
 
 		internacionalBtn = new JButton("INTERNACIONAL BTN");
 		internacionalBtn.setOpaque(true);
-		internacionalBtn.setBounds(10, 10, 50, 50);
+		internacionalBtn.setBounds(10, 10, 200, 50);
 		internacionalBtn.setActionCommand("INTERNACIONAL");
 
 		nacionalBtn = new JButton("NACIONAL BTN");
 		nacionalBtn.setOpaque(true);
-		nacionalBtn.setBounds(10, 60, 50, 50);
+		nacionalBtn.setBounds(10, 60, 200, 50);
 		nacionalBtn.setActionCommand("NACIONAL");
 
 		generarBtn = new JButton("GENERAR FILE");
 		generarBtn.setOpaque(true);
-		generarBtn.setBounds(10, 110, 50, 50);
+		generarBtn.setBounds(10, 110, 200, 50);
 		generarBtn.setActionCommand("GENERARFILE");
 
 		volverBtn = new JButton("VOLVER BUTTON");
 		volverBtn.setOpaque(true);
-		volverBtn.setBounds(10, 160, 50, 50);
+		volverBtn.setBounds(10, 160, 200, 50);
 		volverBtn.setActionCommand("VOLVERADMIN");
 
 		add(imgWhite);
