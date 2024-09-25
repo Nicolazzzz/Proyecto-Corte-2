@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class VentanaPrincipal extends JFrame {
-
+//
 	public VentanaPrincipal() {
 
 		setLocation(40, 40);
