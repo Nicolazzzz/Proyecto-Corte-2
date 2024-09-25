@@ -5,6 +5,11 @@ import javax.swing.JFrame;
 
 public class VentanaPrincipal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private WelcomePanel welcomePanel;
 	private ManagePanel managePanel;
 
 //
@@ -22,11 +27,16 @@ public class VentanaPrincipal extends JFrame {
 		setIconImage(logoApp.getImage());
 
 		managePanel = new ManagePanel();
+		welcomePanel = new WelcomePanel();
 
 	}
 
 	public void mostrarPanelManage() {
 		setContentPane(managePanel);
+	}
+
+	public void mostrarPanelWelcome() {
+		setContentPane(welcomePanel);
 	}
 
 	/**

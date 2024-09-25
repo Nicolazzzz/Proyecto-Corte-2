@@ -35,6 +35,7 @@ public class Controller implements ActionListener {
 	}
 
 	public void asignarLectores() {
+		// WELCOME
 
 		// MANAGE
 		vf.getVp().getManagePanel().getInternacionalBtn().addActionListener(this);
@@ -96,6 +97,7 @@ public class Controller implements ActionListener {
 			break;
 
 		case "VOLVERADMIN":
+			vf.getVp().mostrarPanelWelcome();
 			break;
 
 		// CRUD
