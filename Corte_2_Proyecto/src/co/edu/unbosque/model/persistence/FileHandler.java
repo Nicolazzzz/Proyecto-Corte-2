@@ -10,6 +10,16 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Clase encargada de manejar operaciones de entrada y salida de archivos.
+ * Permite leer y escribir tanto archivos de texto plano como objetos
+ * serializados. Además, asegura que exista una carpeta para almacenar los
+ * archivos.
+ * 
+ * @author Sebastian
+ * @version 1.0
+ * @since 2024-09-24
+ */
 public class FileHandler {
 
 	private static Scanner sc;
@@ -23,6 +33,9 @@ public class FileHandler {
 	private static FileInputStream fis;
 	private static ObjectInputStream ois;
 
+	/**
+	 * Verifica si la carpeta de almacenamiento existe. Si no, la crea.
+	 */
 	public static void checkFolder() {
 		archivo = new File(FOLDER_NAME);
 		if (archivo.exists() && archivo.isDirectory()) {
@@ -32,6 +45,12 @@ public class FileHandler {
 		}
 	}
 
+	/**
+	 * Escribe contenido en un archivo de texto plano.
+	 *
+	 * @param url     Nombre del archivo en el que se escribirá el contenido.
+	 * @param content Contenido que se desea escribir en el archivo.
+	 */
 	public static void writeFile(String url, String content) {
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
@@ -43,13 +62,17 @@ public class FileHandler {
 			pw.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("ERROR EN LA ESCRITURA DEL ARCHIVO (TEXTO PLANO)");
-			// e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("ERROR EN LA CREACIÓN DEL ARCHIVO (TEXTO PLANO)");
-			// e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Lee el contenido de un archivo de texto plano.
+	 *
+	 * @param url Nombre del archivo que se desea leer.
+	 * @return Contenido del archivo como una cadena, o null si hay un error.
+	 */
 	public static String readFile(String url) {
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
@@ -72,6 +95,12 @@ public class FileHandler {
 		return null;
 	}
 
+	/**
+	 * Escribe un objeto en un archivo utilizando serialización.
+	 *
+	 * @param url     Nombre del archivo donde se escribirá el objeto.
+	 * @param content Objeto que se desea serializar y guardar en el archivo.
+	 */
 	public static void writeSerialized(String url, Object content) {
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
@@ -91,6 +120,12 @@ public class FileHandler {
 		}
 	}
 
+	/**
+	 * Lee un objeto desde un archivo serializado.
+	 *
+	 * @param url Nombre del archivo desde el que se leerá el objeto.
+	 * @return El objeto leído del archivo, o null si hay un error.
+	 */
 	public static Object readSerialized(String url) {
 		try {
 			archivo = new File(FOLDER_NAME + "/" + url);
@@ -114,5 +149,4 @@ public class FileHandler {
 		}
 		return null;
 	}
-
 }

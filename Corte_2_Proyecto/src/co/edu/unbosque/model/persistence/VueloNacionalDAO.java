@@ -1,23 +1,41 @@
 package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
-
 import co.edu.unbosque.model.Vuelo;
 import co.edu.unbosque.model.VueloInternacional;
 import co.edu.unbosque.model.VueloNacional;
 import co.edu.unbosque.model.VueloNacionalDTO;
 
+/**
+ * Clase que implementa las operaciones CRUD para manejar los vuelos nacionales.
+ * Esta clase se encarga de leer y escribir datos de vuelos nacionales
+ * desde/hacia un archivo CSV y un archivo serializado.
+ * 
+ * @author Mario
+ * @version 1.0
+ * @since 2024-09-24
+ */
 public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNacional> {
 
 	private ArrayList<VueloNacional> listaVuelosNacionales;
 	private final String FILE_NAME = "vuelosNacionales.csv";
 	private final String SERIAL_NAME = "vuelosNacionales.bat";
 
+	/**
+	 * Constructor que inicializa la lista de vuelos nacionales y verifica la
+	 * existencia de la carpeta necesaria para almacenar archivos.
+	 */
 	public VueloNacionalDAO() {
 		FileHandler.checkFolder();
 		readSerialized();
 	}
 
+	/**
+	 * Muestra todos los vuelos nacionales registrados.
+	 *
+	 * @return Una cadena que representa todos los vuelos o un mensaje indicando que
+	 *         no hay vuelos.
+	 */
 	@Override
 	public String showAll() {
 		String content = "";
@@ -35,11 +53,22 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 		}
 	}
 
+	/**
+	 * Obtiene una lista de todos los DTOs de vuelos nacionales.
+	 *
+	 * @return Lista de objetos VueloNacionalDTO.
+	 */
 	@Override
 	public ArrayList<VueloNacionalDTO> getAll() {
 		return DataMapper.listaVuelosNacionalesToListaVuelosNacionalesDTO(listaVuelosNacionales);
 	}
 
+	/**
+	 * Agrega un nuevo vuelo nacional.
+	 *
+	 * @param newData Objeto VueloNacionalDTO que representa el nuevo vuelo.
+	 * @return true si se agregó correctamente, false si ya existe.
+	 */
 	@Override
 	public boolean add(VueloNacionalDTO newData) {
 		if (find(DataMapper.vueloNacionalDTOToVueloNacional(newData)) == null) {
@@ -51,6 +80,12 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 		return false;
 	}
 
+	/**
+	 * Elimina un vuelo nacional existente.
+	 *
+	 * @param toDelete Objeto VueloNacionalDTO que representa el vuelo a eliminar.
+	 * @return true si se eliminó correctamente, false si no se encontró.
+	 */
 	@Override
 	public boolean delete(VueloNacionalDTO toDelete) {
 		VueloNacional found = find(DataMapper.vueloNacionalDTOToVueloNacional(toDelete));
@@ -60,10 +95,15 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 			writeSerialized();
 			return true;
 		}
-
 		return false;
 	}
 
+	/**
+	 * Busca un vuelo nacional específico.
+	 *
+	 * @param toFind Objeto VueloNacional que representa el vuelo a buscar.
+	 * @return El vuelo encontrado o null si no existe.
+	 */
 	@Override
 	public VueloNacional find(VueloNacional toFind) {
 		VueloNacional found = null;
@@ -77,10 +117,16 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 				}
 			}
 		}
-
 		return null;
 	}
 
+	/**
+	 * Actualiza un vuelo nacional existente.
+	 *
+	 * @param previous Objeto VueloNacionalDTO que representa el vuelo a actualizar.
+	 * @param newData  Objeto VueloNacionalDTO con los nuevos datos.
+	 * @return true si se actualizó correctamente, false si no se encontró el vuelo.
+	 */
 	@Override
 	public boolean update(VueloNacionalDTO previous, VueloNacionalDTO newData) {
 		VueloNacional found = find(DataMapper.vueloNacionalDTOToVueloNacional(previous));
@@ -94,6 +140,9 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 		return false;
 	}
 
+	/**
+	 * Lee los vuelos nacionales desde el archivo CSV.
+	 */
 	@Override
 	public void readFile() {
 		String content = FileHandler.readFile(FILE_NAME);
@@ -116,11 +165,13 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 				vN.setEsHelice(Boolean.parseBoolean(cols[8]));
 				vN.setEsTurbina(Boolean.parseBoolean(cols[9]));
 				listaVuelosNacionales.add(vN);
-
 			}
 		}
 	}
 
+	/**
+	 * Escribe la lista de vuelos nacionales en el archivo CSV.
+	 */
 	@Override
 	public void writeFile() {
 		String content = "";
@@ -140,6 +191,9 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 		FileHandler.writeFile(FILE_NAME, content);
 	}
 
+	/**
+	 * Lee la lista de vuelos nacionales desde el archivo serializado.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void readSerialized() {
@@ -151,16 +205,27 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 		}
 	}
 
+	/**
+	 * Escribe la lista de vuelos nacionales en el archivo serializado.
+	 */
 	@Override
 	public void writeSerialized() {
 		FileHandler.writeSerialized(SERIAL_NAME, listaVuelosNacionales);
 	}
 
+	/**
+	 * Valida la disponibilidad de un vuelo basado en el piloto y los horarios.
+	 *
+	 * @param captain        Nombre del capitán.
+	 * @param seconOnCommand Nombre del segundo piloto.
+	 * @param horaSalida     Hora de salida del vuelo.
+	 * @param horaLlegada    Hora de llegada del vuelo.
+	 * @return true si es válido, false si hay conflictos.
+	 */
 	public boolean validarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
 		if (listaVuelosNacionales.isEmpty()) {
 			return true;
 		} else {
-
 			boolean valido = true;
 
 			// hora salida parametro
@@ -172,7 +237,6 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 			int horaLlegadaParametro = Integer.parseInt(hora2[0]);
 
 			for (VueloNacional vN : listaVuelosNacionales) {
-
 				// hora salida del vuelo original
 				String[] hora3 = vN.getDepartureTime().split(":");
 				int horaSalidaOriginal = Integer.parseInt(hora3[0]);
@@ -185,17 +249,14 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 						&& (horaLlegadaParametro > horaSalidaOriginal);
 
 				boolean pilotoRepetido = vN.getCaptain().equalsIgnoreCase(captain)
-						|| vN.getSecondInCommand().equalsIgnoreCase(seconOnCommand)
-						|| vN.getCaptain().equalsIgnoreCase(seconOnCommand)
-						|| vN.getSecondInCommand().equalsIgnoreCase(captain);
+						|| vN.getSecondInCommand().equalsIgnoreCase(seconOnCommand);
 
 				if (hayInterseccion && pilotoRepetido) {
-					return false;
+					valido = false;
+					break;
 				}
 			}
-
 			return valido;
 		}
 	}
-
 }
