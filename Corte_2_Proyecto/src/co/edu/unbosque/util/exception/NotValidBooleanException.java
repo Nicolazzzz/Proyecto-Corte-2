@@ -14,6 +14,11 @@ package co.edu.unbosque.util.exception;
  */
 public class NotValidBooleanException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public NotValidBooleanException() {
 		super("NO CORRESPONDE SU RESPUESTA CON EL VALOR DE VERDAD, EN PREGUNTAS CON RESPUESTAS SI/NO --> VERIFIQUE QUE SU RESPUESTA SEA ESA");
 	}

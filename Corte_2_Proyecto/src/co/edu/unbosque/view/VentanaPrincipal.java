@@ -13,6 +13,7 @@ public class VentanaPrincipal extends JFrame {
 	private UserPanel userPanel;
 	private ManagePanel managePanel;
 	private CrudPanel crudPanel;
+	private InputPanel inputPanel;
 
 //
 	public VentanaPrincipal() {
@@ -25,13 +26,14 @@ public class VentanaPrincipal extends JFrame {
 		setVisible(true);
 		setTitle("EL DORADO");
 
-		ImageIcon logoApp = new ImageIcon("src/media/Logo.jpg");
+		ImageIcon logoApp = new ImageIcon("src/logo/Logo.png");
 		setIconImage(logoApp.getImage());
 
 		managePanel = new ManagePanel();
 		welcomePanel = new WelcomePanel();
 		userPanel = new UserPanel();
 		crudPanel = new CrudPanel();
+		inputPanel = new InputPanel();
 
 	}
 
