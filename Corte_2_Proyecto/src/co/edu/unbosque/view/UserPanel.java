@@ -50,9 +50,9 @@ public class UserPanel extends JPanel {
 		buscarBtn.setBounds(480, 485, 320, 68);
 		buscarBtn.setActionCommand("BUSCAR");
 
+		add(destinoField);
 		add(imgDark);
 		add(imgWhite);
-		add(destinoField);
 		add(volverBtn);
 		add(buscarBtn);
 	}

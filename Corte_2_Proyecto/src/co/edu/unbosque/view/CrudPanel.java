@@ -37,28 +37,28 @@ public class CrudPanel extends JPanel {
 		imgCrudClaro.setVisible(true);
 
 		addBtn = new JButton("Agregar");
-		addBtn.setOpaque(true);
-		addBtn.setBounds(350, 350, 260, 70);
+		addBtn.setOpaque(false);
+		addBtn.setBounds(342, 324, 278, 71);
 		addBtn.setActionCommand("AGREGAR");
 
 		deleteBtn = new JButton("Eliminar");
-		deleteBtn.setOpaque(true);
-		deleteBtn.setBounds(350, 471, 260, 70);
+		deleteBtn.setOpaque(false);
+		deleteBtn.setBounds(342, 471, 278, 71);
 		deleteBtn.setActionCommand("ELIMINAR");
 
 		showBtn = new JButton("Mostrar");
-		showBtn.setOpaque(true);
-		showBtn.setBounds(200, 50, 260, 70);
+		showBtn.setOpaque(false);
+		showBtn.setBounds(662, 324, 278, 71);
 		showBtn.setActionCommand("MOSTRAR");
 
 		updateBtn = new JButton("Actualizar");
-		updateBtn.setOpaque(true);
-		updateBtn.setBounds(50, 50, 260, 70);
+		updateBtn.setOpaque(false);
+		updateBtn.setBounds(662, 471, 278, 71);
 		updateBtn.setActionCommand("ACTUALIZAR");
 
 		volverBtn = new JButton("Volver");
-		volverBtn.setOpaque(true);
-		volverBtn.setBounds(50, 200, 100, 100);
+		volverBtn.setOpaque(false);
+		volverBtn.setBounds(595, 550, 94, 94);
 		volverBtn.setActionCommand("VOLVERCRUD");
 
 		add(imgCrudClaro);
