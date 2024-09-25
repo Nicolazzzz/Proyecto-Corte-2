@@ -54,7 +54,7 @@ public class VueloInternacional extends Vuelo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\nRequiere visa: " + requiereVisa;
+		return super.toString() + "\nRequiere visa: " + requiereVisa;
 	}
 
 }

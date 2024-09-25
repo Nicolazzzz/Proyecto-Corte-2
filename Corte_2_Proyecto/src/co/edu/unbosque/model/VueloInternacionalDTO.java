@@ -52,7 +52,7 @@ public class VueloInternacionalDTO extends VueloDTO {
 
 	@Override
 	public String toString() {
-		return "\nRequiere visa: " + requiereVisa;
+		return super.toString() + "\nRequiere visa: " + requiereVisa;
 	}
 
 }
