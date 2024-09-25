@@ -52,6 +52,7 @@ public class ManagePanel extends JPanel {
 
 		volverBtn = new JButton("VOLVER BUTTON");
 		volverBtn.setOpaque(true);
+		volverBtn.setToolTipText("PUTO EL QUE LO LEA");
 		volverBtn.setBounds(10, 160, 200, 50);
 		volverBtn.setActionCommand("VOLVERADMIN");
 
