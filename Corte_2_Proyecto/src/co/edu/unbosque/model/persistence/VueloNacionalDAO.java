@@ -35,6 +35,33 @@ public class VueloNacionalDAO implements CRUDOperation<VueloNacionalDTO, VueloNa
 		}
 	}
 
+	public String showSelected(String destino) {
+		boolean siHubo = false;
+		String content = "";
+		int pos = 1;
+		if (listaVuelosNacionales.isEmpty()) {
+			return "No hay vuelos nacionales disponibles";
+		} else {
+			content += "\nVuelos Nacionales Disponibles" + "\n";
+			for (VueloNacional vN : listaVuelosNacionales) {
+				if (vN.getDestino().equalsIgnoreCase(destino)) {
+					content += "\n--------------------------------------------------------";
+					content += "\nVuelo " + pos;
+					content += "\n--------------------------------------------------------";
+					content += vN + "\n" + "\n";
+					pos++;
+					siHubo = true;
+				} else {
+					if (!siHubo)
+						content += "No se encontraron vuelos disponibles";
+				}
+
+			}
+
+		}
+		return content;
+	}
+
 	@Override
 	public ArrayList<VueloNacionalDTO> getAll() {
 		return DataMapper.listaVuelosNacionalesToListaVuelosNacionalesDTO(listaVuelosNacionales);

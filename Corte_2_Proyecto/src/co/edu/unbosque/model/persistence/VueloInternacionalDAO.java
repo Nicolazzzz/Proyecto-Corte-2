@@ -33,6 +33,33 @@ public class VueloInternacionalDAO implements CRUDOperation<VueloInternacionalDT
 		}
 	}
 
+	public String showSelected(String destino) {
+		boolean siHubo = false;
+		String content = "";
+		int pos = 1;
+		if (listaVuelosInternacionales.isEmpty()) {
+			return "No hay vuelos internacionales disponibles";
+		} else {
+			content += "\nVuelos Internacionales Disponibles" + "\n";
+			for (VueloInternacional vI : listaVuelosInternacionales) {
+				if (vI.getDestino().equalsIgnoreCase(destino)) {
+					content += "\n--------------------------------------------------------";
+					content += "\nVuelo " + pos;
+					content += "\n--------------------------------------------------------";
+					content += vI + "\n" + "\n";
+					pos++;
+					siHubo = true;
+				} else {
+					if (!siHubo)
+						content += "No se encontraron vuelos disponibles";
+				}
+
+			}
+
+		}
+		return content;
+	}
+
 	@Override
 	public ArrayList<VueloInternacionalDTO> getAll() {
 		return DataMapper.listaVInternacionalesToListaVuelosInternacionalesDTO(listaVuelosInternacionales);

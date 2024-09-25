@@ -22,6 +22,9 @@ public class Controller {
 	private String destinoA = "";
 	private String llegadaA = "";
 
+	private boolean dark = false;
+	private boolean white = true;
+
 	public Controller() {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
@@ -29,22 +32,7 @@ public class Controller {
 	}
 
 	public void run() {
-		/*
-		 * mainloop: while (true) { int op = vf.getCon().readInt();
-		 * vf.getCon().burnLine(); switch (op) { case 1:
-		 * System.out.println("agregando"); String name = vf.getCon().readLine();
-		 * mf.getComplement().add(new Piloto(name)); break; case 2:
-		 * System.out.println("Eliminando"); String nameD = vf.getCon().readLine();
-		 * mf.getComplement().delete(new Piloto(nameD)); break;
-		 * 
-		 * case 3: System.out.println("Mueche");
-		 * System.out.println(mf.getComplement().showPilots()); break;
-		 * 
-		 * case 4: System.out.println("BYE BYE BITCHS"); break mainloop; case 5:
-		 * System.out.println(mf.getComplement().randomizer()); break; default: break; }
-		 * 
-		 * }
-		 */
+
 	}
 
 	public void mostrarMenuPrincipal() {
@@ -83,6 +71,13 @@ public class Controller {
 
 			case 4:
 				break mainloop;
+
+			case 5:
+				vf.getCon().burnLine();
+				String vuelos = vf.getCon().readLine();
+				vf.getCon().printLine(mf.getvInternacionalDAO().showSelected(vuelos));
+				vf.getCon().printLine(mf.getvNacionalDAO().showSelected(vuelos));
+				break;
 
 			default:
 				break;
@@ -170,6 +165,9 @@ public class Controller {
 					} else {
 						vf.getCon().printLine("NO SE PUDO CREAR");
 					}
+
+				} catch (StringIndexOutOfBoundsException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 				} catch (NotValidInputException e) {
 					vf.getCon().printLine(
 							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
@@ -213,6 +211,8 @@ public class Controller {
 						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
 						break;
 					}
+				} catch (StringIndexOutOfBoundsException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 				} catch (NotValidTimeFormatException e) {
 					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 					break;
@@ -286,6 +286,8 @@ public class Controller {
 					} else {
 						vf.getCon().printLine("NO SE PUDO CREAR");
 					}
+				} catch (StringIndexOutOfBoundsException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 
 				} catch (NotValidInputException e) {
 					vf.getCon().printLine(
@@ -325,6 +327,8 @@ public class Controller {
 						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
 						break;
 					}
+				} catch (StringIndexOutOfBoundsException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 				} catch (NotValidTimeFormatException e) {
 					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 					break;
@@ -353,7 +357,7 @@ public class Controller {
 
 			String menuInter = """
 
-					MENU NACIONAL
+					MENU INTERNACIONAL
 					1) Agregar
 					2) Mostrar
 					3) Actualizar
@@ -419,6 +423,8 @@ public class Controller {
 					} else {
 						vf.getCon().printLine("NO SE PUDO CREAR");
 					}
+				} catch (StringIndexOutOfBoundsException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 				} catch (NotValidInputException e) {
 					vf.getCon().printLine(
 							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
@@ -462,6 +468,8 @@ public class Controller {
 						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
 						break;
 					}
+				} catch (StringIndexOutOfBoundsException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 				} catch (NotValidTimeFormatException e) {
 					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 					break;
@@ -527,6 +535,8 @@ public class Controller {
 						vf.getCon().printLine("NO SE PUDO CREAR");
 					}
 
+				} catch (StringIndexOutOfBoundsException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 				} catch (NotValidInputException e) {
 					vf.getCon().printLine(
 							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
@@ -565,6 +575,8 @@ public class Controller {
 						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
 						break;
 					}
+				} catch (StringIndexOutOfBoundsException e) {
+					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 				} catch (NotValidTimeFormatException e) {
 					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
 					break;
