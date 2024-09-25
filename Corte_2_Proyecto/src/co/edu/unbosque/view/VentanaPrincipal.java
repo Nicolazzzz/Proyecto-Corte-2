@@ -4,6 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class VentanaPrincipal extends JFrame {
+
+	private ManagePanel managePanel;
+
 //
 	public VentanaPrincipal() {
 
@@ -18,6 +21,26 @@ public class VentanaPrincipal extends JFrame {
 		ImageIcon logoApp = new ImageIcon("src/media/logo.jpg");
 		setIconImage(logoApp.getImage());
 
+		managePanel = new ManagePanel();
+
+	}
+
+	public void mostrarPanelManage() {
+		setContentPane(managePanel);
+	}
+
+	/**
+	 * @return the managePanel
+	 */
+	public ManagePanel getManagePanel() {
+		return managePanel;
+	}
+
+	/**
+	 * @param managePanel the managePanel to set
+	 */
+	public void setManagePanel(ManagePanel managePanel) {
+		this.managePanel = managePanel;
 	}
 
 }

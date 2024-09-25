@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import co.edu.unbosque.model.ModelFacade;
-import co.edu.unbosque.model.Piloto;
 import co.edu.unbosque.model.VueloInternacional;
 import co.edu.unbosque.model.VueloInternacionalDTO;
 import co.edu.unbosque.model.VueloNacional;
@@ -32,9 +31,23 @@ public class Controller implements ActionListener {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
 		mostrarMenuPrincipal();
+		asignarLectores();
 	}
 
 	public void asignarLectores() {
+
+		// MANAGE
+		vf.getVp().getManagePanel().getInternacionalBtn().addActionListener(this);
+		vf.getVp().getManagePanel().getInternacionalBtn().setActionCommand("INTERNACIONAL");
+
+		vf.getVp().getManagePanel().getNacionalBtn().addActionListener(this);
+		vf.getVp().getManagePanel().getNacionalBtn().setActionCommand("NACIONAL");
+
+		vf.getVp().getManagePanel().getGenerarBtn().addActionListener(this);
+		vf.getVp().getManagePanel().getGenerarBtn().setActionCommand("GENERARFILE");
+
+		vf.getVp().getManagePanel().getVolverBtn().addActionListener(this);
+		vf.getVp().getManagePanel().getVolverBtn().setActionCommand("VOLVERADMIN");
 
 	}
 
@@ -108,8 +121,6 @@ public class Controller implements ActionListener {
 
 		case "GUARDAR":
 			break;
-			
-			
 
 		}
 

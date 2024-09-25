@@ -11,12 +11,15 @@ package co.edu.unbosque.view;
 public class ViewFacade {
 
 	private Consola con; // Objeto de la clase Consola
+	private VentanaPrincipal vp;
 
 	/**
 	 * Constructor de la clase ViewFacade. Inicializa el objeto Consola.
 	 */
 	public ViewFacade() {
 		con = new Consola();
+		vp = new VentanaPrincipal();
+
 	}
 
 	/**
@@ -36,4 +39,19 @@ public class ViewFacade {
 	public void setCon(Consola con) {
 		this.con = con;
 	}
+
+	/**
+	 * @return the vp
+	 */
+	public VentanaPrincipal getVp() {
+		return vp;
+	}
+
+	/**
+	 * @param vp the vp to set
+	 */
+	public void setVp(VentanaPrincipal vp) {
+		this.vp = vp;
+	}
+
 }

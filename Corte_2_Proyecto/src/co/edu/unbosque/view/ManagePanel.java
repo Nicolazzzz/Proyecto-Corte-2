@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 
 public class ManagePanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton internacionalBtn, nacionalBtn, generarBtn, volverBtn;
 	private JLabel imgWhite, imgDark;
 
