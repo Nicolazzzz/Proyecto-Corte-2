@@ -23,36 +23,3 @@ Requiere Visa: true
 
 VUELOS NACIONALES:
 
-Destino: a
-Compañía: 
-Número de Pasajeros: 1
-Capitán a Cargo: NO PILOTOS
-Segundo al Mando: NO PILOTOS
-Hora de Llegada: 05:10
-Hora de Salida: 04:10
-Combustible: 3000.0
-Es Turbina: false
-Es Hélice: true
-
-Destino: ass
-Compañía: alo
-Número de Pasajeros: 2
-Capitán a Cargo: NO PILOTOS
-Segundo al Mando: NO PILOTOS
-Hora de Llegada: 04:20
-Hora de Salida: 02:30
-Combustible: 6000.0
-Es Turbina: false
-Es Hélice: true
-
-Destino: a
-Compañía: a
-Número de Pasajeros: 40
-Capitán a Cargo: Sofía Martínez
-Segundo al Mando: Emilia González
-Hora de Llegada: 06:20
-Hora de Salida: 04:30
-Combustible: 6000.0
-Es Turbina: false
-Es Hélice: true
-

@@ -63,7 +63,7 @@ public class InputPanel extends JPanel {
 		imgInputNClaro.setVisible(false);
 
 		// ELIMINAR------------------------------
-		
+
 		imgDeleteNClaro = new JLabel();
 		ImageIcon inputDNC = new ImageIcon("src/media/EliminarNacionalClaro.png");
 		Image inputNC = inputDNC.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -123,7 +123,7 @@ public class InputPanel extends JPanel {
 		imgVerificarIClaro.setVisible(false);
 
 		// LOGOS AEROLINEAS --------------------------
-		
+
 		imgAvianca = new JLabel();
 		ImageIcon inputA = new ImageIcon("src/logo/logoavianca.png");
 		Image inputIA = inputA.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
@@ -191,11 +191,10 @@ public class InputPanel extends JPanel {
 		ImageIcon inputtx = new ImageIcon("src/logo/deltaAirlines.png");
 		Image inputsx = inputtx.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgDeltaA.setIcon(new ImageIcon(inputsx));
-		imgDeltaA.setBounds(510, 285, 430, 150);	
+		imgDeltaA.setBounds(510, 285, 430, 150);
 		imgDeltaA.setVisible(false);
 
 		// BOTONES--------------------------------------
-
 		volverBtn = new JButton("Volver");
 		volverBtn.setOpaque(false);
 		volverBtn.setBounds(1020, 252, 130, 130);
@@ -215,7 +214,7 @@ public class InputPanel extends JPanel {
 		companiaBtn.setToolTipText("SELECCIONAR COMPAÑIA ENCARGADA DEL VUELO");
 
 		// ETIQUETAS-------------------------------------
-		
+
 		destinoField = new JTextField();
 		destinoField.setBounds(179, 234, 291, 40);
 		destinoField.setOpaque(true);
@@ -235,17 +234,17 @@ public class InputPanel extends JPanel {
 		llegadaField.setBounds(280, 578, 185, 40);
 		llegadaField.setOpaque(true);
 		llegadaField.setVisible(true);
-		
+
 		propio1Field = new JTextField();
 		propio1Field.setBounds(740, 490, 200, 40);
 		propio1Field.setOpaque(true);
 		propio1Field.setVisible(true);
-		
+
 		propio2Field = new JTextField();
 		propio2Field.setBounds(695, 578, 250, 40);
 		propio2Field.setOpaque(true);
 		propio2Field.setVisible(true);
-		
+
 		add(destinoField);
 		add(pasajerosField);
 		add(salidaField);
@@ -277,7 +276,7 @@ public class InputPanel extends JPanel {
 		add(volverBtn);
 		add(saveBtn);
 		add(companiaBtn);
-		
+
 	}
 
 	/**
