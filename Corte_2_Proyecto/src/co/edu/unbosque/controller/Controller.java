@@ -27,7 +27,8 @@ public class Controller implements ActionListener {
 	private String destinoA = "";
 	private String llegadaA = "";
 	private String company = "";
-	private String companyA = "";
+	private String[] aerolineas = { "Avianca", "Latam", "Wingo", "SATENA", "EasyFly", "Copa Airlines",
+			"American Airlines", "Iberia", "Air France", "Delta Airlines" };
 
 	private boolean dark = true;
 	private boolean white = false;
@@ -110,8 +111,8 @@ public class Controller implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		switch (e.getActionCommand()) {
+	public void actionPerformed(ActionEvent a) {
+		switch (a.getActionCommand()) {
 
 		// BIENVENIDA
 		case "FONDO":
@@ -202,7 +203,7 @@ public class Controller implements ActionListener {
 			agregar = true;
 			actualizar = false;
 			setearFieldsCRUD();
-			setearIMGCRUD();
+			setearImgTaller();
 			vf.getVp().mostrarPanelInput();
 			break;
 
@@ -211,17 +212,16 @@ public class Controller implements ActionListener {
 			agregar = false;
 			actualizar = false;
 			setearFieldsCRUD();
-			setearIMGCRUD();
+			setearImgTaller();
 			vf.getVp().mostrarPanelInput();
 			break;
 
 		case "ACTUALIZAR":
-
 			eliminar = false;
 			agregar = false;
 			actualizar = true;
 			setearFieldsCRUD();
-			setearIMGCRUD();
+			setearImgTaller();
 			vf.getVp().mostrarPanelInput();
 			break;
 
@@ -232,6 +232,9 @@ public class Controller implements ActionListener {
 		// INPUT
 
 		case "COMPANIAINPUT":
+			company = vf.getCon().seleccionarAerolinea(aerolineas);
+			vf.getCon().mostrarMensajeEmergente(company);
+			setearImgCompany();
 			break;
 
 		case "VOLVERINPUT":
@@ -240,13 +243,156 @@ public class Controller implements ActionListener {
 
 		case "GUARDARINPUT":
 			if (agregar == true) {
-				agregar();
+				if (nacional == true && internacional == false) {
+
+					try {
+						boolean validarRandom = true;
+
+						String destino = vf.getVp().getInputPanel().getDestinoField().getText();
+						ExceptionChecker.notValidInputException(destino);
+
+						String companyInCharge = company;
+						ExceptionChecker.notValidInputException(companyInCharge);
+
+						int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
+						ExceptionChecker.negativeIntNumberException(passenger);
+
+						String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
+						ExceptionChecker.notValidTimeFormatException(departureTime);
+
+						String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
+						ExceptionChecker.notValidTimeFormatException(arrivalTime);
+
+						if (!verificarTiempo(departureTime, arrivalTime)) {
+							vf.getCon().mostrarAlerta("Hora invalida, ingrese nuevamente");
+							break;
+						}
+
+						String helice = vf.getVp().getInputPanel().getPropio1Field().getText();
+						boolean esHelice = vf.getCon().leerBoolean(helice);
+						ExceptionChecker.notValidBooleanException(esHelice);
+
+						String turbina = vf.getVp().getInputPanel().getPropio2Field().getText();
+						boolean esTurbina = vf.getCon().leerBoolean(turbina);
+						ExceptionChecker.notValidBooleanException(esTurbina);
+
+						String captain = mf.getComplement().randomizer();
+						String secondOnCommand = mf.getComplement().randomizer();
+
+						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+
+						while (validarRandom == false) {
+							captain = mf.getComplement().randomizer();
+							secondOnCommand = mf.getComplement().randomizer();
+							validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+						}
+
+						double gas = 0;
+						if (esHelice) {
+							gas = calcularGasHelice(passenger, departureTime, arrivalTime);
+						}
+						if (esTurbina) {
+							gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
+						}
+						if (mf.getvNacionalDAO().add(new VueloNacionalDTO(destino, companyInCharge, passenger, captain,
+								secondOnCommand, arrivalTime, departureTime, gas, esTurbina, esHelice)) == true) {
+							vf.getCon().mostrarMensajeEmergente("CREADO EXITOSAMENTE");
+						} else {
+							vf.getCon().mostrarAlerta("NO SE PUDO CREAR");
+						}
+
+					} catch (NegativeIntNumberException e) {
+						vf.getCon().mostrarError("No puede ingresar numeros negativos");
+					} catch (StringIndexOutOfBoundsException e) {
+						vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+					} catch (NotValidInputException e) {
+						vf.getCon().mostrarError(
+								"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+					} catch (NumberFormatException e) {
+						vf.getCon().mostrarError("Ingrese correctamente los datos numericos, use numeros enteros");
+					} catch (NotValidTimeFormatException e) {
+						vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+					} catch (NotValidBooleanException e) {
+						vf.getCon().mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
+					}
+				}
+
+				if (nacional == false && internacional == true) {
+
+					try {
+						boolean validarRandom = true;
+
+						String destino = vf.getVp().getInputPanel().getDestinoField().getText();
+						ExceptionChecker.notValidInputException(destino);
+
+						String companyInCharge = company;
+						ExceptionChecker.notValidInputException(companyInCharge);
+
+						int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
+						ExceptionChecker.negativeIntNumberException(passenger);
+
+						String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
+						ExceptionChecker.notValidTimeFormatException(departureTime);
+
+						String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
+						ExceptionChecker.notValidTimeFormatException(arrivalTime);
+
+						if (!verificarTiempo(departureTime, arrivalTime)) {
+							vf.getCon().mostrarAlerta("Hora invalida, ingrese nuevamente");
+							break;
+						}
+
+						String visa = vf.getVp().getInputPanel().getPropio1Field().getText();
+						boolean requiresVisa = vf.getCon().leerBoolean(visa);
+						ExceptionChecker.notValidBooleanException(requiresVisa);
+
+						String captain = mf.getComplement().randomizer();
+						String secondOnCommand = mf.getComplement().randomizer();
+
+						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+
+						while (validarRandom == false) {
+							captain = mf.getComplement().randomizer();
+							secondOnCommand = mf.getComplement().randomizer();
+							validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+						}
+
+						double gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
+
+						if (mf.getvInternacionalDAO().add(new VueloInternacionalDTO(destino, companyInCharge, passenger,
+								captain, secondOnCommand, arrivalTime, departureTime, gas, requiresVisa)) == true) {
+							vf.getCon().mostrarMensajeEmergente("CREADO EXITOSAMENTE");
+						} else {
+							vf.getCon().mostrarAlerta("NO SE PUDO CREAR, VERIFIQUE QUE NO SEA IDENTICO A OTRO VUELO");
+						}
+
+					} catch (NegativeIntNumberException e) {
+						vf.getCon().mostrarError("No puede ingresar numeros negativos");
+					} catch (StringIndexOutOfBoundsException e) {
+						vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+					} catch (NotValidInputException e) {
+						vf.getCon().mostrarError(
+								"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+					} catch (NumberFormatException e) {
+						vf.getCon().mostrarError("Ingrese correctamente los datos numericos, use numeros enteros");
+					} catch (NotValidTimeFormatException e) {
+						vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+					} catch (NotValidBooleanException e) {
+						vf.getCon().mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
+					}
+				}
+				break;
 			}
 			if (eliminar == true) {
 				eliminar();
+				break;
 			}
-			if (actualizar == true)
+			if (actualizar == true) {
 				actualizar();
+				break;
+			}
+			cleanFields();
+			cleanImgCompany();
 			break;
 
 		}
@@ -925,7 +1071,155 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	public void setearIMGCRUD() {
+	public void cleanImgCompany() {
+		vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+		vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+		vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+		vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+		vf.getVp().getInputPanel().getImgClic().setVisible(false);
+		vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+		vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+		vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+		vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+		vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+	}
+
+	public void cleanFields() {
+		vf.getVp().getInputPanel().getDestinoField().setText("");
+		vf.getVp().getInputPanel().getCompaniaBtn().setText("");
+		vf.getVp().getInputPanel().getLlegadaField().setText("");
+		vf.getVp().getInputPanel().getPasajerosField().setText("");
+		vf.getVp().getInputPanel().getSalidaField().setText("");
+		vf.getVp().getInputPanel().getPropio1Field().setText("");
+		vf.getVp().getInputPanel().getPropio2Field().setText("");
+	}
+
+	public void setearImgCompany() {
+
+		if (company.equals(aerolineas[0])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(true);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[1])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(true);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[2])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(true);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[3])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(true);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[4])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(true);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[5])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(true);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[6])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(true);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[7])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(true);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[8])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(true);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(false);
+		}
+		if (company.equals(aerolineas[9])) {
+			vf.getVp().getInputPanel().getImgAvianca().setVisible(false);
+			vf.getVp().getInputPanel().getImgLatam().setVisible(false);
+			vf.getVp().getInputPanel().getImgWingo().setVisible(false);
+			vf.getVp().getInputPanel().getImgSatena().setVisible(false);
+			vf.getVp().getInputPanel().getImgClic().setVisible(false);
+			vf.getVp().getInputPanel().getImgCopaA().setVisible(false);
+			vf.getVp().getInputPanel().getImgAmericanA().setVisible(false);
+			vf.getVp().getInputPanel().getImgIberia().setVisible(false);
+			vf.getVp().getInputPanel().getImgAirF().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeltaA().setVisible(true);
+		}
+
+	}
+
+	public void setearImgTaller() {
 		vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
 		vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
 		vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);

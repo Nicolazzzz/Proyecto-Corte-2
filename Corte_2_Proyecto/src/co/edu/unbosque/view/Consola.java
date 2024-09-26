@@ -168,6 +168,20 @@ public class Consola {
 		JOptionPane.showMessageDialog(null, texto, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
+	public String seleccionarAerolinea(String[] aerolineas) {
+		// Mostrar una lista desplegable de aerolíneas con JOptionPane
+		String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione una aerolínea:",
+				"Listado de Aerolíneas", JOptionPane.QUESTION_MESSAGE, null, aerolineas, // Lista de opciones
+				aerolineas[0]); // Opción predeterminada
+
+		// Validar que el usuario haya seleccionado una opción válida
+		if (seleccion == null) {
+			seleccion = "No se seleccionó ninguna aerolínea";
+		}
+
+		return seleccion;
+	}
+
 	public boolean leerBoolean(String entrada) {
 		if (entrada.toLowerCase().contains("si")) {
 			return true;

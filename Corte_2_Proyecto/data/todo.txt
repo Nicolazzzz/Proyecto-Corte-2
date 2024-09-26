@@ -56,3 +56,14 @@ Combustible: 6000.0
 Es Turbina: false
 Es Hélice: true
 
+Destino: ahawai
+Compañía: Wingo
+Número de Pasajeros: 100
+Capitán a Cargo: Santiago Gómez
+Segundo al Mando: Diego Sánchez
+Hora de Llegada: 03:50
+Hora de Salida: 02:45
+Combustible: 0.0
+Es Turbina: false
+Es Hélice: true
+
