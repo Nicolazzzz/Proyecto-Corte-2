@@ -34,7 +34,6 @@ public class InputPanel extends JPanel {
 		// <<DISCLAMER>> imgCompania FALTA, no tengo idea de que hacerle, está mas abajo
 
 		// IMAGENES--------------------------------------
-		
 		imgInputIOscuro = new JLabel();
 		ImageIcon inputO = new ImageIcon("src/media/InputInterOscuro.png");
 		Image inputI = inputO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -89,9 +88,9 @@ public class InputPanel extends JPanel {
 		imgDeleteIOscuro = new JLabel();
 		ImageIcon inputDIO = new ImageIcon("src/media/EliminarInterOscuro.png");
 		Image inputIDO = inputDIO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
-		imgDeleteIClaro.setIcon(new ImageIcon(inputIDO));
-		imgDeleteIClaro.setBounds(0, 0, 1270, 720);
-		imgDeleteIClaro.setVisible(false);
+		imgDeleteIOscuro.setIcon(new ImageIcon(inputIDO));
+		imgDeleteIOscuro.setBounds(0, 0, 1270, 720);
+		imgDeleteIOscuro.setVisible(false);
 
 		// VERIFICAR ------------------------------
 
