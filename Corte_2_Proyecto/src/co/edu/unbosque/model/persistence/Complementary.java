@@ -29,7 +29,6 @@ public class Complementary {
 		readSerialized();
 	}
 
-
 	/**
 	 * Agrega un nuevo piloto a la lista si no existe previamente.
 	 * 
@@ -115,7 +114,6 @@ public class Complementary {
 			}
 		}
 	}
-
 
 	/**
 	 * Muestra la lista de pilotos en formato de cadena.
