@@ -57,7 +57,6 @@ public class Complementary {
 		if (found != null) {
 			listaPilotos.remove(found);
 			writeFile();
-			writeSerialized();
 			return true;
 		} else {
 			return false;

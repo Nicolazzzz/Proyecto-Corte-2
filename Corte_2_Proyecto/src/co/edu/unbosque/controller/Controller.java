@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.Piloto;
 import co.edu.unbosque.model.VueloInternacional;
 import co.edu.unbosque.model.VueloInternacionalDTO;
 import co.edu.unbosque.model.VueloNacional;
@@ -42,9 +43,11 @@ public class Controller implements ActionListener {
 	public Controller() {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
+
 		asignarLectores();
 		vf.getVp().mostrarPanelWelcome();
-		// mostrarMenuPrincipal();
+		mostrarMenuPrincipal();
+
 	}
 
 	public void asignarLectores() {
@@ -198,6 +201,8 @@ public class Controller implements ActionListener {
 			eliminar = false;
 			agregar = true;
 			actualizar = false;
+			setearFieldsCRUD();
+			setearIMGCRUD();
 			vf.getVp().mostrarPanelInput();
 			break;
 
@@ -205,14 +210,18 @@ public class Controller implements ActionListener {
 			eliminar = true;
 			agregar = false;
 			actualizar = false;
+			setearFieldsCRUD();
+			setearIMGCRUD();
 			vf.getVp().mostrarPanelInput();
 			break;
 
 		case "ACTUALIZAR":
 
-			eliminar = true;
+			eliminar = false;
 			agregar = false;
-			actualizar = false;
+			actualizar = true;
+			setearFieldsCRUD();
+			setearIMGCRUD();
 			vf.getVp().mostrarPanelInput();
 			break;
 
@@ -230,6 +239,14 @@ public class Controller implements ActionListener {
 			break;
 
 		case "GUARDARINPUT":
+			if (agregar == true) {
+				agregar();
+			}
+			if (eliminar == true) {
+				eliminar();
+			}
+			if (actualizar == true)
+				actualizar();
 			break;
 
 		}
@@ -906,6 +923,106 @@ public class Controller implements ActionListener {
 		} else {
 			return true;
 		}
+	}
+
+	public void setearIMGCRUD() {
+		vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
+		vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
+		vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
+		vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
+		vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+		vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
+		vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+		vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
+		vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(false);
+		vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(false);
+		vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(false);
+		vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(false);
+
+		if (agregar == true && nacional == true && dark == true) {
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(true);
+		}
+
+		if (agregar == true && nacional == true && white == true) {
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(true);
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
+		}
+
+		if (agregar == true && internacional == true && dark == true) {
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
+		}
+
+		if (agregar == true && internacional == true && white == true) {
+			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(true);
+			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
+		}
+
+		if (eliminar == true && nacional == true && dark == true) {
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(true);
+		}
+
+		if (eliminar == true && nacional == true && white == true) {
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(true);
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
+		}
+
+		if (eliminar == true && internacional == true && dark == true) {
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
+		}
+
+		if (eliminar == true && internacional == true && white == true) {
+			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(true);
+			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
+		}
+
+		if (actualizar == true && nacional == true && dark == true) {
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(true);
+		}
+
+		if (actualizar == true && nacional == true && white == true) {
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(true);
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(false);
+		}
+
+		if (actualizar == true && internacional == true && dark == true) {
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(false);
+		}
+
+		if (actualizar == true && internacional == true && white == true) {
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(true);
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(false);
+		}
+
 	}
 
 	public void setearFondo() {
