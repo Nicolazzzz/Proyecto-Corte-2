@@ -1112,13 +1112,13 @@ public class Controller implements ActionListener {
 					horaInvalida = false;
 				}
 
-				String turbina = vf.getVp().getInputPanel().getPropio1Field().getText();
-				boolean esTurbina = vf.getCon().leerBoolean(turbina);
-				ExceptionChecker.notValidBooleanException(esTurbina);
-
-				String helice = vf.getVp().getInputPanel().getPropio2Field().getText();
+				String helice = vf.getVp().getInputPanel().getPropio1Field().getText();
 				boolean esHelice = vf.getCon().leerBoolean(helice);
 				ExceptionChecker.notValidBooleanException(esHelice);
+
+				String turbina = vf.getVp().getInputPanel().getPropio2Field().getText();
+				boolean esTurbina = vf.getCon().leerBoolean(turbina);
+				ExceptionChecker.notValidBooleanException(esTurbina);
 
 				String captain = mf.getComplement().randomizer();
 				String secondOnCommand = mf.getComplement().randomizer();
@@ -1186,8 +1186,9 @@ public class Controller implements ActionListener {
 				} else {
 					horaInvalida = false;
 				}
-				vf.getCon().printLine("Requiere VISA");
-				boolean requiresVisa = vf.getCon().readBoolean();
+
+				String visa = vf.getVp().getInputPanel().getPropio1Field().getText();
+				boolean requiresVisa = vf.getCon().leerBoolean(visa);
 				ExceptionChecker.notValidBooleanException(requiresVisa);
 
 				String captain = mf.getComplement().randomizer();
