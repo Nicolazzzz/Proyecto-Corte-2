@@ -1231,16 +1231,12 @@ public class Controller implements ActionListener {
 
 		if (nacional == true && internacional == false) {
 			try {
-				vf.getCon().printLine("ELIMINANDO");
-				vf.getCon().printLine("compania");
 				String companiaA = company;
 				ExceptionChecker.notValidInputException(companiaA);
 
-				vf.getCon().printLine("destino");
 				String destinoA = vf.getVp().getInputPanel().getDestinoField().getText();
 				ExceptionChecker.notValidInputException(destinoA);
 
-				vf.getCon().printLine("llegada");
 				String hLlegadaA = vf.getVp().getInputPanel().getLlegadaField().getText();
 				ExceptionChecker.notValidTimeFormatException(hLlegadaA);
 
@@ -1445,6 +1441,60 @@ public class Controller implements ActionListener {
 
 	public void VerificarActualizar() {
 
+		if (nacional == true && internacional == false) {
+			try {
+				companiaA = company;
+				ExceptionChecker.notValidInputException(companiaA);
+
+				destinoA = vf.getVp().getInputPanel().getDestinoField().getText();
+				ExceptionChecker.notValidInputException(destinoA);
+
+				llegadaA = vf.getVp().getInputPanel().getLlegadaField().getText();
+				ExceptionChecker.notValidTimeFormatException(llegadaA);
+
+				if (mf.getvNacionalDAO().find(new VueloNacional(destinoA, companiaA, 0, null, null, llegadaA, null, 0,
+						false, false)) == null) {
+					vf.getCon().mostrarAlerta("No fue encontrado el vuelo, verifique los datos ingresados");
+				} else {
+					vf.getCon().mostrarMensajeEmergente("Vuelo encontrado, ingrese los datos a actualizar");
+				}
+			} catch (StringIndexOutOfBoundsException e) {
+				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+			} catch (NotValidTimeFormatException e) {
+				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+			} catch (NotValidInputException e) {
+				vf.getCon().mostrarError(
+						"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+			}
+		}
+
+		if (nacional == false && internacional == true) {
+			try {
+				companiaA = company;
+				ExceptionChecker.notValidInputException(companiaA);
+
+				destinoA = vf.getVp().getInputPanel().getDestinoField().getText();
+				ExceptionChecker.notValidInputException(destinoA);
+
+				llegadaA = vf.getVp().getInputPanel().getLlegadaField().getText();
+				ExceptionChecker.notValidTimeFormatException(llegadaA);
+
+				if (mf.getvInternacionalDAO().find(
+						new VueloInternacional(destinoA, companiaA, 0, null, null, llegadaA, null, 0, false)) == null) {
+					vf.getCon().mostrarAlerta("No fue encontrado el vuelo, verifique los datos ingresados");
+				} else {
+					vf.getCon().mostrarMensajeEmergente("Vuelo encontrado, ingrese los datos a actualizar");
+				}
+			} catch (StringIndexOutOfBoundsException e) {
+				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+			} catch (NotValidTimeFormatException e) {
+				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+
+			} catch (NotValidInputException e) {
+				vf.getCon().mostrarError(
+						"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+			}
+		}
 	}
 
 }
