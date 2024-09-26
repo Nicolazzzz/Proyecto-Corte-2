@@ -1,6 +1,7 @@
 package co.edu.unbosque.model;
 
 import co.edu.unbosque.model.persistence.Complementary;
+import co.edu.unbosque.model.persistence.FileUtils;
 import co.edu.unbosque.model.persistence.VueloInternacionalDAO;
 import co.edu.unbosque.model.persistence.VueloNacionalDAO;
 
@@ -18,6 +19,7 @@ public class ModelFacade {
 	private VueloInternacionalDAO vInternacionalDAO;
 	private VueloNacionalDAO vNacionalDAO;
 	private Complementary complement;
+	private FileUtils fileUtils;
 
 	/**
 	 * Constructor que inicializa los DAOs de vuelos internacionales y nacionales,
@@ -27,6 +29,21 @@ public class ModelFacade {
 		vInternacionalDAO = new VueloInternacionalDAO();
 		vNacionalDAO = new VueloNacionalDAO();
 		complement = new Complementary();
+		fileUtils = new FileUtils();
+	}
+
+	/**
+	 * @return the fileUtils
+	 */
+	public FileUtils getFileUtils() {
+		return fileUtils;
+	}
+
+	/**
+	 * @param fileUtils the fileUtils to set
+	 */
+	public void setFileUtils(FileUtils fileUtils) {
+		this.fileUtils = fileUtils;
 	}
 
 	/**

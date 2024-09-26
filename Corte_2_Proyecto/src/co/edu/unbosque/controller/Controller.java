@@ -35,6 +35,9 @@ public class Controller implements ActionListener {
 	private boolean internacional = false;
 
 	private boolean horaInvalida = false;
+	private boolean agregar = false;
+	private boolean actualizar = false;
+	private boolean eliminar = false;
 
 	public Controller() {
 		vf = new ViewFacade();
@@ -172,9 +175,6 @@ public class Controller implements ActionListener {
 			break;
 
 		// CRUD
-		case "AGREGAR":
-			vf.getVp().mostrarPanelInput();
-			break;
 
 		case "MOSTRAR":
 			if (white == true) {
@@ -192,14 +192,28 @@ public class Controller implements ActionListener {
 					vf.getCon().mostrarMensajeEmergenteConScrollWhite(mf.getvInternacionalDAO().showAll());
 				break;
 			}
+			break;
 
+		case "AGREGAR":
+
+			eliminar = false;
+			agregar = true;
+			actualizar = false;
+			vf.getVp().mostrarPanelInput();
 			break;
 
 		case "ELIMINAR":
+			eliminar = true;
+			agregar = false;
+			actualizar = false;
 			vf.getVp().mostrarPanelInput();
 			break;
 
 		case "ACTUALIZAR":
+
+			eliminar = true;
+			agregar = false;
+			actualizar = false;
 			vf.getVp().mostrarPanelInput();
 			break;
 
