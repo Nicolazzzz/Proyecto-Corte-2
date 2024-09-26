@@ -51,16 +51,19 @@ public class WelcomePanel extends JPanel {
 		adminBtn.setOpaque(false);
 		adminBtn.setBounds(480, 406, 320, 70);
 		adminBtn.setActionCommand("ADMIN");
+		adminBtn.setToolTipText("PROGRAMA PARA ADMINISTRADORES");
 
 		userBtn = new JButton("USER BTN");
 		userBtn.setOpaque(false);
 		userBtn.setBounds(480, 530, 320, 70);
 		userBtn.setActionCommand("USER");
+		userBtn.setToolTipText("CONSULTA DE VUELOS PARA USUARIOS");
 
 		backgroungBtn = new JButton("BACKGROUND");
 		backgroungBtn.setOpaque(false);
 		backgroungBtn.setBounds(1148, 29, 102, 102);
 		backgroungBtn.setActionCommand("FONDO");
+		backgroungBtn.setToolTipText("CAMBIAR TEMA");
 
 		add(imgDark);
 		add(imgWhite);

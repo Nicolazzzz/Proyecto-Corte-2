@@ -69,26 +69,31 @@ public class CrudPanel extends JPanel {
 		addBtn.setOpaque(false);
 		addBtn.setBounds(342, 324, 278, 71);
 		addBtn.setActionCommand("AGREGAR");
+		addBtn.setToolTipText("AGREGAR VUELO");
 
 		deleteBtn = new JButton("Eliminar");
 		deleteBtn.setOpaque(false);
 		deleteBtn.setBounds(342, 471, 278, 71);
 		deleteBtn.setActionCommand("ELIMINAR");
+		deleteBtn.setToolTipText("ELIMINAR VUELO");
 
 		showBtn = new JButton("Mostrar");
 		showBtn.setOpaque(false);
 		showBtn.setBounds(662, 324, 278, 71);
 		showBtn.setActionCommand("MOSTRAR");
+		showBtn.setToolTipText("MOSTRAR VUELOS");
 
 		updateBtn = new JButton("Actualizar");
 		updateBtn.setOpaque(false);
 		updateBtn.setBounds(662, 471, 278, 71);
 		updateBtn.setActionCommand("ACTUALIZAR");
+		updateBtn.setToolTipText("ACTUALIZAR VUELOS");
 
 		volverBtn = new JButton("Volver");
 		volverBtn.setOpaque(false);
 		volverBtn.setBounds(595, 550, 94, 94);
 		volverBtn.setActionCommand("VOLVERCRUD");
+		volverBtn.setToolTipText("VOLVER AL MENÚ DE VUELOS");
 
 		add(imgInterCrudClaro);
 		add(imgInterCrudOscuro);
