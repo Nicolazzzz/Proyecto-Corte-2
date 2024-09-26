@@ -1,26 +1,36 @@
 
 package co.edu.unbosque.model.persistence;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.ObjectInputStream;
+import java.io.StreamCorruptedException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * FileUtils is a utility class that handles file operations such as copying
- * data from CSV files (both international and national flights) to a
- * destination text file, and reading serialized objects from files.
+ * FileUtils es una clase de utilidad que maneja operaciones de archivos como copiar
+ * datos de archivos CSV (tanto vuelos internacionales como nacionales) a un
+ * archivo de texto de destino y lectura de objetos serializados de archivos.
  * 
- * This class includes methods for copying and formatting flight data and
- * handling potential I/O exceptions.
+ * Esta clase incluye métodos para copiar y formatear datos de vuelo y
+ * Manejo de posibles excepciones de E/S.
  * 
- * @author Nicolas
- * @version 1.0
+ *@autor Nicolás
+ * @versión 1.0
  */
 public class FileUtils {
 
 	/**
-	 * Constructor for the FileUtils class. It initializes the file paths for both
-	 * international and national flight data, and invokes the methods to copy this
-	 * data into a destination text file.
+	 * Constructor para la clase FileUtils. Inicializa las rutas de los archivos para ambos.
+	 * datos de vuelos nacionales e internacionales, e invoca los métodos para copiarlos
+	 * datos en un archivo de texto de destino.
 	 */
 	public FileUtils() {
 
@@ -29,6 +39,7 @@ public class FileUtils {
 		String dstFileName = "data\\todo.txt";
 
 		try {
+			
 			copyInternacional(srcInterName, dstFileName);
 			copyNacional(srcNacionalName, dstFileName);
 		} catch (IOException e) {
@@ -38,13 +49,13 @@ public class FileUtils {
 	}
 
 	/**
-	 * Copies and formats the data from an international flight CSV file to a
-	 * destination file. The data includes flight details such as destination,
-	 * company, passengers, captain, and more.
+	 * Copia y formatea los datos de un archivo CSV de vuelo internacional a un
+	 * archivo de destino. Los datos incluyen detalles del vuelo como destino,
+	 * empresa, pasajeros, capitán, y más.
 	 * 
-	 * @param srcInterName the source file path for international flights
-	 * @param dstFileName  the destination file path where data will be copied
-	 * @throws IOException if an I/O error occurs during file reading or writing
+	 * @param srcInterName la ruta del archivo fuente para vuelos internacionales
+	 * @param dstFileName la ruta del archivo de destino donde se copiarán los datos
+	 * @throws IOException si se produce un error de E/S durante la lectura o escritura de archivos
 	 */
 	private static void copyInternacional(String srcInterName, String dstFileName) throws IOException {
 		File srcFile = new File(srcInterName);
@@ -100,15 +111,14 @@ public class FileUtils {
 			}
 		}
 	}
-
 	/**
-	 * Copies and formats the data from a national flight CSV file to a destination
-	 * file. The data includes flight details such as destination, company,
-	 * passengers, captain, and more.
+	 * Copia y formatea los datos de un archivo CSV de vuelo nacional a un destino.
+	 * archivo. Los datos incluyen detalles del vuelo como destino, compañía,
+	 * pasajeros, capitán y más.
 	 * 
-	 * @param srcNacionalName the source file path for national flights
-	 * @param dstFileName     the destination file path where data will be copied
-	 * @throws IOException if an I/O error occurs during file reading or writing
+	 * @param srcNacionalName la ruta del archivo fuente para vuelos nacionales
+	 * @param dstFileName la ruta del archivo de destino donde se copiarán los datos
+	 * @throws IOException si se produce un error de E/S durante la lectura o escritura de archivos
 	 */
 	private static void copyNacional(String srcNacionalName, String dstFileName) throws IOException {
 		File srcFile = new File(srcNacionalName);
@@ -181,10 +191,10 @@ public class FileUtils {
 	}
 
 	/**
-	 * Reads and deserializes an object from a file.
+	 * Lee y deserializa un objeto de un archivo.
 	 * 
-	 * @param fileName the name of the file to read the object from
-	 * @return the deserialized object, or null if an error occurred
+	 * @param fileName el nombre del archivo desde el que leer el objeto
+	 * @return el objeto deserializado, o null si ocurrió un error
 	 */
 	public static Object readSerializedFile(String fileName) {
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {

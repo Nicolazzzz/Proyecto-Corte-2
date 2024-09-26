@@ -10,6 +10,7 @@ import co.edu.unbosque.model.VueloInternacional;
 import co.edu.unbosque.model.VueloInternacionalDTO;
 import co.edu.unbosque.model.VueloNacional;
 import co.edu.unbosque.model.VueloNacionalDTO;
+import co.edu.unbosque.model.persistence.FileUtils;
 import co.edu.unbosque.util.exception.ExceptionChecker;
 import co.edu.unbosque.util.exception.NegativeIntNumberException;
 import co.edu.unbosque.util.exception.NotValidBooleanException;
@@ -22,6 +23,7 @@ public class Controller implements ActionListener {
 
 	private ModelFacade mf;
 	private ViewFacade vf;
+	private FileUtils fl = new FileUtils();;
 
 	private String companiaA = "";
 	private String destinoA = "";
@@ -43,6 +45,7 @@ public class Controller implements ActionListener {
 	public Controller() {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
+	
 
 		asignarLectores();
 		vf.getVp().mostrarPanelWelcome();
@@ -171,6 +174,8 @@ public class Controller implements ActionListener {
 			break;
 
 		case "GENERARFILE":
+			new FileUtils();
+			vf.getCon().mostrarMensajeEmergente("ARCHIVO GENERADO CON EXITO!");
 			break;
 
 		case "VOLVERADMIN":
