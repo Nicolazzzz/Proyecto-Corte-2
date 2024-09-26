@@ -214,7 +214,7 @@ public class InputPanel extends JPanel {
 		visaField.setVisible(true);
 		
 		
-
+//a
 		add(destinoField);
 		add(pasajerosField);
 		add(salidaField);
