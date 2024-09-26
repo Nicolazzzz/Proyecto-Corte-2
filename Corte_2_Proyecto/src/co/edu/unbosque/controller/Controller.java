@@ -10,6 +10,7 @@ import co.edu.unbosque.model.VueloInternacional;
 import co.edu.unbosque.model.VueloInternacionalDTO;
 import co.edu.unbosque.model.VueloNacional;
 import co.edu.unbosque.model.VueloNacionalDTO;
+import co.edu.unbosque.model.persistence.FileUtils;
 import co.edu.unbosque.util.exception.ExceptionChecker;
 import co.edu.unbosque.util.exception.NegativeIntNumberException;
 import co.edu.unbosque.util.exception.NotValidBooleanException;
@@ -22,6 +23,7 @@ public class Controller implements ActionListener {
 
 	private ModelFacade mf;
 	private ViewFacade vf;
+	private FileUtils fl = new FileUtils();;
 
 	private String companiaA = "";
 	private String destinoA = "";
@@ -36,18 +38,17 @@ public class Controller implements ActionListener {
 	private boolean nacional = false;
 	private boolean internacional = false;
 
-	private boolean horaInvalida = false;
 	private boolean agregar = false;
 	private boolean actualizar = false;
 	private boolean eliminar = false;
 
+	private boolean verificado = false;
+
 	public Controller() {
 		vf = new ViewFacade();
 		mf = new ModelFacade();
-
 		asignarLectores();
 		vf.getVp().mostrarPanelWelcome();
-		mostrarMenuPrincipal();
 
 	}
 
@@ -172,6 +173,8 @@ public class Controller implements ActionListener {
 			break;
 
 		case "GENERARFILE":
+			new FileUtils();
+			vf.getCon().mostrarMensajeEmergente("ARCHIVO GENERADO CON EXITO!");
 			break;
 
 		case "VOLVERADMIN":
@@ -388,580 +391,166 @@ public class Controller implements ActionListener {
 				break;
 			}
 			if (actualizar == true) {
-				actualizar();
-				break;
-			}
-			cleanFields();
-			cleanImgCompany();
-			break;
-
-		}
-
-	}
-
-	public void mostrarMenuPrincipal() {
-
-		mainloop: while (true) {
-
-			String menuPpal = """
-
-
-					MENU PRINCIPAL
-
-					1) NACIONAL
-					2) INTERNACIONAL
-					3) GENERAR ARCHIVO VUELOS
-					4) SALIR
-
-					"""
-
-			;
-
-			vf.getCon().printLine(menuPpal);
-			int op = vf.getCon().readInt();
-
-			switch (op) {
-			case 1:
-				mostrarMenuNacional();
-
-				break;
-
-			case 2:
-				mostrarMenuInternacional();
-				break;
-
-			case 3:
-				break;
-
-			case 4:
-				break mainloop;
-
-			case 5:
-				vf.getCon().burnLine();
-				String vuelos = vf.getCon().readLine();
-				vf.getCon().printLine(mf.getvInternacionalDAO().showSelected(vuelos));
-				vf.getCon().printLine(mf.getvNacionalDAO().showSelected(vuelos));
-				break;
-
-			default:
-				break;
-			}
-		}
-
-	}
-
-	public void mostrarMenuNacional() {
-		nacionloop: while (true) {
-
-			String menuNacional = """
-
-					MENU NACIONAL
-					1) Agregar
-					2) Mostrar
-					3) Actualizar
-					4) Eliminar
-					5) Salir
-
-					""";
-			vf.getCon().printLine(menuNacional);
-			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
-			switch (op) {
-			case 1:
-
-				try {
-					boolean validarRandom = true;
-					vf.getCon().printLine("AGREGANDO");
-
-					vf.getCon().printLine("DESTINO");
-					String destino = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destino);
-
-					vf.getCon().printLine("COMPANIA");
-					String companyInCharge = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companyInCharge);
-
-					vf.getCon().printLine("Pasajeros");
-					int passenger = vf.getCon().readInt();
-					vf.getCon().burnLine();
-
-					vf.getCon().printLine("hora salida");
-					String departureTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(departureTime);
-
-					vf.getCon().printLine("hora llegada");
-					String arrivalTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-					if (!verificarTiempo(departureTime, arrivalTime)) {
-						vf.getCon().printLine("Hora invalida");
-						break;
-					}
-
-					vf.getCon().printLine("es helice");
-					boolean esHelice = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(esHelice);
-
-					vf.getCon().printLine("es turbina");
-					boolean esTurbina = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(esTurbina);
-
-					String captain = mf.getComplement().randomizer();
-					String secondOnCommand = mf.getComplement().randomizer();
-
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-					while (validarRandom == false) {
-						captain = mf.getComplement().randomizer();
-						secondOnCommand = mf.getComplement().randomizer();
-						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-					}
-
-					double gas = 0;
-					if (esHelice)
-						gas = calcularGasHelice(passenger, departureTime, arrivalTime);
-					if (esTurbina)
-						gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-					if (mf.getvNacionalDAO().add(new VueloNacionalDTO(destino, companyInCharge, passenger, captain,
-							secondOnCommand, arrivalTime, departureTime, gas, esTurbina, esHelice)) == true) {
-						vf.getCon().printLine("CREADO EXITOSAMENTE");
-					} else {
-						vf.getCon().printLine("NO SE PUDO CREAR");
-					}
-
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-
-				} catch (NumberFormatException e) {
-					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
-					break;
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-				} catch (NotValidBooleanException e) {
-					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
+				VerificarActualizar();
+				if (verificado == false) {
 					break;
 				}
-				break;
+				if (verificado == true) {
+					agregar = true;
+					actualizar = false;
+					setearImgTaller();
+					setearFieldsCRUD();
+					if (nacional == true && internacional == false) {
 
-			case 2:
-				vf.getCon().printLine(mf.getvNacionalDAO().showAll());
-				break;
+						try {
+							boolean validarRandom = true;
 
-			case 3:
+							String destino = vf.getVp().getInputPanel().getDestinoField().getText();
+							ExceptionChecker.notValidInputException(destino);
 
-				try {
-					vf.getCon().printLine("VALIDAR UPDATE");
-					vf.getCon().printLine("compania");
-					companiaA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companiaA);
+							String companyInCharge = company;
+							ExceptionChecker.notValidInputException(companyInCharge);
 
-					vf.getCon().printLine("destino");
-					destinoA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destinoA);
+							int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
+							ExceptionChecker.negativeIntNumberException(passenger);
 
-					vf.getCon().printLine("llegada");
-					llegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(llegadaA);
+							String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
+							ExceptionChecker.notValidTimeFormatException(departureTime);
 
-					if (mf.getvNacionalDAO().find(new VueloNacional(destinoA, companiaA, 0, null, null, llegadaA, null,
-							0, false, false)) == null) {
-						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
-						break;
+							String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
+							ExceptionChecker.notValidTimeFormatException(arrivalTime);
+
+							if (!verificarTiempo(departureTime, arrivalTime)) {
+								vf.getCon().mostrarAlerta("Hora invalida, ingrese nuevamente");
+								break;
+							}
+
+							String helice = vf.getVp().getInputPanel().getPropio1Field().getText();
+							boolean esHelice = vf.getCon().leerBoolean(helice);
+							ExceptionChecker.notValidBooleanException(esHelice);
+
+							String turbina = vf.getVp().getInputPanel().getPropio2Field().getText();
+							boolean esTurbina = vf.getCon().leerBoolean(turbina);
+							ExceptionChecker.notValidBooleanException(esTurbina);
+
+							String captain = mf.getComplement().randomizer();
+							String secondOnCommand = mf.getComplement().randomizer();
+
+							validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+
+							while (validarRandom == false) {
+								captain = mf.getComplement().randomizer();
+								secondOnCommand = mf.getComplement().randomizer();
+								validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+							}
+
+							double gas = 0;
+							if (esHelice)
+								gas = calcularGasHelice(passenger, departureTime, arrivalTime);
+							if (esTurbina)
+								gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
+
+							if (mf.getvNacionalDAO()
+									.update(new VueloNacionalDTO(destinoA, companiaA, 0, null, null, llegadaA, null, 0),
+											new VueloNacionalDTO(destino, companyInCharge, passenger, captain,
+													secondOnCommand, arrivalTime, departureTime, gas, esTurbina,
+													esHelice)) == true) {
+								vf.getCon().mostrarMensajeEmergente("CREADO EXITOSAMENTE");
+							} else {
+								vf.getCon().mostrarAlerta("NO SE PUDO CREAR");
+							}
+
+						} catch (NegativeIntNumberException e) {
+							vf.getCon().mostrarError("No puede ingresar numeros negativos");
+						} catch (StringIndexOutOfBoundsException e) {
+							vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+						} catch (NotValidInputException e) {
+							vf.getCon().mostrarError(
+									"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+						} catch (NumberFormatException e) {
+							vf.getCon().mostrarError("Ingrese correctamente los datos numericos, use numeros enteros");
+						} catch (NotValidTimeFormatException e) {
+							vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+						} catch (NotValidBooleanException e) {
+							vf.getCon()
+									.mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
+						}
 					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
 
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+					if (nacional == false && internacional == true) {
+						try {
+							boolean validarRandom = true;
+
+							String destino = vf.getVp().getInputPanel().getDestinoField().getText();
+							ExceptionChecker.notValidInputException(destino);
+
+							String companyInCharge = company;
+							ExceptionChecker.notValidInputException(companyInCharge);
+
+							int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
+							ExceptionChecker.negativeIntNumberException(passenger);
+
+							String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
+							ExceptionChecker.notValidTimeFormatException(departureTime);
+
+							String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
+							ExceptionChecker.notValidTimeFormatException(arrivalTime);
+
+							if (!verificarTiempo(departureTime, arrivalTime)) {
+								vf.getCon().mostrarAlerta("Hora invalida, ingrese nuevamente");
+								break;
+							}
+
+							String visa = vf.getVp().getInputPanel().getPropio1Field().getText();
+							boolean requiresVisa = vf.getCon().leerBoolean(visa);
+							ExceptionChecker.notValidBooleanException(requiresVisa);
+
+							String captain = mf.getComplement().randomizer();
+							String secondOnCommand = mf.getComplement().randomizer();
+
+							validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+
+							while (validarRandom == false) {
+								captain = mf.getComplement().randomizer();
+								secondOnCommand = mf.getComplement().randomizer();
+								validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
+							}
+
+							double gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
+
+							if (mf.getvInternacionalDAO().update(
+									new VueloInternacionalDTO(destinoA, companiaA, 0, null, null, llegadaA, null, 0),
+									new VueloInternacionalDTO(destino, companyInCharge, passenger, captain,
+											secondOnCommand, arrivalTime, departureTime, gas, requiresVisa)) == true) {
+								vf.getCon().mostrarMensajeEmergente("CREADO EXITOSAMENTE");
+							} else {
+								vf.getCon().mostrarAlerta("NO SE PUDO CREAR");
+							}
+						} catch (NegativeIntNumberException e) {
+							vf.getCon().mostrarError("No puede ingresar numeros negativos");
+						} catch (StringIndexOutOfBoundsException e) {
+							vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+						} catch (NotValidInputException e) {
+							vf.getCon().mostrarError(
+									"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
+						} catch (NumberFormatException e) {
+							vf.getCon().mostrarError("Ingrese correctamente los datos numericos, use numeros enteros");
+						} catch (NotValidTimeFormatException e) {
+							vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
+						} catch (NotValidBooleanException e) {
+							vf.getCon()
+									.mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
+						}
+					}
+
 					break;
 				}
-
-				try {
-					boolean validarRandom = true;
-					vf.getCon().printLine("AGREGANDO");
-
-					vf.getCon().printLine("DESTINO");
-					String destino = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destino);
-
-					vf.getCon().printLine("COMPANIA");
-					String companyInCharge = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companyInCharge);
-
-					vf.getCon().printLine("Pasajeros");
-					int passenger = vf.getCon().readInt();
-					vf.getCon().burnLine();
-
-					vf.getCon().printLine("hora salida");
-					String departureTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(departureTime);
-
-					vf.getCon().printLine("hora llegada");
-					String arrivalTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-					if (!verificarTiempo(departureTime, arrivalTime)) {
-						vf.getCon().printLine("Hora invalida");
-						break;
-					}
-
-					vf.getCon().printLine("es helice");
-					boolean esHelice = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(esHelice);
-
-					vf.getCon().printLine("es turbina");
-					boolean esTurbina = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(esTurbina);
-
-					String captain = mf.getComplement().randomizer();
-					String secondOnCommand = mf.getComplement().randomizer();
-
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-					while (validarRandom == false) {
-						captain = mf.getComplement().randomizer();
-						secondOnCommand = mf.getComplement().randomizer();
-						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-					}
-
-					double gas = 0;
-					if (esHelice)
-						gas = calcularGasHelice(passenger, departureTime, arrivalTime);
-					if (esTurbina)
-						gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-					if (mf.getvNacionalDAO().update(
-							new VueloNacionalDTO(destinoA, companiaA, 0, null, null, llegadaA, null, 0),
-							new VueloNacionalDTO(destino, companyInCharge, passenger, captain, secondOnCommand,
-									arrivalTime, departureTime, gas, esTurbina, esHelice)) == true) {
-						vf.getCon().printLine("CREADO EXITOSAMENTE");
-					} else {
-						vf.getCon().printLine("NO SE PUDO CREAR");
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-
-				} catch (NumberFormatException e) {
-					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
-					break;
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-				} catch (NotValidBooleanException e) {
-					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-					break;
-				}
-				break;
-
-			case 4:
-				try {
-					vf.getCon().printLine("ELIMINANDO");
-					vf.getCon().printLine("compania");
-					String companiaA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companiaA);
-
-					vf.getCon().printLine("destino");
-					String destinoA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destinoA);
-
-					vf.getCon().printLine("llegada");
-					String hLlegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(hLlegadaA);
-
-					if (mf.getvNacionalDAO().delete(new VueloNacionalDTO(destinoA, companiaA, 0, null, null, hLlegadaA,
-							null, 0, false, false)) == false) {
-						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
-						break;
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-				}
-				break;
-
-			case 5:
-				vf.getCon().printLine("VOLVIENDO.....");
-				break nacionloop;
-
-			default:
+				cleanFields();
+				cleanImgCompany();
 				break;
 			}
 		}
 
-	}
-
-	public void mostrarMenuInternacional() {
-		interloop: while (true) {
-
-			String menuInter = """
-
-					MENU INTERNACIONAL
-					1) Agregar
-					2) Mostrar
-					3) Actualizar
-					4) Eliminar
-					5) Salir
-
-					""";
-			vf.getCon().printLine(menuInter);
-			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
-			switch (op) {
-			case 1:
-
-				try {
-					boolean validarRandom = true;
-					vf.getCon().printLine("AGREGANDO");
-
-					vf.getCon().printLine("DESTINO");
-					String destino = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destino);
-
-					vf.getCon().printLine("COMPANIA");
-					String companyInCharge = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companyInCharge);
-
-					vf.getCon().printLine("Pasajeros");
-					int passenger = vf.getCon().readInt();
-					vf.getCon().burnLine();
-
-					vf.getCon().printLine("hora salida");
-					String departureTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(departureTime);
-
-					vf.getCon().printLine("hora llegada");
-					String arrivalTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-					if (!verificarTiempo(departureTime, arrivalTime)) {
-						vf.getCon().printLine("Hora invalida");
-						break;
-					}
-
-					vf.getCon().printLine("Requiere VISA");
-					boolean requiresVisa = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(requiresVisa);
-
-					String captain = mf.getComplement().randomizer();
-					String secondOnCommand = mf.getComplement().randomizer();
-
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-					while (validarRandom == false) {
-						captain = mf.getComplement().randomizer();
-						secondOnCommand = mf.getComplement().randomizer();
-						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-					}
-
-					double gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-					if (mf.getvInternacionalDAO().add(new VueloInternacionalDTO(destino, companyInCharge, passenger,
-							captain, secondOnCommand, arrivalTime, departureTime, gas, requiresVisa)) == true) {
-						vf.getCon().printLine("CREADO EXITOSAMENTE");
-					} else {
-						vf.getCon().printLine("NO SE PUDO CREAR");
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-
-				} catch (NumberFormatException e) {
-					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
-					break;
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-				} catch (NotValidBooleanException e) {
-					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-					break;
-				}
-				break;
-			case 2:
-				vf.getCon().printLine(mf.getvInternacionalDAO().showAll());
-
-				break;
-
-			case 3:
-
-				try {
-					vf.getCon().printLine("VALIDAR UPDATE");
-					vf.getCon().printLine("compania");
-					companiaA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companiaA);
-
-					vf.getCon().printLine("destino");
-					destinoA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destinoA);
-
-					vf.getCon().printLine("llegada");
-					llegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(llegadaA);
-
-					if (mf.getvInternacionalDAO().find(new VueloInternacional(destinoA, companiaA, 0, null, null,
-							llegadaA, null, 0, false)) == null) {
-						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
-						break;
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-				}
-
-				try {
-					boolean validarRandom = true;
-					vf.getCon().printLine("AGREGANDO");
-
-					vf.getCon().printLine("DESTINO");
-					String destino = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destino);
-
-					vf.getCon().printLine("COMPANIA");
-					String companyInCharge = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companyInCharge);
-
-					vf.getCon().printLine("Pasajeros");
-					int passenger = vf.getCon().readInt();
-					vf.getCon().burnLine();
-
-					vf.getCon().printLine("hora salida");
-					String departureTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(departureTime);
-
-					vf.getCon().printLine("hora llegada");
-					String arrivalTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-					if (!verificarTiempo(departureTime, arrivalTime)) {
-						vf.getCon().printLine("Hora invalida");
-						break;
-					}
-					vf.getCon().printLine("Requiere VISA");
-					boolean requiresVisa = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(requiresVisa);
-
-					String captain = mf.getComplement().randomizer();
-					String secondOnCommand = mf.getComplement().randomizer();
-
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-					while (validarRandom == false) {
-						captain = mf.getComplement().randomizer();
-						secondOnCommand = mf.getComplement().randomizer();
-						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-					}
-
-					double gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-					if (mf.getvInternacionalDAO().update(
-							new VueloInternacionalDTO(destinoA, companiaA, 0, null, null, llegadaA, null, 0),
-							new VueloInternacionalDTO(destino, companyInCharge, passenger, captain, secondOnCommand,
-									arrivalTime, departureTime, gas, requiresVisa)) == true) {
-						vf.getCon().printLine("CREADO EXITOSAMENTE");
-					} else {
-						vf.getCon().printLine("NO SE PUDO CREAR");
-					}
-
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-
-				} catch (NumberFormatException e) {
-					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
-					break;
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-				} catch (NotValidBooleanException e) {
-					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-					break;
-				}
-				break;
-
-			case 4:
-				try {
-					vf.getCon().printLine("ELIMINANDO");
-					vf.getCon().printLine("compania");
-					String companiaA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companiaA);
-
-					vf.getCon().printLine("destino");
-					String destinoA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destinoA);
-
-					vf.getCon().printLine("llegada");
-					String hLlegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(hLlegadaA);
-
-					if (mf.getvInternacionalDAO().delete(new VueloInternacionalDTO(destinoA, companiaA, 0, null, null,
-							hLlegadaA, null, 0, false)) == false) {
-						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
-						break;
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-				}
-				break;
-
-			case 5:
-				vf.getCon().printLine("VOLVIENDO.....");
-				break interloop;
-
-			default:
-				break;
-
-			}
-		}
 	}
 
 	public double calcularGasHelice(int pasajeros, String horaSalida, String horaLlegada) {
@@ -1547,7 +1136,7 @@ public class Controller implements ActionListener {
 
 		if (agregar == true) {
 			if (nacional == true) {
-				if (agregar == true && eliminar == false && actualizar == false) {
+				if (eliminar == false && actualizar == false) {
 					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
 					vf.getVp().getInputPanel().getPasajerosField().setVisible(true);
 					vf.getVp().getInputPanel().getSalidaField().setVisible(true);
@@ -1559,7 +1148,7 @@ public class Controller implements ActionListener {
 			}
 
 			if (internacional == true) {
-				if (agregar == true && eliminar == false && actualizar == false) {
+				if (eliminar == false && actualizar == false) {
 					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
 					vf.getVp().getInputPanel().getPasajerosField().setVisible(true);
 					vf.getVp().getInputPanel().getSalidaField().setVisible(true);
@@ -1570,10 +1159,10 @@ public class Controller implements ActionListener {
 				}
 			}
 		}
-		if (eliminar == true || actualizar == true) {
+		if (eliminar == true) {
 
 			if (nacional == true) {
-				if (agregar == false && eliminar == true && actualizar == false) {
+				if (agregar == false && actualizar == false) {
 					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
 					vf.getVp().getInputPanel().getCompaniaBtn().setVisible(true);
 					vf.getVp().getInputPanel().getLlegadaField().setVisible(true);
@@ -1586,7 +1175,37 @@ public class Controller implements ActionListener {
 			}
 
 			if (internacional == true) {
-				if (agregar == false && eliminar == true && actualizar == false) {
+				if (agregar == false && actualizar == false) {
+					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
+					vf.getVp().getInputPanel().getCompaniaBtn().setVisible(true);
+					vf.getVp().getInputPanel().getLlegadaField().setVisible(true);
+					vf.getVp().getInputPanel().getPasajerosField().setVisible(false);
+					vf.getVp().getInputPanel().getSalidaField().setVisible(false);
+					vf.getVp().getInputPanel().getPropio1Field().setVisible(false);
+					vf.getVp().getInputPanel().getPropio2Field().setVisible(false);
+
+				}
+			}
+
+		}
+
+		if (actualizar == true) {
+
+			if (nacional == true) {
+				if (agregar == false && eliminar == false) {
+					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
+					vf.getVp().getInputPanel().getCompaniaBtn().setVisible(true);
+					vf.getVp().getInputPanel().getLlegadaField().setVisible(true);
+					vf.getVp().getInputPanel().getPasajerosField().setVisible(false);
+					vf.getVp().getInputPanel().getSalidaField().setVisible(false);
+					vf.getVp().getInputPanel().getPropio1Field().setVisible(false);
+					vf.getVp().getInputPanel().getPropio2Field().setVisible(false);
+
+				}
+			}
+
+			if (internacional == true) {
+				if (agregar == false && eliminar == false) {
 					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
 					vf.getVp().getInputPanel().getCompaniaBtn().setVisible(true);
 					vf.getVp().getInputPanel().getLlegadaField().setVisible(true);
@@ -1601,153 +1220,11 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	public void agregar() {
-
-		if (nacional == true && internacional == false) {
-
-			try {
-				boolean validarRandom = true;
-
-				String destino = vf.getVp().getInputPanel().getDestinoField().getText();
-				ExceptionChecker.notValidInputException(destino);
-
-				String companyInCharge = company;
-				ExceptionChecker.notValidInputException(companyInCharge);
-
-				int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
-				ExceptionChecker.negativeIntNumberException(passenger);
-
-				String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
-				ExceptionChecker.notValidTimeFormatException(departureTime);
-
-				String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
-				ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-				if (!verificarTiempo(departureTime, arrivalTime)) {
-					horaInvalida = true;
-				} else {
-					horaInvalida = false;
-				}
-
-				String helice = vf.getVp().getInputPanel().getPropio1Field().getText();
-				boolean esHelice = vf.getCon().leerBoolean(helice);
-				ExceptionChecker.notValidBooleanException(esHelice);
-
-				String turbina = vf.getVp().getInputPanel().getPropio2Field().getText();
-				boolean esTurbina = vf.getCon().leerBoolean(turbina);
-				ExceptionChecker.notValidBooleanException(esTurbina);
-
-				String captain = mf.getComplement().randomizer();
-				String secondOnCommand = mf.getComplement().randomizer();
-
-				validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-				while (validarRandom == false) {
-					captain = mf.getComplement().randomizer();
-					secondOnCommand = mf.getComplement().randomizer();
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-				}
-
-				double gas = 0;
-				if (esHelice)
-					gas = calcularGasHelice(passenger, departureTime, arrivalTime);
-				if (esTurbina)
-					gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-				if (mf.getvNacionalDAO().add(new VueloNacionalDTO(destino, companyInCharge, passenger, captain,
-						secondOnCommand, arrivalTime, departureTime, gas, esTurbina, esHelice)) == true) {
-					vf.getCon().mostrarMensajeEmergente("CREADO EXITOSAMENTE");
-				} else {
-					vf.getCon().mostrarAlerta("NO SE PUDO CREAR");
-				}
-
-			} catch (NegativeIntNumberException e) {
-				vf.getCon().mostrarError("No puede ingresar numeros negativos");
-			} catch (StringIndexOutOfBoundsException e) {
-				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
-			} catch (NotValidInputException e) {
-				vf.getCon().mostrarError(
-						"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-			} catch (NumberFormatException e) {
-				vf.getCon().mostrarError("Ingrese correctamente los datos numericos, use numeros enteros");
-			} catch (NotValidTimeFormatException e) {
-				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
-			} catch (NotValidBooleanException e) {
-				vf.getCon().mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-			}
-		}
-
-		if (nacional == false && internacional == true) {
-
-			try {
-				boolean validarRandom = true;
-
-				String destino = vf.getVp().getInputPanel().getDestinoField().getText();
-				ExceptionChecker.notValidInputException(destino);
-
-				String companyInCharge = company;
-				ExceptionChecker.notValidInputException(companyInCharge);
-
-				int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
-				ExceptionChecker.negativeIntNumberException(passenger);
-
-				String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
-				ExceptionChecker.notValidTimeFormatException(departureTime);
-
-				String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
-				ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-				if (!verificarTiempo(departureTime, arrivalTime)) {
-					horaInvalida = true;
-				} else {
-					horaInvalida = false;
-				}
-
-				String visa = vf.getVp().getInputPanel().getPropio1Field().getText();
-				boolean requiresVisa = vf.getCon().leerBoolean(visa);
-				ExceptionChecker.notValidBooleanException(requiresVisa);
-
-				String captain = mf.getComplement().randomizer();
-				String secondOnCommand = mf.getComplement().randomizer();
-
-				validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-				while (validarRandom == false) {
-					captain = mf.getComplement().randomizer();
-					secondOnCommand = mf.getComplement().randomizer();
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-				}
-
-				double gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-				if (mf.getvInternacionalDAO().add(new VueloInternacionalDTO(destino, companyInCharge, passenger,
-						captain, secondOnCommand, arrivalTime, departureTime, gas, requiresVisa)) == true) {
-					vf.getCon().mostrarMensajeEmergente("CREADO EXITOSAMENTE");
-				} else {
-					vf.getCon().mostrarAlerta("NO SE PUDO CREAR, VERIFIQUE QUE NO SEA IDENTICO A OTRO VUELO");
-				}
-
-			} catch (NegativeIntNumberException e) {
-				vf.getCon().mostrarError("No puede ingresar numeros negativos");
-			} catch (StringIndexOutOfBoundsException e) {
-				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
-			} catch (NotValidInputException e) {
-				vf.getCon().mostrarError(
-						"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-			} catch (NumberFormatException e) {
-				vf.getCon().mostrarError("Ingrese correctamente los datos numericos, use numeros enteros");
-			} catch (NotValidTimeFormatException e) {
-				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
-			} catch (NotValidBooleanException e) {
-				vf.getCon().mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-			}
-		}
-	}
-
 	public void eliminar() {
 
 		if (nacional == true && internacional == false) {
 			try {
+
 				String companiaA = company;
 				ExceptionChecker.notValidInputException(companiaA);
 
@@ -1757,8 +1234,8 @@ public class Controller implements ActionListener {
 				String hLlegadaA = vf.getVp().getInputPanel().getLlegadaField().getText();
 				ExceptionChecker.notValidTimeFormatException(hLlegadaA);
 
-				if (mf.getvNacionalDAO().delete(new VueloNacionalDTO(destinoA, companiaA, 0, null, null, hLlegadaA,
-						null, 0, false, false)) == false) {
+				if (mf.getvNacionalDAO().delete(
+						new VueloNacionalDTO("beta", "dia", 0, null, null, "10:00", null, 0, false, false)) == false) {
 					vf.getCon().mostrarAlerta("No fue encontrado el vuelo, verifique los datos ingresados");
 				} else {
 					vf.getCon().mostrarMensajeEmergente("Vuelo Eliminado Exitosamente");
@@ -1810,152 +1287,6 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	public void actualizar() {
-
-		if (nacional == true && internacional == false) {
-
-			try {
-				boolean validarRandom = true;
-
-				String destino = vf.getVp().getInputPanel().getDestinoField().getText();
-				ExceptionChecker.notValidInputException(destino);
-
-				String companyInCharge = company;
-				ExceptionChecker.notValidInputException(companyInCharge);
-
-				int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
-				ExceptionChecker.negativeIntNumberException(passenger);
-
-				String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
-				ExceptionChecker.notValidTimeFormatException(departureTime);
-
-				String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
-				ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-				if (!verificarTiempo(departureTime, arrivalTime)) {
-					horaInvalida = true;
-				} else {
-					horaInvalida = false;
-				}
-
-				String helice = vf.getVp().getInputPanel().getPropio1Field().getText();
-				boolean esHelice = vf.getCon().leerBoolean(helice);
-				ExceptionChecker.notValidBooleanException(esHelice);
-
-				String turbina = vf.getVp().getInputPanel().getPropio2Field().getText();
-				boolean esTurbina = vf.getCon().leerBoolean(turbina);
-				ExceptionChecker.notValidBooleanException(esTurbina);
-
-				String captain = mf.getComplement().randomizer();
-				String secondOnCommand = mf.getComplement().randomizer();
-
-				validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-				while (validarRandom == false) {
-					captain = mf.getComplement().randomizer();
-					secondOnCommand = mf.getComplement().randomizer();
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-				}
-
-				double gas = 0;
-				if (esHelice)
-					gas = calcularGasHelice(passenger, departureTime, arrivalTime);
-				if (esTurbina)
-					gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-				if (mf.getvNacionalDAO().update(
-						new VueloNacionalDTO(destinoA, companiaA, 0, null, null, llegadaA, null, 0),
-						new VueloNacionalDTO(destino, companyInCharge, passenger, captain, secondOnCommand, arrivalTime,
-								departureTime, gas, esTurbina, esHelice)) == true) {
-					vf.getCon().mostrarMensajeEmergente("CREADO EXITOSAMENTE");
-				} else {
-					vf.getCon().mostrarAlerta("NO SE PUDO CREAR");
-				}
-
-			} catch (NegativeIntNumberException e) {
-				vf.getCon().mostrarError("No puede ingresar numeros negativos");
-			} catch (StringIndexOutOfBoundsException e) {
-				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
-			} catch (NotValidInputException e) {
-				vf.getCon().mostrarError(
-						"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-			} catch (NumberFormatException e) {
-				vf.getCon().mostrarError("Ingrese correctamente los datos numericos, use numeros enteros");
-			} catch (NotValidTimeFormatException e) {
-				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
-			} catch (NotValidBooleanException e) {
-				vf.getCon().mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-			}
-		}
-
-		if (nacional == false && internacional == true) {
-			try {
-				boolean validarRandom = true;
-
-				String destino = vf.getVp().getInputPanel().getDestinoField().getText();
-				ExceptionChecker.notValidInputException(destino);
-
-				String companyInCharge = company;
-				ExceptionChecker.notValidInputException(companyInCharge);
-
-				int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
-				ExceptionChecker.negativeIntNumberException(passenger);
-
-				String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
-				ExceptionChecker.notValidTimeFormatException(departureTime);
-
-				String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
-				ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-				if (!verificarTiempo(departureTime, arrivalTime)) {
-					horaInvalida = true;
-				} else {
-					horaInvalida = false;
-				}
-
-				String visa = vf.getVp().getInputPanel().getPropio1Field().getText();
-				boolean requiresVisa = vf.getCon().leerBoolean(visa);
-				ExceptionChecker.notValidBooleanException(requiresVisa);
-
-				String captain = mf.getComplement().randomizer();
-				String secondOnCommand = mf.getComplement().randomizer();
-
-				validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-				while (validarRandom == false) {
-					captain = mf.getComplement().randomizer();
-					secondOnCommand = mf.getComplement().randomizer();
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-				}
-
-				double gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-				if (mf.getvInternacionalDAO().update(
-						new VueloInternacionalDTO(destinoA, companiaA, 0, null, null, llegadaA, null, 0),
-						new VueloInternacionalDTO(destino, companyInCharge, passenger, captain, secondOnCommand,
-								arrivalTime, departureTime, gas, requiresVisa)) == true) {
-					vf.getCon().mostrarMensajeEmergente("CREADO EXITOSAMENTE");
-				} else {
-					vf.getCon().mostrarAlerta("NO SE PUDO CREAR");
-				}
-			} catch (NegativeIntNumberException e) {
-				vf.getCon().mostrarError("No puede ingresar numeros negativos");
-			} catch (StringIndexOutOfBoundsException e) {
-				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
-			} catch (NotValidInputException e) {
-				vf.getCon().mostrarError(
-						"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-			} catch (NumberFormatException e) {
-				vf.getCon().mostrarError("Ingrese correctamente los datos numericos, use numeros enteros");
-			} catch (NotValidTimeFormatException e) {
-				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
-			} catch (NotValidBooleanException e) {
-				vf.getCon().mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-			}
-		}
-
-	}
-
 	public void VerificarActualizar() {
 
 		if (nacional == true && internacional == false) {
@@ -1972,8 +1303,10 @@ public class Controller implements ActionListener {
 				if (mf.getvNacionalDAO().find(new VueloNacional(destinoA, companiaA, 0, null, null, llegadaA, null, 0,
 						false, false)) == null) {
 					vf.getCon().mostrarAlerta("No fue encontrado el vuelo, verifique los datos ingresados");
+					verificado = false;
 				} else {
 					vf.getCon().mostrarMensajeEmergente("Vuelo encontrado, ingrese los datos a actualizar");
+					verificado = true;
 				}
 			} catch (StringIndexOutOfBoundsException e) {
 				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
@@ -1999,8 +1332,10 @@ public class Controller implements ActionListener {
 				if (mf.getvInternacionalDAO().find(
 						new VueloInternacional(destinoA, companiaA, 0, null, null, llegadaA, null, 0, false)) == null) {
 					vf.getCon().mostrarAlerta("No fue encontrado el vuelo, verifique los datos ingresados");
+					verificado = false;
 				} else {
 					vf.getCon().mostrarMensajeEmergente("Vuelo encontrado, ingrese los datos a actualizar");
+					verificado = true;
 				}
 			} catch (StringIndexOutOfBoundsException e) {
 				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");

@@ -245,6 +245,12 @@ public class InputPanel extends JPanel {
 		propio2Field.setOpaque(true);
 		propio2Field.setVisible(true);
 
+		add(destinoField);
+		add(pasajerosField);
+		add(salidaField);
+		add(llegadaField);
+		add(propio1Field);
+		add(propio2Field);
 		add(imgDeltaA);
 		add(imgAvianca);
 		add(imgLatam);
@@ -255,13 +261,6 @@ public class InputPanel extends JPanel {
 		add(imgAmericanA);
 		add(imgIberia);
 		add(imgAirF);
-		add(volverBtn);
-		add(saveBtn);
-		add(companiaBtn);
-		add(destinoField);
-		add(pasajerosField);
-		add(salidaField);
-		add(llegadaField);
 		add(imgInputIOscuro);
 		add(imgInputIClaro);
 		add(imgInputNOscuro);
@@ -274,14 +273,10 @@ public class InputPanel extends JPanel {
 		add(imgVerificarIClaro);
 		add(imgVerificarNOscuro);
 		add(imgVerificarNClaro);
-		add(destinoField);
-		add(pasajerosField);
-		add(salidaField);
-		add(llegadaField);
-		add(propio1Field);
-		add(propio2Field);
-		add(imgInputIOscuro);
-		add(imgInputIClaro);
+		add(volverBtn);
+		add(saveBtn);
+		add(companiaBtn);
+
 	}
 
 	/**
