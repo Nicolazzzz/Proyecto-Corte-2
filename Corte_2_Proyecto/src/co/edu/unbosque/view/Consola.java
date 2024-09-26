@@ -167,4 +167,11 @@ public class Consola {
 	public void mostrarError(String texto) {
 		JOptionPane.showMessageDialog(null, texto, "Error", JOptionPane.ERROR_MESSAGE);
 	}
+
+	public boolean leerBoolean(String entrada) {
+		if (entrada.toLowerCase().contains("si")) {
+			return true;
+		}
+		return false;
+	}
 }

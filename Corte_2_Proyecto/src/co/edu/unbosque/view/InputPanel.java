@@ -16,12 +16,13 @@ public class InputPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JLabel imgCompania, imgInputIOscuro, imgInputIClaro, imgInputNClaro, imgInputNOscuro, imgDeleteNClaro,
-			imgDeleteNOscuro, imgDeleteIOscuro, imgDeleteIClaro, imgAvianca, imgLatam, imgWingo, imgSatena, imgClic,
-			imgCopaA, imgAmericanA, imgIberia, imgAirF, imgDeltaA;
+			imgDeleteNOscuro, imgDeleteIOscuro, imgDeleteIClaro, imgVerificarNOscuro, imgVerificarNClaro,
+			imgVerificarIOscuro, imgVerificarIClaro, imgAvianca, imgLatam, imgWingo, imgSatena, imgClic, imgCopaA,
+			imgAmericanA, imgIberia, imgAirF, imgDeltaA;
 
 	private JButton volverBtn, saveBtn, companiaBtn;
 
-	private JTextField destinoField, pasajerosField, salidaField, llegadaField, visaField;
+	private JTextField destinoField, pasajerosField, salidaField, llegadaField, propio1Field, propio2Field;
 
 	public InputPanel() {
 
@@ -89,6 +90,40 @@ public class InputPanel extends JPanel {
 		imgDeleteIClaro.setIcon(new ImageIcon(inputIDO));
 		imgDeleteIClaro.setBounds(0, 0, 1270, 720);
 		imgDeleteIClaro.setVisible(false);
+
+// VERIFICAR <-----------AQUI ES DONDE FALTAN IMAGENES
+//		
+//		
+//		
+//		
+
+		imgVerificarNOscuro = new JLabel();
+		ImageIcon inputVNO = new ImageIcon("src/media/EliminarInterOscuro.png");
+		Image inputvNO = inputVNO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgVerificarNOscuro.setIcon(new ImageIcon(inputvNO));
+		imgVerificarNOscuro.setBounds(0, 0, 1270, 720);
+		imgVerificarNOscuro.setVisible(false);
+
+		imgVerificarNClaro = new JLabel();
+		ImageIcon inputVNC = new ImageIcon("src/media/EliminarInterOscuro.png");
+		Image inputvNC = inputVNC.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgVerificarNClaro.setIcon(new ImageIcon(inputvNC));
+		imgVerificarNClaro.setBounds(0, 0, 1270, 720);
+		imgVerificarNClaro.setVisible(false);
+
+		imgVerificarIOscuro = new JLabel();
+		ImageIcon inputVIO = new ImageIcon("src/media/EliminarInterOscuro.png");
+		Image inputvIO = inputVIO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgVerificarIOscuro.setIcon(new ImageIcon(inputvIO));
+		imgVerificarIOscuro.setBounds(0, 0, 1270, 720);
+		imgVerificarIOscuro.setVisible(false);
+
+		imgVerificarIClaro = new JLabel();
+		ImageIcon inputVIC = new ImageIcon("src/media/EliminarInterOscuro.png");
+		Image inputvIC = inputVIC.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		imgVerificarIClaro.setIcon(new ImageIcon(inputvIC));
+		imgVerificarIClaro.setBounds(0, 0, 1270, 720);
+		imgVerificarIClaro.setVisible(false);
 
 		imgAvianca = new JLabel();
 		ImageIcon inputA = new ImageIcon("src/logo/logoavianca.png");
@@ -208,10 +243,15 @@ public class InputPanel extends JPanel {
 		llegadaField.setOpaque(true);
 		llegadaField.setVisible(false);
 
-		visaField = new JTextField();
-		visaField.setBounds(248, 255, 300, 60);
-		visaField.setOpaque(true);
-		visaField.setVisible(false);
+		propio1Field = new JTextField();
+		propio1Field.setBounds(248, 255, 300, 60);
+		propio1Field.setOpaque(true);
+		propio1Field.setVisible(false);
+
+		propio2Field = new JTextField();
+		propio2Field.setBounds(248, 255, 300, 60);
+		propio2Field.setOpaque(true);
+		propio2Field.setVisible(false);
 
 		add(imgInputIOscuro);
 		add(imgInputIClaro);
@@ -222,6 +262,10 @@ public class InputPanel extends JPanel {
 		add(imgDeleteIClaro);
 		add(imgDeleteIOscuro);
 		add(imgCompania);
+		add(imgVerificarIOscuro);
+		add(imgVerificarIClaro);
+		add(imgVerificarNOscuro);
+		add(imgVerificarNClaro);
 		add(imgAvianca);
 		add(imgLatam);
 		add(imgWingo);
@@ -239,72 +283,10 @@ public class InputPanel extends JPanel {
 		add(pasajerosField);
 		add(salidaField);
 		add(llegadaField);
-		add(visaField);
+		add(propio1Field);
+		add(propio2Field);
 		add(imgInputIOscuro);
 		add(imgInputIClaro);
-	}
-
-	/**
-	 * @return the imgDeleteNClaro
-	 */
-	public JLabel getImgDeleteNClaro() {
-		return imgDeleteNClaro;
-	}
-
-	/**
-	 * @param imgDeleteNClaro the imgDeleteNClaro to set
-	 */
-	public void setImgDeleteNClaro(JLabel imgDeleteNClaro) {
-		this.imgDeleteNClaro = imgDeleteNClaro;
-	}
-
-	/**
-	 * @return the imgDeleteNOscuro
-	 */
-	public JLabel getImgDeleteNOscuro() {
-		return imgDeleteNOscuro;
-	}
-
-	/**
-	 * @param imgDeleteNOscuro the imgDeleteNOscuro to set
-	 */
-	public void setImgDeleteNOscuro(JLabel imgDeleteNOscuro) {
-		this.imgDeleteNOscuro = imgDeleteNOscuro;
-	}
-
-	/**
-	 * @return the imgDeleteIOscuro
-	 */
-	public JLabel getImgDeleteIOscuro() {
-		return imgDeleteIOscuro;
-	}
-
-	/**
-	 * @param imgDeleteIOscuro the imgDeleteIOscuro to set
-	 */
-	public void setImgDeleteIOscuro(JLabel imgDeleteIOscuro) {
-		this.imgDeleteIOscuro = imgDeleteIOscuro;
-	}
-
-	/**
-	 * @return the imgDeleteIClaro
-	 */
-	public JLabel getImgDeleteIClaro() {
-		return imgDeleteIClaro;
-	}
-
-	/**
-	 * @param imgDeleteIClaro the imgDeleteIClaro to set
-	 */
-	public void setImgDeleteIClaro(JLabel imgDeleteIClaro) {
-		this.imgDeleteIClaro = imgDeleteIClaro;
-	}
-
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	/**
@@ -375,6 +357,62 @@ public class InputPanel extends JPanel {
 	 */
 	public void setImgInputNOscuro(JLabel imgInputNOscuro) {
 		this.imgInputNOscuro = imgInputNOscuro;
+	}
+
+	/**
+	 * @return the imgDeleteNClaro
+	 */
+	public JLabel getImgDeleteNClaro() {
+		return imgDeleteNClaro;
+	}
+
+	/**
+	 * @param imgDeleteNClaro the imgDeleteNClaro to set
+	 */
+	public void setImgDeleteNClaro(JLabel imgDeleteNClaro) {
+		this.imgDeleteNClaro = imgDeleteNClaro;
+	}
+
+	/**
+	 * @return the imgDeleteNOscuro
+	 */
+	public JLabel getImgDeleteNOscuro() {
+		return imgDeleteNOscuro;
+	}
+
+	/**
+	 * @param imgDeleteNOscuro the imgDeleteNOscuro to set
+	 */
+	public void setImgDeleteNOscuro(JLabel imgDeleteNOscuro) {
+		this.imgDeleteNOscuro = imgDeleteNOscuro;
+	}
+
+	/**
+	 * @return the imgDeleteIOscuro
+	 */
+	public JLabel getImgDeleteIOscuro() {
+		return imgDeleteIOscuro;
+	}
+
+	/**
+	 * @param imgDeleteIOscuro the imgDeleteIOscuro to set
+	 */
+	public void setImgDeleteIOscuro(JLabel imgDeleteIOscuro) {
+		this.imgDeleteIOscuro = imgDeleteIOscuro;
+	}
+
+	/**
+	 * @return the imgDeleteIClaro
+	 */
+	public JLabel getImgDeleteIClaro() {
+		return imgDeleteIClaro;
+	}
+
+	/**
+	 * @param imgDeleteIClaro the imgDeleteIClaro to set
+	 */
+	public void setImgDeleteIClaro(JLabel imgDeleteIClaro) {
+		this.imgDeleteIClaro = imgDeleteIClaro;
 	}
 
 	/**
@@ -616,17 +654,38 @@ public class InputPanel extends JPanel {
 	}
 
 	/**
-	 * @return the visaField
+	 * @return the propio1Field
 	 */
-	public JTextField getVisaField() {
-		return visaField;
+	public JTextField getPropio1Field() {
+		return propio1Field;
 	}
 
 	/**
-	 * @param visaField the visaField to set
+	 * @param propio1Field the propio1Field to set
 	 */
-	public void setVisaField(JTextField visaField) {
-		this.visaField = visaField;
+	public void setPropio1Field(JTextField propio1Field) {
+		this.propio1Field = propio1Field;
+	}
+
+	/**
+	 * @return the propio2Field
+	 */
+	public JTextField getPropio2Field() {
+		return propio2Field;
+	}
+
+	/**
+	 * @param propio2Field the propio2Field to set
+	 */
+	public void setPropio2Field(JTextField propio2Field) {
+		this.propio2Field = propio2Field;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
