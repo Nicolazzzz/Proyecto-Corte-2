@@ -1,8 +1,7 @@
+
 package co.edu.unbosque.view;
 
 import java.awt.Image;
-import java.sql.BatchUpdateException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -10,12 +9,25 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ * UserPanel is a JPanel designed for user interaction, allowing them to search
+ * for destinations. It provides a search field and buttons for searching and
+ * returning, along with background images that change depending on the theme.
+ * 
+ * @author Santiago
+ * @version 1.0
+ */
 public class UserPanel extends JPanel {
 
 	private JLabel imgDark, imgWhite;
 	private JTextField destinoField;
 	private JButton volverBtn, buscarBtn;
 
+	/**
+	 * Constructs the UserPanel and initializes its components such as text fields,
+	 * buttons, and background images for light and dark themes. The layout is set
+	 * to null and the panel is made visible.
+	 */
 	public UserPanel() {
 		setSize(1280, 720);
 		setLayout(null);
@@ -58,6 +70,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the dark-themed background image label.
+	 * 
 	 * @return the imgDark
 	 */
 	public JLabel getImgDark() {
@@ -65,6 +79,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the dark-themed background image label.
+	 * 
 	 * @param imgDark the imgDark to set
 	 */
 	public void setImgDark(JLabel imgDark) {
@@ -72,6 +88,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the light-themed background image label.
+	 * 
 	 * @return the imgWhite
 	 */
 	public JLabel getImgWhite() {
@@ -79,6 +97,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the light-themed background image label.
+	 * 
 	 * @param imgWhite the imgWhite to set
 	 */
 	public void setImgWhite(JLabel imgWhite) {
@@ -86,6 +106,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the text field where the user inputs the destination.
+	 * 
 	 * @return the destinoField
 	 */
 	public JTextField getDestinoField() {
@@ -93,6 +115,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the text field for destination input.
+	 * 
 	 * @param destinoField the destinoField to set
 	 */
 	public void setDestinoField(JTextField destinoField) {
@@ -100,6 +124,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the button used to return to the previous screen.
+	 * 
 	 * @return the volverBtn
 	 */
 	public JButton getVolverBtn() {
@@ -107,6 +133,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the return button to go back to the previous screen.
+	 * 
 	 * @param volverBtn the volverBtn to set
 	 */
 	public void setVolverBtn(JButton volverBtn) {
@@ -114,6 +142,8 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the search button.
+	 * 
 	 * @return the buscarBtn
 	 */
 	public JButton getBuscarBtn() {
@@ -121,10 +151,11 @@ public class UserPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the search button.
+	 * 
 	 * @param buscarBtn the buscarBtn to set
 	 */
 	public void setBuscarBtn(JButton buscarBtn) {
 		this.buscarBtn = buscarBtn;
 	}
-
 }
