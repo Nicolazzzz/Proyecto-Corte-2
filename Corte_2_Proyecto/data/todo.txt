@@ -34,3 +34,14 @@ Combustible: 12000.0
 Es Turbina: false
 Es Hélice: true
 
+Destino: hawai
+Compañía: Wingo
+Número de Pasajeros: 180
+Capitán a Cargo: Amelia Morales
+Segundo al Mando: Sofía Martínez
+Hora de Llegada: 12:00
+Hora de Salida: 10:00
+Combustible: 14400.0
+Es Turbina: true
+Es Hélice: false
+

@@ -16,7 +16,10 @@ import co.edu.unbosque.util.exception.NotValidBooleanException;
 import co.edu.unbosque.util.exception.NotValidInputException;
 import co.edu.unbosque.util.exception.NotValidTimeFormatException;
 import co.edu.unbosque.view.ViewFacade;
-
+/**
+ * Clase controlador 
+ * logica de el programa
+ */
 public class Controller implements ActionListener {
 
 	private ModelFacade mf;
