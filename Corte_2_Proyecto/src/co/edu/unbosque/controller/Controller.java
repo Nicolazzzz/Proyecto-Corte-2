@@ -1267,16 +1267,12 @@ public class Controller implements ActionListener {
 
 		if (nacional == false && internacional == true) {
 			try {
-				vf.getCon().printLine("ELIMINANDO");
-				vf.getCon().printLine("compania");
 				String companiaA = company;
 				ExceptionChecker.notValidInputException(companiaA);
 
-				vf.getCon().printLine("destino");
 				String destinoA = vf.getVp().getInputPanel().getDestinoField().getText();
 				ExceptionChecker.notValidInputException(destinoA);
 
-				vf.getCon().printLine("llegada");
 				String hLlegadaA = vf.getVp().getInputPanel().getLlegadaField().getText();
 				ExceptionChecker.notValidTimeFormatException(hLlegadaA);
 
