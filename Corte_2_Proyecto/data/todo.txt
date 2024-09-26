@@ -23,3 +23,14 @@ Requiere Visa: true
 
 VUELOS NACIONALES:
 
+Destino: hawai
+Compañía: Wingo
+Número de Pasajeros: 200
+Capitán a Cargo: Gabriel Aguilar
+Segundo al Mando: Lucas García
+Hora de Llegada: 08:10
+Hora de Salida: 06:20
+Combustible: 12000.0
+Es Turbina: false
+Es Hélice: true
+

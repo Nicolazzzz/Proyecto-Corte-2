@@ -52,14 +52,17 @@ public class Controller implements ActionListener {
 	}
 
 	/**
-	 * Asigna los ActionListeners a los botones de los diferentes paneles de la interfaz de usuario.
+	 * Asigna los ActionListeners a los botones de los diferentes paneles de la
+	 * interfaz de usuario.
 	 * 
-	 * Este método se encarga de vincular cada botón de la interfaz gráfica con un ActionListener
-	 * que capturará las acciones del usuario. Además, establece un ActionCommand para identificar
-	 * qué botón ha sido presionado, facilitando la gestión de los eventos dentro del controlador.
+	 * Este método se encarga de vincular cada botón de la interfaz gráfica con un
+	 * ActionListener que capturará las acciones del usuario. Además, establece un
+	 * ActionCommand para identificar qué botón ha sido presionado, facilitando la
+	 * gestión de los eventos dentro del controlador.
 	 * 
-	 * Cada botón tiene asociado su propio ActionCommand, que será utilizado en el método que gestiona
-	 * las acciones para identificar qué acción se debe realizar según el botón presionado.
+	 * Cada botón tiene asociado su propio ActionCommand, que será utilizado en el
+	 * método que gestiona las acciones para identificar qué acción se debe realizar
+	 * según el botón presionado.
 	 * 
 	 * @author: Mario Rodríguez
 	 * @Versión: 1.0
@@ -124,15 +127,16 @@ public class Controller implements ActionListener {
 	}
 
 	/**
-	 * Gestiona los eventos de los botones de la interfaz gráfica según el ActionCommand asociado.
+	 * Gestiona los eventos de los botones de la interfaz gráfica según el
+	 * ActionCommand asociado.
 	 * 
-	 * Este método procesa las acciones del usuario en la interfaz gráfica a través de un 
-	 * ActionEvent y ejecuta diferentes operaciones según el botón presionado.
+	 * Este método procesa las acciones del usuario en la interfaz gráfica a través
+	 * de un ActionEvent y ejecuta diferentes operaciones según el botón presionado.
 	 * 
-	 * @param e el evento de acción que contiene el comando del botón que fue presionado.
+	 * @param e el evento de acción que contiene el comando del botón que fue
+	 *          presionado.
 	 * 
-	 * Autor: Mario Rodríguez
-	 * Versión: 1.0
+	 *          Autor: Mario Rodríguez Versión: 1.0
 	 */
 	@Override
 	public void actionPerformed(ActionEvent a) {
@@ -423,21 +427,6 @@ public class Controller implements ActionListener {
 					setearFieldsCRUD();
 					if (nacional == true && internacional == false) {
 
-	/**
-	 * Muestra el menú principal del sistema y gestiona las opciones seleccionadas por el usuario.
-	 * 
-	 * Este método despliega un menú con varias opciones relacionadas con vuelos nacionales,
-	 * internacionales, generación de archivos y búsqueda de vuelos. Se ejecuta en un bucle
-	 * principal que permite al usuario navegar entre las opciones hasta que decide salir.
-	 * 
-	 * @see #mostrarMenuNacional()
-	 * @see #mostrarMenuInternacional()
-	 * 
-	 * Autor: Mario Rodríguez
-	 * Versión: 1.0
-	 */
-
-	public void mostrarMenuPrincipal() {
 						try {
 							boolean validarRandom = true;
 
@@ -605,582 +594,6 @@ public class Controller implements ActionListener {
 
 	}
 
-	/**
-	 * Muestra el menú de opciones para gestionar vuelos nacionales y ejecuta la acción seleccionada por el usuario.
-	 * 
-	 * Este método permite realizar operaciones CRUD sobre los vuelos nacionales mediante un menú interactivo.
-	 * El menú se repite en un bucle hasta que el usuario selecciona la opción de salir (opción 5).
-	 * Cada operación se maneja mediante un <code>switch</code>, permitiendo la interacción con los vuelos 
-	 * almacenados a través de la interfaz de usuario.
-	 * 
-	 * @throws NotValidInputException Si se ingresan datos no válidos en campos que no aceptan caracteres especiales o números.
-	 * @throws NotValidTimeFormatException Si el formato de la hora no es correcto (formato hh:mm).
-	 * @throws NotValidBooleanException Si no se responde correctamente en los campos de tipo booleano (sí/no).
-	 * 
-	 * @see #verificarTiempo(String, String)
-	 * @see #calcularGasHelice(int, String, String)
-	 * @see #calcularGasTurbina(int, String, String)
-	 * 
-	 * Autor: Mario Rodríguez
-	 * Versión: 1.0
-	 */
-
-	public void mostrarMenuNacional() {
-		nacionloop: while (true) {
-
-			String menuNacional = """
-
-					MENU NACIONAL
-					1) Agregar
-					2) Mostrar
-					3) Actualizar
-					4) Eliminar
-					5) Salir
-
-					""";
-			vf.getCon().printLine(menuNacional);
-			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
-			switch (op) {
-			case 1:
-
-				try {
-					boolean validarRandom = true;
-					vf.getCon().printLine("AGREGANDO");
-
-					vf.getCon().printLine("DESTINO");
-					String destino = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destino);
-
-					vf.getCon().printLine("COMPANIA");
-					String companyInCharge = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companyInCharge);
-
-					vf.getCon().printLine("Pasajeros");
-					int passenger = vf.getCon().readInt();
-					vf.getCon().burnLine();
-
-					vf.getCon().printLine("hora salida");
-					String departureTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(departureTime);
-
-					vf.getCon().printLine("hora llegada");
-					String arrivalTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-					if (!verificarTiempo(departureTime, arrivalTime)) {
-						vf.getCon().printLine("Hora invalida");
-						break;
-					}
-
-					vf.getCon().printLine("es helice");
-					boolean esHelice = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(esHelice);
-
-					vf.getCon().printLine("es turbina");
-					boolean esTurbina = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(esTurbina);
-
-					String captain = mf.getComplement().randomizer();
-					String secondOnCommand = mf.getComplement().randomizer();
-
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-					while (validarRandom == false) {
-						captain = mf.getComplement().randomizer();
-						secondOnCommand = mf.getComplement().randomizer();
-						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-					}
-
-					double gas = 0;
-					if (esHelice)
-						gas = calcularGasHelice(passenger, departureTime, arrivalTime);
-					if (esTurbina)
-						gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-					if (mf.getvNacionalDAO().add(new VueloNacionalDTO(destino, companyInCharge, passenger, captain,
-							secondOnCommand, arrivalTime, departureTime, gas, esTurbina, esHelice)) == true) {
-						vf.getCon().printLine("CREADO EXITOSAMENTE");
-					} else {
-						vf.getCon().printLine("NO SE PUDO CREAR");
-					}
-
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-
-				} catch (NumberFormatException e) {
-					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
-					break;
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-				} catch (NotValidBooleanException e) {
-					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-					break;
-				}
-				break;
-
-			case 2:
-				vf.getCon().printLine(mf.getvNacionalDAO().showAll());
-				break;
-
-			case 3:
-
-				try {
-					vf.getCon().printLine("VALIDAR UPDATE");
-					vf.getCon().printLine("compania");
-					companiaA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companiaA);
-
-					vf.getCon().printLine("destino");
-					destinoA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destinoA);
-
-					vf.getCon().printLine("llegada");
-					llegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(llegadaA);
-
-					if (mf.getvNacionalDAO().find(new VueloNacional(destinoA, companiaA, 0, null, null, llegadaA, null,
-							0, false, false)) == null) {
-						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
-						break;
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-				}
-
-				try {
-					boolean validarRandom = true;
-					vf.getCon().printLine("AGREGANDO");
-
-					vf.getCon().printLine("DESTINO");
-					String destino = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destino);
-
-					vf.getCon().printLine("COMPANIA");
-					String companyInCharge = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companyInCharge);
-
-					vf.getCon().printLine("Pasajeros");
-					int passenger = vf.getCon().readInt();
-					vf.getCon().burnLine();
-
-					vf.getCon().printLine("hora salida");
-					String departureTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(departureTime);
-
-					vf.getCon().printLine("hora llegada");
-					String arrivalTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-					if (!verificarTiempo(departureTime, arrivalTime)) {
-						vf.getCon().printLine("Hora invalida");
-						break;
-					}
-
-					vf.getCon().printLine("es helice");
-					boolean esHelice = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(esHelice);
-
-					vf.getCon().printLine("es turbina");
-					boolean esTurbina = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(esTurbina);
-
-					String captain = mf.getComplement().randomizer();
-					String secondOnCommand = mf.getComplement().randomizer();
-
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-					while (validarRandom == false) {
-						captain = mf.getComplement().randomizer();
-						secondOnCommand = mf.getComplement().randomizer();
-						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-					}
-
-					double gas = 0;
-					if (esHelice)
-						gas = calcularGasHelice(passenger, departureTime, arrivalTime);
-					if (esTurbina)
-						gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-					if (mf.getvNacionalDAO().update(
-							new VueloNacionalDTO(destinoA, companiaA, 0, null, null, llegadaA, null, 0),
-							new VueloNacionalDTO(destino, companyInCharge, passenger, captain, secondOnCommand,
-									arrivalTime, departureTime, gas, esTurbina, esHelice)) == true) {
-						vf.getCon().printLine("CREADO EXITOSAMENTE");
-					} else {
-						vf.getCon().printLine("NO SE PUDO CREAR");
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-
-				} catch (NumberFormatException e) {
-					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
-					break;
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-				} catch (NotValidBooleanException e) {
-					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-					break;
-				}
-				break;
-
-			case 4:
-				try {
-					vf.getCon().printLine("ELIMINANDO");
-					vf.getCon().printLine("compania");
-					String companiaA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companiaA);
-
-					vf.getCon().printLine("destino");
-					String destinoA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destinoA);
-
-					vf.getCon().printLine("llegada");
-					String hLlegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(hLlegadaA);
-
-					if (mf.getvNacionalDAO().delete(new VueloNacionalDTO(destinoA, companiaA, 0, null, null, hLlegadaA,
-							null, 0, false, false)) == false) {
-						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
-						break;
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-				}
-				break;
-
-			case 5:
-				vf.getCon().printLine("VOLVIENDO.....");
-				break nacionloop;
-
-			default:
-				break;
-			}
-		}
-
-	}
-
-	/**
-	 * Muestra el menú de opciones para gestionar vuelos internacionales y ejecuta la acción seleccionada por el usuario.
-	 * 
-	 * Este método permite realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre los vuelos internacionales
-	 * mediante un menú interactivo. El menú se ejecuta en un bucle hasta que el usuario selecciona la opción de salir (opción 5).
-	 * 
-	 * En cada operación, se validan los datos ingresados, como el formato de la hora, los nombres de destinos y compañías, 
-	 * y las respuestas booleanas, a través de excepciones personalizadas.
-	 * 
-	 * @throws NotValidInputException Si se ingresan caracteres especiales o números en campos de texto donde no son permitidos.
-	 * @throws NotValidTimeFormatException Si el formato de la hora es incorrecto (debe ser hh:mm en formato 24 horas).
-	 * @throws NotValidBooleanException Si la respuesta a una pregunta booleana (sí/no) no es válida.
-	 * 
-	 * @see #verificarTiempo(String, String)
-	 * @see #calcularGasTurbina(int, String, String)
-	 * @see #verificarRandom(String, String, String, String)
-	 * 
-	 * Autor: Mario Rodríguez
-	 * Versión: 1.0
-	 */
-	public void mostrarMenuInternacional() {
-		interloop: while (true) {
-
-			String menuInter = """
-
-					MENU INTERNACIONAL
-					1) Agregar
-					2) Mostrar
-					3) Actualizar
-					4) Eliminar
-					5) Salir
-
-					""";
-			vf.getCon().printLine(menuInter);
-			int op = vf.getCon().readInt();
-			vf.getCon().burnLine();
-			switch (op) {
-			case 1:
-
-				try {
-					boolean validarRandom = true;
-					vf.getCon().printLine("AGREGANDO");
-
-					vf.getCon().printLine("DESTINO");
-					String destino = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destino);
-
-					vf.getCon().printLine("COMPANIA");
-					String companyInCharge = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companyInCharge);
-
-					vf.getCon().printLine("Pasajeros");
-					int passenger = vf.getCon().readInt();
-					vf.getCon().burnLine();
-
-					vf.getCon().printLine("hora salida");
-					String departureTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(departureTime);
-
-					vf.getCon().printLine("hora llegada");
-					String arrivalTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-					if (!verificarTiempo(departureTime, arrivalTime)) {
-						vf.getCon().printLine("Hora invalida");
-						break;
-					}
-
-					vf.getCon().printLine("Requiere VISA");
-					boolean requiresVisa = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(requiresVisa);
-
-					String captain = mf.getComplement().randomizer();
-					String secondOnCommand = mf.getComplement().randomizer();
-
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-					while (validarRandom == false) {
-						captain = mf.getComplement().randomizer();
-						secondOnCommand = mf.getComplement().randomizer();
-						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-					}
-
-					double gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-					if (mf.getvInternacionalDAO().add(new VueloInternacionalDTO(destino, companyInCharge, passenger,
-							captain, secondOnCommand, arrivalTime, departureTime, gas, requiresVisa)) == true) {
-						vf.getCon().printLine("CREADO EXITOSAMENTE");
-					} else {
-						vf.getCon().printLine("NO SE PUDO CREAR");
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-
-				} catch (NumberFormatException e) {
-					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
-					break;
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-				} catch (NotValidBooleanException e) {
-					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-					break;
-				}
-				break;
-			case 2:
-				vf.getCon().printLine(mf.getvInternacionalDAO().showAll());
-
-				break;
-
-			case 3:
-
-				try {
-					vf.getCon().printLine("VALIDAR UPDATE");
-					vf.getCon().printLine("compania");
-					companiaA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companiaA);
-
-					vf.getCon().printLine("destino");
-					destinoA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destinoA);
-
-					vf.getCon().printLine("llegada");
-					llegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(llegadaA);
-
-					if (mf.getvInternacionalDAO().find(new VueloInternacional(destinoA, companiaA, 0, null, null,
-							llegadaA, null, 0, false)) == null) {
-						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
-						break;
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-				}
-
-				try {
-					boolean validarRandom = true;
-					vf.getCon().printLine("AGREGANDO");
-
-					vf.getCon().printLine("DESTINO");
-					String destino = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destino);
-
-					vf.getCon().printLine("COMPANIA");
-					String companyInCharge = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companyInCharge);
-
-					vf.getCon().printLine("Pasajeros");
-					int passenger = vf.getCon().readInt();
-					vf.getCon().burnLine();
-
-					vf.getCon().printLine("hora salida");
-					String departureTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(departureTime);
-
-					vf.getCon().printLine("hora llegada");
-					String arrivalTime = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(arrivalTime);
-
-					if (!verificarTiempo(departureTime, arrivalTime)) {
-						vf.getCon().printLine("Hora invalida");
-						break;
-					}
-					vf.getCon().printLine("Requiere VISA");
-					boolean requiresVisa = vf.getCon().readBoolean();
-					ExceptionChecker.notValidBooleanException(requiresVisa);
-
-					String captain = mf.getComplement().randomizer();
-					String secondOnCommand = mf.getComplement().randomizer();
-
-					validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-
-					while (validarRandom == false) {
-						captain = mf.getComplement().randomizer();
-						secondOnCommand = mf.getComplement().randomizer();
-						validarRandom = verificarRandom(captain, secondOnCommand, departureTime, arrivalTime);
-					}
-
-					double gas = calcularGasTurbina(passenger, departureTime, arrivalTime);
-
-					if (mf.getvInternacionalDAO().update(
-							new VueloInternacionalDTO(destinoA, companiaA, 0, null, null, llegadaA, null, 0),
-							new VueloInternacionalDTO(destino, companyInCharge, passenger, captain, secondOnCommand,
-									arrivalTime, departureTime, gas, requiresVisa)) == true) {
-						vf.getCon().printLine("CREADO EXITOSAMENTE");
-					} else {
-						vf.getCon().printLine("NO SE PUDO CREAR");
-					}
-
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-
-				} catch (NumberFormatException e) {
-					vf.getCon().printLine("Ingrese correctamente los datos numericos, use numeros enteros");
-					break;
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-				} catch (NotValidBooleanException e) {
-					vf.getCon().printLine("En campos de respuesta para pregunta SI / NO, conteste con si o no");
-					break;
-				}
-				break;
-
-			case 4:
-				try {
-					vf.getCon().printLine("ELIMINANDO");
-					vf.getCon().printLine("compania");
-					String companiaA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(companiaA);
-
-					vf.getCon().printLine("destino");
-					String destinoA = vf.getCon().readLine();
-					ExceptionChecker.notValidInputException(destinoA);
-
-					vf.getCon().printLine("llegada");
-					String hLlegadaA = vf.getCon().readLine();
-					ExceptionChecker.notValidTimeFormatException(hLlegadaA);
-
-					if (mf.getvInternacionalDAO().delete(new VueloInternacionalDTO(destinoA, companiaA, 0, null, null,
-							hLlegadaA, null, 0, false)) == false) {
-						vf.getCon().printLine("No fue encontrado el vuelo, verifique los datos ingresados");
-						break;
-					}
-				} catch (StringIndexOutOfBoundsException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-				} catch (NotValidTimeFormatException e) {
-					vf.getCon().printLine("Formato de hora no valido, recuerde hh:mm (24:00)");
-					break;
-//					e.printStackTrace();
-
-				} catch (NotValidInputException e) {
-					vf.getCon().printLine(
-							"No puede ingresar caracteres especiales o numeros en campos de nombres o palabras");
-					break;
-				}
-				break;
-
-			case 5:
-				vf.getCon().printLine("VOLVIENDO.....");
-				break interloop;
-
-			default:
-				break;
-
-			}
-		}
-	}
-
-	/**
-	 * Calcula la cantidad de gasolina necesaria para un vuelo basado en el número de pasajeros y la duración del vuelo.
-	 * 
-	 * Este método determina el consumo de combustible en litros por hora de un avión de hélice, considerando dos 
-	 * tipos de aviones con diferentes capacidades de pasajeros. El cálculo se realiza en base a la duración del vuelo 
-	 * calculada a partir de la hora de salida y la hora de llegada, y se añade un 20% adicional como reserva de 
-	 * combustible.
-	 * 
-	 * @param pasajeros Número de pasajeros del vuelo, que afecta al tipo de avión utilizado y su consumo de combustible.
-	 * @param horaSalida Hora de salida del vuelo en formato "hh:mm".
-	 * @param horaLlegada Hora de llegada del vuelo en formato "hh:mm".
-	 * @return La cantidad de gasolina necesaria en litros, incluyendo la reserva.
-	 * 
-	 * @throws NumberFormatException Si el formato de las horas no es válido y no puede ser convertido a entero.
-	 * 
-	 * @see #verificarTiempo(String, String)
-	 * 
-	 * Autor: Mario Rodríguez
-	 * Versión: 1.0
-	 */
-=======
->>>>>>> branch 'master' of https://github.com/Nicolazzzz/Proyecto-Corte-2.git
 	public double calcularGasHelice(int pasajeros, String horaSalida, String horaLlegada) {
 
 		int horaResultante = 0;
@@ -1218,24 +631,27 @@ public class Controller implements ActionListener {
 	}
 
 	/**
-	 * Calcula la cantidad de gasolina necesaria para un vuelo basado en el número de pasajeros y la duración del vuelo.
+	 * Calcula la cantidad de gasolina necesaria para un vuelo basado en el número
+	 * de pasajeros y la duración del vuelo.
 	 * 
-	 * Este método determina el consumo de combustible en litros por hora de un avión de turbina, considerando 
-	 * diferentes tipos de aviones según la capacidad de pasajeros. El cálculo se realiza en base a la duración 
-	 * del vuelo calculada a partir de la hora de salida y la hora de llegada, y se añade un 20% adicional como 
-	 * reserva de combustible.
+	 * Este método determina el consumo de combustible en litros por hora de un
+	 * avión de turbina, considerando diferentes tipos de aviones según la capacidad
+	 * de pasajeros. El cálculo se realiza en base a la duración del vuelo calculada
+	 * a partir de la hora de salida y la hora de llegada, y se añade un 20%
+	 * adicional como reserva de combustible.
 	 * 
-	 * @param pasajeros Número de pasajeros del vuelo, que afecta al tipo de avión utilizado y su consumo de combustible.
-	 * @param horaSalida Hora de salida del vuelo en formato "hh:mm".
+	 * @param pasajeros   Número de pasajeros del vuelo, que afecta al tipo de avión
+	 *                    utilizado y su consumo de combustible.
+	 * @param horaSalida  Hora de salida del vuelo en formato "hh:mm".
 	 * @param horaLlegada Hora de llegada del vuelo en formato "hh:mm".
 	 * @return La cantidad de gasolina necesaria en litros, incluyendo la reserva.
 	 * 
-	 * @throws NumberFormatException Si el formato de las horas no es válido y no puede ser convertido a entero.
+	 * @throws NumberFormatException Si el formato de las horas no es válido y no
+	 *                               puede ser convertido a entero.
 	 * 
 	 * @see #verificarTiempo(String, String)
 	 * 
-	 * Autor: Mario Rodríguez
-	 * Versión: 1.0
+	 *      Autor: Mario Rodríguez Versión: 1.0
 	 */
 	public double calcularGasTurbina(int pasajeros, String horaSalida, String horaLlegada) {
 
@@ -1281,26 +697,27 @@ public class Controller implements ActionListener {
 	}
 
 	/**
-	 * Verifica la validez de los datos de la tripulación (capitán y segundo al mando) 
-	 * en relación con la hora de salida y la hora de llegada, asegurándose de que no 
-	 * haya conflictos en los registros de vuelos internacionales y nacionales.
+	 * Verifica la validez de los datos de la tripulación (capitán y segundo al
+	 * mando) en relación con la hora de salida y la hora de llegada, asegurándose
+	 * de que no haya conflictos en los registros de vuelos internacionales y
+	 * nacionales.
 	 * 
-	 * Este método consulta dos diferentes DAO (Data Access Object) para validar que 
-	 * los nombres del capitán y del segundo al mando no están ya asignados a otro vuelo 
-	 * que tenga el mismo horario. Si se encuentra algún conflicto, el método retornará 
-	 * falso; de lo contrario, retornará verdadero.
+	 * Este método consulta dos diferentes DAO (Data Access Object) para validar que
+	 * los nombres del capitán y del segundo al mando no están ya asignados a otro
+	 * vuelo que tenga el mismo horario. Si se encuentra algún conflicto, el método
+	 * retornará falso; de lo contrario, retornará verdadero.
 	 * 
-	 * @param captain Nombre del capitán del vuelo.
+	 * @param captain        Nombre del capitán del vuelo.
 	 * @param seconOnCommand Nombre del segundo al mando del vuelo.
-	 * @param horaSalida Hora de salida del vuelo en formato "hh:mm".
-	 * @param horaLlegada Hora de llegada del vuelo en formato "hh:mm".
-	 * @return true si los datos son válidos y no hay conflictos, false en caso contrario.
+	 * @param horaSalida     Hora de salida del vuelo en formato "hh:mm".
+	 * @param horaLlegada    Hora de llegada del vuelo en formato "hh:mm".
+	 * @return true si los datos son válidos y no hay conflictos, false en caso
+	 *         contrario.
 	 * 
 	 * @see VueloInternacionalDAO#validarRandom(String, String, String, String)
 	 * @see VueloNacionalDAO#validarRandom(String, String, String, String)
 	 * 
-	 * Autor: Mario Rodríguez
-	 * Versión: 1.0
+	 *      Autor: Mario Rodríguez Versión: 1.0
 	 */
 	public boolean verificarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
 		boolean valido = true;

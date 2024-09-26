@@ -15,22 +15,22 @@ import java.io.StreamCorruptedException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * FileUtils es una clase de utilidad que maneja operaciones de archivos como copiar
- * datos de archivos CSV (tanto vuelos internacionales como nacionales) a un
- * archivo de texto de destino y lectura de objetos serializados de archivos.
+ * FileUtils es una clase de utilidad que maneja operaciones de archivos como
+ * copiar datos de archivos CSV (tanto vuelos internacionales como nacionales) a
+ * un archivo de texto de destino y lectura de objetos serializados de archivos.
  * 
- * Esta clase incluye métodos para copiar y formatear datos de vuelo y
- * Manejo de posibles excepciones de E/S.
+ * Esta clase incluye métodos para copiar y formatear datos de vuelo y Manejo de
+ * posibles excepciones de E/S.
  * 
- *@autor Nicolás
+ * @autor Nicolás
  * @versión 1.0
  */
 public class FileUtils {
 
 	/**
-	 * Constructor para la clase FileUtils. Inicializa las rutas de los archivos para ambos.
-	 * datos de vuelos nacionales e internacionales, e invoca los métodos para copiarlos
-	 * datos en un archivo de texto de destino.
+	 * Constructor para la clase FileUtils. Inicializa las rutas de los archivos
+	 * para ambos. datos de vuelos nacionales e internacionales, e invoca los
+	 * métodos para copiarlos datos en un archivo de texto de destino.
 	 */
 	public FileUtils() {
 
@@ -39,12 +39,10 @@ public class FileUtils {
 		String dstFileName = "data\\todo.txt";
 
 		try {
-			
+
 			copyInternacional(srcInterName, dstFileName);
 			copyNacional(srcNacionalName, dstFileName);
 		} catch (IOException e) {
-			System.err.println("Error al copiar archivos: " + e.getMessage());
-			e.printStackTrace();
 		}
 	}
 
@@ -54,8 +52,10 @@ public class FileUtils {
 	 * empresa, pasajeros, capitán, y más.
 	 * 
 	 * @param srcInterName la ruta del archivo fuente para vuelos internacionales
-	 * @param dstFileName la ruta del archivo de destino donde se copiarán los datos
-	 * @throws IOException si se produce un error de E/S durante la lectura o escritura de archivos
+	 * @param dstFileName  la ruta del archivo de destino donde se copiarán los
+	 *                     datos
+	 * @throws IOException si se produce un error de E/S durante la lectura o
+	 *                     escritura de archivos
 	 */
 	private static void copyInternacional(String srcInterName, String dstFileName) throws IOException {
 		File srcFile = new File(srcInterName);
@@ -93,39 +93,38 @@ public class FileUtils {
 					writer.write("\n");
 				}
 			}
-			System.out.println("Vuelos internacionales copiados y formateados correctamente");
 		} finally {
 			if (reader != null) {
 				try {
 					reader.close();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
 			if (writer != null) {
 				try {
 					writer.close();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
 		}
 	}
+
 	/**
 	 * Copia y formatea los datos de un archivo CSV de vuelo nacional a un destino.
 	 * archivo. Los datos incluyen detalles del vuelo como destino, compañía,
 	 * pasajeros, capitán y más.
 	 * 
 	 * @param srcNacionalName la ruta del archivo fuente para vuelos nacionales
-	 * @param dstFileName la ruta del archivo de destino donde se copiarán los datos
-	 * @throws IOException si se produce un error de E/S durante la lectura o escritura de archivos
+	 * @param dstFileName     la ruta del archivo de destino donde se copiarán los
+	 *                        datos
+	 * @throws IOException si se produce un error de E/S durante la lectura o
+	 *                     escritura de archivos
 	 */
 	private static void copyNacional(String srcNacionalName, String dstFileName) throws IOException {
 		File srcFile = new File(srcNacionalName);
 		File dstFile = new File(dstFileName);
 
 		if (!srcFile.exists()) {
-			System.err.println("El archivo de vuelos nacionales no existe: " + srcNacionalName);
 			return;
 		}
 
@@ -161,30 +160,23 @@ public class FileUtils {
 					writer.write("Es Hélice: " + data[9] + "\n");
 					writer.write("\n");
 				} else {
-					System.err.println("Línea " + lineCount + " no tiene suficientes campos: " + line);
 				}
 			}
 
 			if (lineCount <= 1) {
-				System.err.println("El archivo de vuelos nacionales está vacío o solo contiene la cabecera.");
 			} else {
-				System.out
-						.println("Vuelos nacionales copiados y formateados correctamente. Total de líneas procesadas: "
-								+ (lineCount - 1));
 			}
 		} finally {
 			if (reader != null) {
 				try {
 					reader.close();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
 			if (writer != null) {
 				try {
 					writer.close();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
 		}
@@ -199,7 +191,6 @@ public class FileUtils {
 	public static Object readSerializedFile(String fileName) {
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
 			Object obj = ois.readObject();
-			System.out.println("Objeto leído con éxito: " + obj);
 			return obj;
 		} catch (FileNotFoundException e) {
 			System.err.println("Error: No se pudo encontrar el archivo " + fileName);
