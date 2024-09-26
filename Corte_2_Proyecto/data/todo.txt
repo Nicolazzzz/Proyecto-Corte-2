@@ -1,0 +1,25 @@
+VUELOS INTERNACIONALES:
+
+Destino: Tempo
+Compañía: avianca
+Número de Pasajeros: 120
+Capitán a Cargo: Master Chief
+Segundo al Mando: Elbert Galarga
+Hora de Llegada: 12:00
+Hora de Salida: 07:30
+Combustible: 36000.0
+Requiere Visa: true
+
+Destino: kiko
+Compañía: loco
+Número de Pasajeros: 322
+Capitán a Cargo: Emmanuel Pinzon
+Segundo al Mando: Sebastian Perez
+Hora de Llegada: 13:21
+Hora de Salida: 04:14
+Combustible: 129600.0
+Requiere Visa: true
+
+
+VUELOS NACIONALES:
+

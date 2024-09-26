@@ -5,7 +5,7 @@ package co.edu.unbosque.controller;
  * Clase principal que inicia la aplicación creando una instancia del
  * controlador. Esta clase sirve como punto de entrada de la aplicación.
  * <p>
- * La aplicación se inicia cuando se ejecuta el método {@code main}, que crea
+ * La aplicación se inicia cuando se ejecutaa el método {@code main}, que crea
  * una instancia de la clase {@link Controller}.
  * </p>
  * 
