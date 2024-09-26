@@ -154,7 +154,7 @@ public class Controller implements ActionListener {
 			vf.getVp().mostrarPanelWelcome();
 			break;
 
-		// ADMIN
+		// ADMINA
 		case "INTERNACIONAL":
 			internacional = true;
 			nacional = false;
