@@ -688,4 +688,60 @@ public class InputPanel extends JPanel {
 		return serialVersionUID;
 	}
 
+	/**
+	 * @return the imgVerificarNOscuro
+	 */
+	public JLabel getImgVerificarNOscuro() {
+		return imgVerificarNOscuro;
+	}
+
+	/**
+	 * @param imgVerificarNOscuro the imgVerificarNOscuro to set
+	 */
+	public void setImgVerificarNOscuro(JLabel imgVerificarNOscuro) {
+		this.imgVerificarNOscuro = imgVerificarNOscuro;
+	}
+
+	/**
+	 * @return the imgVerificarNClaro
+	 */
+	public JLabel getImgVerificarNClaro() {
+		return imgVerificarNClaro;
+	}
+
+	/**
+	 * @param imgVerificarNClaro the imgVerificarNClaro to set
+	 */
+	public void setImgVerificarNClaro(JLabel imgVerificarNClaro) {
+		this.imgVerificarNClaro = imgVerificarNClaro;
+	}
+
+	/**
+	 * @return the imgVerificarIOscuro
+	 */
+	public JLabel getImgVerificarIOscuro() {
+		return imgVerificarIOscuro;
+	}
+
+	/**
+	 * @param imgVerificarIOscuro the imgVerificarIOscuro to set
+	 */
+	public void setImgVerificarIOscuro(JLabel imgVerificarIOscuro) {
+		this.imgVerificarIOscuro = imgVerificarIOscuro;
+	}
+
+	/**
+	 * @return the imgVerificarIClaro
+	 */
+	public JLabel getImgVerificarIClaro() {
+		return imgVerificarIClaro;
+	}
+
+	/**
+	 * @param imgVerificarIClaro the imgVerificarIClaro to set
+	 */
+	public void setImgVerificarIClaro(JLabel imgVerificarIClaro) {
+		this.imgVerificarIClaro = imgVerificarIClaro;
+	}
+
 }

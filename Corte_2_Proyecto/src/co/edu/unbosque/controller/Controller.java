@@ -195,7 +195,6 @@ public class Controller implements ActionListener {
 			break;
 
 		case "AGREGAR":
-
 			eliminar = false;
 			agregar = true;
 			actualizar = false;
@@ -932,17 +931,27 @@ public class Controller implements ActionListener {
 			vf.getVp().getCrudPanel().getImgNacionalCrudClaro().setVisible(false);
 
 			// INPUT
+
+			// ======AGREGAR=======
 			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(true);
 			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
 
 			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(true);
 			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
 
+			// ======DELETE========
 			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(true);
 			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
 
 			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(true);
 			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
+
+			// ======VERIFICAR========
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(false);
 
 		}
 
@@ -967,18 +976,26 @@ public class Controller implements ActionListener {
 			vf.getVp().getCrudPanel().getImgNacionalCrudClaro().setVisible(true);
 
 			// INPUT
+			// ======AGREGAR=======
 			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(true);
 
 			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(true);
 
+			// ======DELETE========
 			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(true);
 
 			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(true);
 
+			// ======VERIFICAR========
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(true);
+
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(true);
 		}
 
 	}
@@ -996,7 +1013,6 @@ public class Controller implements ActionListener {
 			// INPUT
 
 			// ------AGREGAR--------
-
 			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(true);
 			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
 
@@ -1004,12 +1020,18 @@ public class Controller implements ActionListener {
 			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
 
 			// =====ELIMINAR========
-
 			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(true);
 			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
 
 			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+
+			// ======VERIFICAR========
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(false);
 
 		}
 
@@ -1024,7 +1046,6 @@ public class Controller implements ActionListener {
 			// INPUT
 
 			// ------AGREGAR--------
-
 			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(true);
 
@@ -1032,12 +1053,18 @@ public class Controller implements ActionListener {
 			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
 
 			// =====ELIMINAR========
-
 			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(true);
 
 			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+
+			// ======VERIFICAR========
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(true);
+
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(false);
 		}
 
 		if (nacional == false && internacional == true && dark == true && white == false) {
@@ -1051,7 +1078,6 @@ public class Controller implements ActionListener {
 			// INPUT
 
 			// ------AGREGAR--------
-
 			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
 
@@ -1059,12 +1085,18 @@ public class Controller implements ActionListener {
 			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(false);
 
 			// =====ELIMINAR========
-
 			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
 
 			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(true);
 			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(false);
+
+			// ======VERIFICAR========
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(false);
+
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(true);
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(false);
 		}
 
 		if (nacional == false && internacional == true && dark == false && white == true) {
@@ -1077,7 +1109,6 @@ public class Controller implements ActionListener {
 			// INPUT
 
 			// ------AGREGAR--------
-
 			vf.getVp().getInputPanel().getImgInputNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgInputNClaro().setVisible(false);
 
@@ -1085,17 +1116,78 @@ public class Controller implements ActionListener {
 			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(true);
 
 			// =====ELIMINAR========
-
 			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
 
 			vf.getVp().getInputPanel().getImgDeleteIOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteIClaro().setVisible(true);
 
-			// =====ACTUALIZAR======
+			// ======VERIFICAR========
+			vf.getVp().getInputPanel().getImgVerificarNOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarNClaro().setVisible(false);
 
+			vf.getVp().getInputPanel().getImgVerificarIOscuro().setVisible(false);
+			vf.getVp().getInputPanel().getImgVerificarIClaro().setVisible(true);
 		}
 
+	}
+
+	public void setearFieldsCRUD() {
+
+		if (agregar == true) {
+			if (nacional == true) {
+				if (agregar == true && eliminar == false && actualizar == false) {
+					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
+					vf.getVp().getInputPanel().getPasajerosField().setVisible(true);
+					vf.getVp().getInputPanel().getSalidaField().setVisible(true);
+					vf.getVp().getInputPanel().getLlegadaField().setVisible(true);
+					vf.getVp().getInputPanel().getPropio1Field().setVisible(true);
+					vf.getVp().getInputPanel().getPropio2Field().setVisible(true);
+					vf.getVp().getInputPanel().getCompaniaBtn().setVisible(true);
+				}
+			}
+
+			if (internacional == true) {
+				if (agregar == true && eliminar == false && actualizar == false) {
+					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
+					vf.getVp().getInputPanel().getPasajerosField().setVisible(true);
+					vf.getVp().getInputPanel().getSalidaField().setVisible(true);
+					vf.getVp().getInputPanel().getLlegadaField().setVisible(true);
+					vf.getVp().getInputPanel().getPropio1Field().setVisible(true);
+					vf.getVp().getInputPanel().getPropio2Field().setVisible(false);
+					vf.getVp().getInputPanel().getCompaniaBtn().setVisible(true);
+				}
+			}
+		}
+		if (eliminar == true || actualizar == true) {
+
+			if (nacional == true) {
+				if (agregar == false && eliminar == true && actualizar == false) {
+					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
+					vf.getVp().getInputPanel().getCompaniaBtn().setVisible(true);
+					vf.getVp().getInputPanel().getLlegadaField().setVisible(true);
+					vf.getVp().getInputPanel().getPasajerosField().setVisible(false);
+					vf.getVp().getInputPanel().getSalidaField().setVisible(false);
+					vf.getVp().getInputPanel().getPropio1Field().setVisible(false);
+					vf.getVp().getInputPanel().getPropio2Field().setVisible(false);
+
+				}
+			}
+
+			if (internacional == true) {
+				if (agregar == false && eliminar == true && actualizar == false) {
+					vf.getVp().getInputPanel().getDestinoField().setVisible(true);
+					vf.getVp().getInputPanel().getCompaniaBtn().setVisible(true);
+					vf.getVp().getInputPanel().getLlegadaField().setVisible(true);
+					vf.getVp().getInputPanel().getPasajerosField().setVisible(false);
+					vf.getVp().getInputPanel().getSalidaField().setVisible(false);
+					vf.getVp().getInputPanel().getPropio1Field().setVisible(false);
+					vf.getVp().getInputPanel().getPropio2Field().setVisible(false);
+
+				}
+			}
+
+		}
 	}
 
 	public void agregar() {
