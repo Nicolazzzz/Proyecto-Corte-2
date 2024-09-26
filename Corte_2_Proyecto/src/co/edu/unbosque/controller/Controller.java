@@ -1158,7 +1158,6 @@ public class Controller implements ActionListener {
 			} catch (NotValidBooleanException e) {
 				vf.getCon().mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
 			}
-
 		}
 
 		if (nacional == false && internacional == true) {
@@ -1226,7 +1225,6 @@ public class Controller implements ActionListener {
 				vf.getCon().mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
 			}
 		}
-
 	}
 
 	public void eliminar() {
@@ -1235,15 +1233,15 @@ public class Controller implements ActionListener {
 			try {
 				vf.getCon().printLine("ELIMINANDO");
 				vf.getCon().printLine("compania");
-				String companiaA = vf.getCon().readLine();
+				String companiaA = company;
 				ExceptionChecker.notValidInputException(companiaA);
 
 				vf.getCon().printLine("destino");
-				String destinoA = vf.getCon().readLine();
+				String destinoA = vf.getVp().getInputPanel().getDestinoField().getText();
 				ExceptionChecker.notValidInputException(destinoA);
 
 				vf.getCon().printLine("llegada");
-				String hLlegadaA = vf.getCon().readLine();
+				String hLlegadaA = vf.getVp().getInputPanel().getLlegadaField().getText();
 				ExceptionChecker.notValidTimeFormatException(hLlegadaA);
 
 				if (mf.getvNacionalDAO().delete(new VueloNacionalDTO(destinoA, companiaA, 0, null, null, hLlegadaA,
@@ -1268,15 +1266,15 @@ public class Controller implements ActionListener {
 			try {
 				vf.getCon().printLine("ELIMINANDO");
 				vf.getCon().printLine("compania");
-				String companiaA = vf.getCon().readLine();
+				String companiaA = company;
 				ExceptionChecker.notValidInputException(companiaA);
 
 				vf.getCon().printLine("destino");
-				String destinoA = vf.getCon().readLine();
+				String destinoA = vf.getVp().getInputPanel().getDestinoField().getText();
 				ExceptionChecker.notValidInputException(destinoA);
 
 				vf.getCon().printLine("llegada");
-				String hLlegadaA = vf.getCon().readLine();
+				String hLlegadaA = vf.getVp().getInputPanel().getLlegadaField().getText();
 				ExceptionChecker.notValidTimeFormatException(hLlegadaA);
 
 				if (mf.getvInternacionalDAO().delete(new VueloInternacionalDTO(destinoA, companiaA, 0, null, null,
@@ -1305,26 +1303,20 @@ public class Controller implements ActionListener {
 
 			try {
 				boolean validarRandom = true;
-				vf.getCon().printLine("AGREGANDO");
 
-				vf.getCon().printLine("DESTINO");
-				String destino = vf.getCon().readLine();
+				String destino = vf.getVp().getInputPanel().getDestinoField().getText();
 				ExceptionChecker.notValidInputException(destino);
 
-				vf.getCon().printLine("COMPANIA");
-				String companyInCharge = vf.getCon().readLine();
+				String companyInCharge = company;
 				ExceptionChecker.notValidInputException(companyInCharge);
 
-				vf.getCon().printLine("Pasajeros");
-				int passenger = vf.getCon().readInt();
-				vf.getCon().burnLine();
+				int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
+				ExceptionChecker.negativeIntNumberException(passenger);
 
-				vf.getCon().printLine("hora salida");
-				String departureTime = vf.getCon().readLine();
+				String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
 				ExceptionChecker.notValidTimeFormatException(departureTime);
 
-				vf.getCon().printLine("hora llegada");
-				String arrivalTime = vf.getCon().readLine();
+				String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
 				ExceptionChecker.notValidTimeFormatException(arrivalTime);
 
 				if (!verificarTiempo(departureTime, arrivalTime)) {
@@ -1333,12 +1325,12 @@ public class Controller implements ActionListener {
 					horaInvalida = false;
 				}
 
-				vf.getCon().printLine("es helice");
-				boolean esHelice = vf.getCon().readBoolean();
+				String helice = vf.getVp().getInputPanel().getPropio1Field().getText();
+				boolean esHelice = vf.getCon().leerBoolean(helice);
 				ExceptionChecker.notValidBooleanException(esHelice);
 
-				vf.getCon().printLine("es turbina");
-				boolean esTurbina = vf.getCon().readBoolean();
+				String turbina = vf.getVp().getInputPanel().getPropio2Field().getText();
+				boolean esTurbina = vf.getCon().leerBoolean(turbina);
 				ExceptionChecker.notValidBooleanException(esTurbina);
 
 				String captain = mf.getComplement().randomizer();
@@ -1366,6 +1358,9 @@ public class Controller implements ActionListener {
 				} else {
 					vf.getCon().mostrarAlerta("NO SE PUDO CREAR");
 				}
+
+			} catch (NegativeIntNumberException e) {
+				vf.getCon().mostrarError("No puede ingresar numeros negativos");
 			} catch (StringIndexOutOfBoundsException e) {
 				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
 			} catch (NotValidInputException e) {
@@ -1383,26 +1378,20 @@ public class Controller implements ActionListener {
 		if (nacional == false && internacional == true) {
 			try {
 				boolean validarRandom = true;
-				vf.getCon().printLine("AGREGANDO");
 
-				vf.getCon().printLine("DESTINO");
-				String destino = vf.getCon().readLine();
+				String destino = vf.getVp().getInputPanel().getDestinoField().getText();
 				ExceptionChecker.notValidInputException(destino);
 
-				vf.getCon().printLine("COMPANIA");
-				String companyInCharge = vf.getCon().readLine();
+				String companyInCharge = company;
 				ExceptionChecker.notValidInputException(companyInCharge);
 
-				vf.getCon().printLine("Pasajeros");
-				int passenger = vf.getCon().readInt();
-				vf.getCon().burnLine();
+				int passenger = Integer.parseInt(vf.getVp().getInputPanel().getPasajerosField().getText());
+				ExceptionChecker.negativeIntNumberException(passenger);
 
-				vf.getCon().printLine("hora salida");
-				String departureTime = vf.getCon().readLine();
+				String departureTime = vf.getVp().getInputPanel().getSalidaField().getText();
 				ExceptionChecker.notValidTimeFormatException(departureTime);
 
-				vf.getCon().printLine("hora llegada");
-				String arrivalTime = vf.getCon().readLine();
+				String arrivalTime = vf.getVp().getInputPanel().getLlegadaField().getText();
 				ExceptionChecker.notValidTimeFormatException(arrivalTime);
 
 				if (!verificarTiempo(departureTime, arrivalTime)) {
@@ -1410,8 +1399,9 @@ public class Controller implements ActionListener {
 				} else {
 					horaInvalida = false;
 				}
-				vf.getCon().printLine("Requiere VISA");
-				boolean requiresVisa = vf.getCon().readBoolean();
+
+				String visa = vf.getVp().getInputPanel().getPropio1Field().getText();
+				boolean requiresVisa = vf.getCon().leerBoolean(visa);
 				ExceptionChecker.notValidBooleanException(requiresVisa);
 
 				String captain = mf.getComplement().randomizer();
@@ -1435,6 +1425,8 @@ public class Controller implements ActionListener {
 				} else {
 					vf.getCon().mostrarAlerta("NO SE PUDO CREAR");
 				}
+			} catch (NegativeIntNumberException e) {
+				vf.getCon().mostrarError("No puede ingresar numeros negativos");
 			} catch (StringIndexOutOfBoundsException e) {
 				vf.getCon().mostrarError("Formato de hora no valido, recuerde hh:mm (24:00)");
 			} catch (NotValidInputException e) {
