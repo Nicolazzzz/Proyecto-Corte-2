@@ -56,11 +56,13 @@ public class UserPanel extends JPanel {
 		volverBtn.setOpaque(false);
 		volverBtn.setBounds(900, 453, 132, 132);
 		volverBtn.setActionCommand("VOLVERUSER");
+		volverBtn.setToolTipText("VOLVER AL MENÚ PRINCIPAL");
 
 		buscarBtn = new JButton("BUSCAR");
 		buscarBtn.setOpaque(false);
 		buscarBtn.setBounds(480, 485, 320, 68);
 		buscarBtn.setActionCommand("BUSCAR");
+		buscarBtn.setToolTipText("BUSCAR VUELO");
 
 		add(destinoField);
 		add(imgDark);

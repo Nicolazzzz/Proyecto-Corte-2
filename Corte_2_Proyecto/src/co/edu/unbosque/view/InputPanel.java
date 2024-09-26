@@ -201,7 +201,7 @@ public class InputPanel extends JPanel {
 		volverBtn.setOpaque(false);
 		volverBtn.setBounds(1020, 252, 130, 130);
 		volverBtn.setActionCommand("VOLVERINPUT");
-		volverBtn.setToolTipText("VOLVER AL MENÚ");
+		volverBtn.setToolTipText("VOLVER AL MENÚ DE GESTIÓN");
 
 		saveBtn = new JButton("Guardar");
 		saveBtn.setOpaque(false);

@@ -54,22 +54,26 @@ public class ManagePanel extends JPanel {
 		internacionalBtn.setOpaque(false);
 		internacionalBtn.setBounds(480, 433, 321, 71);
 		internacionalBtn.setActionCommand("INTERNACIONAL");
+		internacionalBtn.setToolTipText("ADMINISTRAR VUELOS INTERNACIONALES");
 
 		nacionalBtn = new JButton("NACIONAL BTN");
 		nacionalBtn.setOpaque(false);
 		nacionalBtn.setBounds(480, 324, 321, 71);
 		nacionalBtn.setActionCommand("NACIONAL");
+		nacionalBtn.setToolTipText("ADMINISTRAR VUELOS NACIONALES");
 
 		generarBtn = new JButton("GENERAR FILE");
 		generarBtn.setOpaque(false);
 		generarBtn.setBounds(480, 542, 321, 71);
 		generarBtn.setActionCommand("GENERARFILE");
+		generarBtn.setToolTipText("GENERAR ARCHIVO DE VUELOS");
 
 		volverBtn = new JButton("VOLVER BUTTON");
 		volverBtn.setOpaque(false);
 		volverBtn.setBounds(848, 533, 94, 94);
 		volverBtn.setToolTipText("PUTO EL QUE LO LEA");
 		volverBtn.setActionCommand("VOLVERADMIN");
+		volverBtn.setToolTipText("VOLVER AL MENÚ PRINCIPAL");
 
 		add(imgWhite);
 		add(imgDark);
