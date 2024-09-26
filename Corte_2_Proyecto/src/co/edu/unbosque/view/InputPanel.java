@@ -1,7 +1,6 @@
 package co.edu.unbosque.view;
 
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -35,6 +34,7 @@ public class InputPanel extends JPanel {
 		// <<DISCLAMER>> imgCompania FALTA, no tengo idea de que hacerle, está mas abajo
 
 		// IMAGENES--------------------------------------
+		
 		imgInputIOscuro = new JLabel();
 		ImageIcon inputO = new ImageIcon("src/media/InputInterOscuro.png");
 		Image inputI = inputO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -63,6 +63,8 @@ public class InputPanel extends JPanel {
 		imgInputNClaro.setBounds(0, 0, 1270, 720);
 		imgInputNClaro.setVisible(false);
 
+		// ELIMINAR------------------------------
+		
 		imgDeleteNClaro = new JLabel();
 		ImageIcon inputDNC = new ImageIcon("src/media/EliminarNacionalClaro.png");
 		Image inputNC = inputDNC.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
@@ -91,181 +93,161 @@ public class InputPanel extends JPanel {
 		imgDeleteIClaro.setBounds(0, 0, 1270, 720);
 		imgDeleteIClaro.setVisible(false);
 
-// VERIFICAR <-----------AQUI ES DONDE FALTAN IMAGENES
-//		
-//		
-//		
-//		
+		// VERIFICAR ------------------------------
 
 		imgVerificarNOscuro = new JLabel();
-		ImageIcon inputVNO = new ImageIcon("src/media/EliminarInterOscuro.png");
+		ImageIcon inputVNO = new ImageIcon("src/media/VerificarNacionalOscuro.png");
 		Image inputvNO = inputVNO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgVerificarNOscuro.setIcon(new ImageIcon(inputvNO));
 		imgVerificarNOscuro.setBounds(0, 0, 1270, 720);
 		imgVerificarNOscuro.setVisible(false);
 
 		imgVerificarNClaro = new JLabel();
-		ImageIcon inputVNC = new ImageIcon("src/media/EliminarInterOscuro.png");
+		ImageIcon inputVNC = new ImageIcon("src/media/VerificarNacionalClaro.png");
 		Image inputvNC = inputVNC.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgVerificarNClaro.setIcon(new ImageIcon(inputvNC));
 		imgVerificarNClaro.setBounds(0, 0, 1270, 720);
 		imgVerificarNClaro.setVisible(false);
 
 		imgVerificarIOscuro = new JLabel();
-		ImageIcon inputVIO = new ImageIcon("src/media/EliminarInterOscuro.png");
+		ImageIcon inputVIO = new ImageIcon("src/media/VerificarInterOscuro.png");
 		Image inputvIO = inputVIO.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgVerificarIOscuro.setIcon(new ImageIcon(inputvIO));
 		imgVerificarIOscuro.setBounds(0, 0, 1270, 720);
 		imgVerificarIOscuro.setVisible(false);
 
 		imgVerificarIClaro = new JLabel();
-		ImageIcon inputVIC = new ImageIcon("src/media/EliminarInterOscuro.png");
+		ImageIcon inputVIC = new ImageIcon("src/media/VerificarInterClaro.png");
 		Image inputvIC = inputVIC.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
 		imgVerificarIClaro.setIcon(new ImageIcon(inputvIC));
 		imgVerificarIClaro.setBounds(0, 0, 1270, 720);
 		imgVerificarIClaro.setVisible(false);
 
+		// LOGOS AEROLINEAS --------------------------
+		
 		imgAvianca = new JLabel();
 		ImageIcon inputA = new ImageIcon("src/logo/logoavianca.png");
-		Image inputIA = inputA.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputIA = inputA.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgAvianca.setIcon(new ImageIcon(inputIA));
-		imgAvianca.setBounds(0, 0, 1270, 720);
+		imgAvianca.setBounds(510, 285, 430, 150);
 		imgAvianca.setVisible(false);
 
 		imgLatam = new JLabel();
 		ImageIcon inputL = new ImageIcon("src/logo/latam.png");
-		Image inputIL = inputL.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputIL = inputL.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgLatam.setIcon(new ImageIcon(inputIL));
-		imgLatam.setBounds(0, 0, 1270, 720);
+		imgLatam.setBounds(510, 285, 430, 150);
 		imgLatam.setVisible(false);
 
 		imgWingo = new JLabel();
 		ImageIcon inputW = new ImageIcon("src/logo/wingo.png");
-		Image inputIW = inputW.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputIW = inputW.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgWingo.setIcon(new ImageIcon(inputIW));
-		imgWingo.setBounds(0, 0, 1270, 720);
+		imgWingo.setBounds(510, 285, 430, 150);
 		imgWingo.setVisible(false);
 
 		imgSatena = new JLabel();
 		ImageIcon inputS = new ImageIcon("src/logo/Satena.png");
-		Image inputIS = inputS.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputIS = inputS.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgSatena.setIcon(new ImageIcon(inputIS));
-		imgSatena.setBounds(0, 0, 1270, 720);
+		imgSatena.setBounds(510, 285, 430, 150);
 		imgSatena.setVisible(false);
 
 		imgClic = new JLabel();
 		ImageIcon inputCc = new ImageIcon("src/logo/clic.png");
-		Image inputICc = inputCc.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputICc = inputCc.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgClic.setIcon(new ImageIcon(inputICc));
-		imgClic.setBounds(0, 0, 1270, 720);
+		imgClic.setBounds(510, 285, 430, 150);
 		imgClic.setVisible(false);
 
 		imgCopaA = new JLabel();
 		ImageIcon inputa = new ImageIcon("src/logo/copaAirlines.png");
-		Image inputaa = inputa.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputaa = inputa.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgCopaA.setIcon(new ImageIcon(inputaa));
-		imgCopaA.setBounds(0, 0, 1270, 720);
+		imgCopaA.setBounds(510, 285, 430, 150);
 		imgCopaA.setVisible(false);
 
 		imgAmericanA = new JLabel();
 		ImageIcon inputas = new ImageIcon("src/logo/americanAirlines.png");
-		Image inputaas = inputas.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputaas = inputas.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgAmericanA.setIcon(new ImageIcon(inputaas));
-		imgAmericanA.setBounds(0, 0, 1270, 720);
+		imgAmericanA.setBounds(510, 285, 430, 150);
 		imgAmericanA.setVisible(false);
 
 		imgIberia = new JLabel();
 		ImageIcon inputxd = new ImageIcon("src/logo/iberiaAirlines.png");
-		Image inputxxd = inputxd.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputxxd = inputxd.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgIberia.setIcon(new ImageIcon(inputxxd));
-		imgIberia.setBounds(0, 0, 1270, 720);
+		imgIberia.setBounds(510, 285, 430, 150);
 		imgIberia.setVisible(false);
 
 		imgAirF = new JLabel();
 		ImageIcon inputt = new ImageIcon("src/logo/airFrance.png");
-		Image inputs = inputt.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputs = inputt.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgAirF.setIcon(new ImageIcon(inputs));
-		imgAirF.setBounds(0, 0, 1270, 720);
+		imgAirF.setBounds(510, 285, 430, 150);
 		imgAirF.setVisible(false);
 
 		imgDeltaA = new JLabel();
 		ImageIcon inputtx = new ImageIcon("src/logo/deltaAirlines.png");
-		Image inputsx = inputtx.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
+		Image inputsx = inputtx.getImage().getScaledInstance(430, 150, Image.SCALE_SMOOTH);
 		imgDeltaA.setIcon(new ImageIcon(inputsx));
-		imgDeltaA.setBounds(0, 0, 1270, 720);
+		imgDeltaA.setBounds(510, 285, 430, 150);	
 		imgDeltaA.setVisible(false);
-
-		imgCompania = new JLabel();// <--- AQUI ESTÁ
-		ImageIcon inputCom = new ImageIcon("src/logo/deltaAirlines.png");
-		Image inputcom = inputCom.getImage().getScaledInstance(1270, 720, Image.SCALE_SMOOTH);
-		imgCompania.setIcon(new ImageIcon(inputcom));
-		imgCompania.setBounds(0, 0, 1270, 720);
-		imgCompania.setVisible(false);
 
 		// BOTONES--------------------------------------
 
 		volverBtn = new JButton("Volver");
 		volverBtn.setOpaque(false);
-		volverBtn.setBounds(30, 30, 300, 400);
+		volverBtn.setBounds(1020, 252, 130, 130);
 		volverBtn.setActionCommand("VOLVERINPUT");
 		volverBtn.setToolTipText("VOLVER AL MENÚ");
 
 		saveBtn = new JButton("Guardar");
 		saveBtn.setOpaque(false);
-		saveBtn.setBounds(30, 30, 300, 300);
+		saveBtn.setBounds(1020, 465, 130, 130);
 		saveBtn.setActionCommand("GUARDARINPUT");
 		saveBtn.setToolTipText("GUARDAR SELECCIÓN");
 
 		companiaBtn = new JButton("Compañia");
 		companiaBtn.setOpaque(false);
-		companiaBtn.setBounds(30, 30, 300, 200);
+		companiaBtn.setBounds(76, 315, 400, 52);
 		companiaBtn.setActionCommand("COMPANIAINPUT");
 		companiaBtn.setToolTipText("SELECCIONAR COMPAÑIA ENCARGADA DEL VUELO");
 
 		// ETIQUETAS-------------------------------------
+		
 		destinoField = new JTextField();
-		destinoField.setBounds(248, 255, 300, 60);
+		destinoField.setBounds(179, 234, 291, 40);
 		destinoField.setOpaque(true);
-		destinoField.setVisible(false);
+		destinoField.setVisible(true);
 
 		pasajerosField = new JTextField();
-		pasajerosField.setBounds(248, 255, 300, 60);
+		pasajerosField.setBounds(270, 403, 190, 40);
 		pasajerosField.setOpaque(true);
-		pasajerosField.setVisible(false);
+		pasajerosField.setVisible(true);
 
 		salidaField = new JTextField();
-		salidaField.setBounds(248, 255, 300, 60);
+		salidaField.setBounds(260, 490, 205, 40);
 		salidaField.setOpaque(true);
-		salidaField.setVisible(false);
+		salidaField.setVisible(true);
 
 		llegadaField = new JTextField();
-		llegadaField.setBounds(248, 255, 300, 60);
+		llegadaField.setBounds(280, 578, 185, 40);
 		llegadaField.setOpaque(true);
-		llegadaField.setVisible(false);
-
+		llegadaField.setVisible(true);
+		
 		propio1Field = new JTextField();
-		propio1Field.setBounds(248, 255, 300, 60);
+		propio1Field.setBounds(740, 490, 200, 40);
 		propio1Field.setOpaque(true);
-		propio1Field.setVisible(false);
-
+		propio1Field.setVisible(true);
+		
 		propio2Field = new JTextField();
-		propio2Field.setBounds(248, 255, 300, 60);
+		propio2Field.setBounds(695, 578, 250, 40);
 		propio2Field.setOpaque(true);
-		propio2Field.setVisible(false);
-
-		add(imgInputIOscuro);
-		add(imgInputIClaro);
-		add(imgInputNOscuro);
-		add(imgInputNClaro);
-		add(imgDeleteNClaro);
-		add(imgDeleteNOscuro);
-		add(imgDeleteIClaro);
-		add(imgDeleteIOscuro);
-		add(imgCompania);
-		add(imgVerificarIOscuro);
-		add(imgVerificarIClaro);
-		add(imgVerificarNOscuro);
-		add(imgVerificarNClaro);
+		propio2Field.setVisible(true);
+		
+		add(imgDeltaA);
 		add(imgAvianca);
 		add(imgLatam);
 		add(imgWingo);
@@ -275,10 +257,25 @@ public class InputPanel extends JPanel {
 		add(imgAmericanA);
 		add(imgIberia);
 		add(imgAirF);
-		add(imgDeltaA);
 		add(volverBtn);
 		add(saveBtn);
 		add(companiaBtn);
+		add(destinoField);
+		add(pasajerosField);
+		add(salidaField);
+		add(llegadaField);
+		add(imgInputIOscuro);
+		add(imgInputIClaro);
+		add(imgInputNOscuro);
+		add(imgInputNClaro);
+		add(imgDeleteNClaro);
+		add(imgDeleteNOscuro);
+		add(imgDeleteIClaro);
+		add(imgDeleteIOscuro);
+		add(imgVerificarIOscuro);
+		add(imgVerificarIClaro);
+		add(imgVerificarNOscuro);
+		add(imgVerificarNClaro);
 		add(destinoField);
 		add(pasajerosField);
 		add(salidaField);
