@@ -104,7 +104,7 @@ public class CrudPanel extends JPanel {
 		add(showBtn);
 		add(updateBtn);
 		add(volverBtn);
-	}
+	} //
 
 	/**
 	 * Gets the button to add a new entry.
