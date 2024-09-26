@@ -1,21 +1,36 @@
+
 package co.edu.unbosque.view;
 
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * CrudPanel is a JPanel that manages a CRUD (Create, Read, Update, Delete)
+ * interface. It contains buttons to perform the CRUD operations and background
+ * images related to international and national options, in both light and dark
+ * themes.
+ * 
+ * @author Santiago
+ * @version 1.0
+ */
 public class CrudPanel extends JPanel {
 
 	/**
-	 * 
+	 * Serialization ID for this class.
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private JButton addBtn, deleteBtn, showBtn, updateBtn, volverBtn;
 	private JLabel imgInterCrudClaro, imgInterCrudOscuro, imgNacionalCrudOscuro, imgNacionalCrudClaro;
 
+	/**
+	 * Constructs a CrudPanel and initializes its buttons and background images for
+	 * both international and national flight themes. The layout is set to null and
+	 * the panel is made visible.
+	 */
 	public CrudPanel() {
 
 		setSize(1280, 720);
@@ -84,10 +99,11 @@ public class CrudPanel extends JPanel {
 		add(showBtn);
 		add(updateBtn);
 		add(volverBtn);
-
 	}
 
 	/**
+	 * Gets the button to add a new entry.
+	 * 
 	 * @return the addBtn
 	 */
 	public JButton getAddBtn() {
@@ -95,6 +111,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the button to add a new entry.
+	 * 
 	 * @param addBtn the addBtn to set
 	 */
 	public void setAddBtn(JButton addBtn) {
@@ -102,6 +120,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the button to delete an entry.
+	 * 
 	 * @return the deleteBtn
 	 */
 	public JButton getDeleteBtn() {
@@ -109,6 +129,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the button to delete an entry.
+	 * 
 	 * @param deleteBtn the deleteBtn to set
 	 */
 	public void setDeleteBtn(JButton deleteBtn) {
@@ -116,6 +138,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the button to show an entry.
+	 * 
 	 * @return the showBtn
 	 */
 	public JButton getShowBtn() {
@@ -123,6 +147,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the button to show an entry.
+	 * 
 	 * @param showBtn the showBtn to set
 	 */
 	public void setShowBtn(JButton showBtn) {
@@ -130,6 +156,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the button to update an entry.
+	 * 
 	 * @return the updateBtn
 	 */
 	public JButton getUpdateBtn() {
@@ -137,6 +165,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the button to update an entry.
+	 * 
 	 * @param updateBtn the updateBtn to set
 	 */
 	public void setUpdateBtn(JButton updateBtn) {
@@ -144,6 +174,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the button to go back.
+	 * 
 	 * @return the volverBtn
 	 */
 	public JButton getVolverBtn() {
@@ -151,6 +183,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the button to go back.
+	 * 
 	 * @param volverBtn the volverBtn to set
 	 */
 	public void setVolverBtn(JButton volverBtn) {
@@ -158,6 +192,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the label for the international flight CRUD panel in light mode.
+	 * 
 	 * @return the imgInterCrudClaro
 	 */
 	public JLabel getImgInterCrudClaro() {
@@ -165,6 +201,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the label for the international flight CRUD panel in light mode.
+	 * 
 	 * @param imgInterCrudClaro the imgInterCrudClaro to set
 	 */
 	public void setImgInterCrudClaro(JLabel imgInterCrudClaro) {
@@ -172,6 +210,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the label for the international flight CRUD panel in dark mode.
+	 * 
 	 * @return the imgInterCrudOscuro
 	 */
 	public JLabel getImgInterCrudOscuro() {
@@ -179,6 +219,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the label for the international flight CRUD panel in dark mode.
+	 * 
 	 * @param imgInterCrudOscuro the imgInterCrudOscuro to set
 	 */
 	public void setImgInterCrudOscuro(JLabel imgInterCrudOscuro) {
@@ -186,6 +228,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the label for the national flight CRUD panel in dark mode.
+	 * 
 	 * @return the imgNacionalCrudOscuro
 	 */
 	public JLabel getImgNacionalCrudOscuro() {
@@ -193,6 +237,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the label for the national flight CRUD panel in dark mode.
+	 * 
 	 * @param imgNacionalCrudOscuro the imgNacionalCrudOscuro to set
 	 */
 	public void setImgNacionalCrudOscuro(JLabel imgNacionalCrudOscuro) {
@@ -200,6 +246,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the label for the national flight CRUD panel in light mode.
+	 * 
 	 * @return the imgNacionalCrudClaro
 	 */
 	public JLabel getImgNacionalCrudClaro() {
@@ -207,6 +255,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Sets the label for the national flight CRUD panel in light mode.
+	 * 
 	 * @param imgNacionalCrudClaro the imgNacionalCrudClaro to set
 	 */
 	public void setImgNacionalCrudClaro(JLabel imgNacionalCrudClaro) {
@@ -214,6 +264,8 @@ public class CrudPanel extends JPanel {
 	}
 
 	/**
+	 * Gets the serialization version UID.
+	 * 
 	 * @return the serialversionuid
 	 */
 	public static long getSerialversionuid() {

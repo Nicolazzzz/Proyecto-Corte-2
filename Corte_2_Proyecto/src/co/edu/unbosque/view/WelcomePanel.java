@@ -1,3 +1,4 @@
+
 package co.edu.unbosque.view;
 
 import java.awt.Image;
@@ -6,17 +7,28 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * WelcomePanel is a JPanel that represents the welcome screen of the
+ * application. It provides options for the user to navigate to the admin or
+ * user sections, and a button to change the background theme between light and
+ * dark modes.
+ * 
+ * @author Santiago
+ * @version 1.0
+ */
 public class WelcomePanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+
 	private JLabel imgDark, imgWhite;
 	private JButton adminBtn, userBtn, backgroungBtn;
 
+	/**
+	 * Constructs the WelcomePanel, setting up its layout, background images, and
+	 * buttons for interacting with the application.
+	 */
 	public WelcomePanel() {
-		
+
 		setSize(1280, 720);
 		setLayout(null);
 		setVisible(true);
@@ -54,27 +66,30 @@ public class WelcomePanel extends JPanel {
 		add(imgWhite);
 		add(adminBtn);
 		add(userBtn);
-		add(backgroungBtn); 
-			
-		}
+		add(backgroungBtn);
+	}
 
 	/**
+	 * Gets the dark-themed background image.
+	 * 
 	 * @return the imgDark
 	 */
-
 	public JLabel getImgDark() {
 		return imgDark;
 	}
 
 	/**
+	 * Sets the dark-themed background image.
+	 * 
 	 * @param imgDark the imgDark to set
 	 */
-
 	public void setImgDark(JLabel imgDark) {
 		this.imgDark = imgDark;
 	}
 
 	/**
+	 * Gets the light-themed background image.
+	 * 
 	 * @return the imgWhite
 	 */
 	public JLabel getImgWhite() {
@@ -82,6 +97,8 @@ public class WelcomePanel extends JPanel {
 	}
 
 	/**
+	 * Sets the light-themed background image.
+	 * 
 	 * @param imgWhite the imgWhite to set
 	 */
 	public void setImgWhite(JLabel imgWhite) {
@@ -89,6 +106,8 @@ public class WelcomePanel extends JPanel {
 	}
 
 	/**
+	 * Gets the admin button.
+	 * 
 	 * @return the adminBtn
 	 */
 	public JButton getAdminBtn() {
@@ -96,6 +115,8 @@ public class WelcomePanel extends JPanel {
 	}
 
 	/**
+	 * Sets the admin button.
+	 * 
 	 * @param adminBtn the adminBtn to set
 	 */
 	public void setAdminBtn(JButton adminBtn) {
@@ -103,6 +124,8 @@ public class WelcomePanel extends JPanel {
 	}
 
 	/**
+	 * Gets the user button.
+	 * 
 	 * @return the userBtn
 	 */
 	public JButton getUserBtn() {
@@ -110,6 +133,8 @@ public class WelcomePanel extends JPanel {
 	}
 
 	/**
+	 * Sets the user button.
+	 * 
 	 * @param userBtn the userBtn to set
 	 */
 	public void setUserBtn(JButton userBtn) {
@@ -117,6 +142,8 @@ public class WelcomePanel extends JPanel {
 	}
 
 	/**
+	 * Gets the button used to change the background theme.
+	 * 
 	 * @return the backgroungBtn
 	 */
 	public JButton getBackgroungBtn() {
@@ -124,10 +151,11 @@ public class WelcomePanel extends JPanel {
 	}
 
 	/**
+	 * Sets the button to change the background theme.
+	 * 
 	 * @param backgroungBtn the backgroungBtn to set
 	 */
 	public void setBackgroungBtn(JButton backgroungBtn) {
 		this.backgroungBtn = backgroungBtn;
 	}
-
 }
