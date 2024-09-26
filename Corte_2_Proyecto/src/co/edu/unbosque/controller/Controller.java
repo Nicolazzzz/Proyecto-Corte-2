@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import co.edu.unbosque.model.ModelFacade;
-import co.edu.unbosque.model.Piloto;
 import co.edu.unbosque.model.VueloInternacional;
 import co.edu.unbosque.model.VueloInternacionalDTO;
 import co.edu.unbosque.model.VueloNacional;
@@ -16,7 +15,6 @@ import co.edu.unbosque.util.exception.NegativeIntNumberException;
 import co.edu.unbosque.util.exception.NotValidBooleanException;
 import co.edu.unbosque.util.exception.NotValidInputException;
 import co.edu.unbosque.util.exception.NotValidTimeFormatException;
-import co.edu.unbosque.view.VentanaPrincipal;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller implements ActionListener {
@@ -43,6 +41,7 @@ public class Controller implements ActionListener {
 	private boolean eliminar = false;
 
 	private boolean verificado = false;
+	private boolean verificarClick = false;
 
 	public Controller() {
 		vf = new ViewFacade();
@@ -390,11 +389,9 @@ public class Controller implements ActionListener {
 				eliminar();
 				break;
 			}
-			if (actualizar == true) {
-				VerificarActualizar();
-				if (verificado == false) {
-					break;
-				}
+
+			if (verificarClick == true) {
+
 				if (verificado == true) {
 					agregar = true;
 					actualizar = false;
@@ -542,8 +539,24 @@ public class Controller implements ActionListener {
 									.mostrarError("En campos de respuesta para pregunta SI / NO, conteste con si o no");
 						}
 					}
-
+					verificarClick = false;
 					break;
+				}
+			}
+
+			if (verificarClick == false) {
+				verificarClick = true;
+			}
+			if (actualizar == true) {
+				VerificarActualizar();
+				if (verificado == false) {
+					break;
+				}
+				if (verificado == true) {
+					agregar = true;
+					actualizar = false;
+					setearImgTaller();
+					setearFieldsCRUD();
 				}
 				cleanFields();
 				cleanImgCompany();
