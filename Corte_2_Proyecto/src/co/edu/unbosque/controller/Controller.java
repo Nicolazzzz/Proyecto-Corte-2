@@ -53,6 +53,19 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Asigna los ActionListeners a los botones de los diferentes paneles de la interfaz de usuario.
+	 * 
+	 * Este método se encarga de vincular cada botón de la interfaz gráfica con un ActionListener
+	 * que capturará las acciones del usuario. Además, establece un ActionCommand para identificar
+	 * qué botón ha sido presionado, facilitando la gestión de los eventos dentro del controlador.
+	 * 
+	 * Cada botón tiene asociado su propio ActionCommand, que será utilizado en el método que gestiona
+	 * las acciones para identificar qué acción se debe realizar según el botón presionado.
+	 * 
+	 * @author: Mario Rodríguez
+	 * @Versión: 1.0
+	 */
 	public void asignarLectores() {
 		// WELCOME
 		vf.getVp().getWelcomePanel().getAdminBtn().addActionListener(this);
@@ -112,6 +125,17 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Gestiona los eventos de los botones de la interfaz gráfica según el ActionCommand asociado.
+	 * 
+	 * Este método procesa las acciones del usuario en la interfaz gráfica a través de un 
+	 * ActionEvent y ejecuta diferentes operaciones según el botón presionado.
+	 * 
+	 * @param e el evento de acción que contiene el comando del botón que fue presionado.
+	 * 
+	 * Autor: Mario Rodríguez
+	 * Versión: 1.0
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
@@ -258,6 +282,20 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Muestra el menú principal del sistema y gestiona las opciones seleccionadas por el usuario.
+	 * 
+	 * Este método despliega un menú con varias opciones relacionadas con vuelos nacionales,
+	 * internacionales, generación de archivos y búsqueda de vuelos. Se ejecuta en un bucle
+	 * principal que permite al usuario navegar entre las opciones hasta que decide salir.
+	 * 
+	 * @see #mostrarMenuNacional()
+	 * @see #mostrarMenuInternacional()
+	 * 
+	 * Autor: Mario Rodríguez
+	 * Versión: 1.0
+	 */
+
 	public void mostrarMenuPrincipal() {
 
 		mainloop: while (true) {
@@ -308,6 +346,26 @@ public class Controller implements ActionListener {
 		}
 
 	}
+
+	/**
+	 * Muestra el menú de opciones para gestionar vuelos nacionales y ejecuta la acción seleccionada por el usuario.
+	 * 
+	 * Este método permite realizar operaciones CRUD sobre los vuelos nacionales mediante un menú interactivo.
+	 * El menú se repite en un bucle hasta que el usuario selecciona la opción de salir (opción 5).
+	 * Cada operación se maneja mediante un <code>switch</code>, permitiendo la interacción con los vuelos 
+	 * almacenados a través de la interfaz de usuario.
+	 * 
+	 * @throws NotValidInputException Si se ingresan datos no válidos en campos que no aceptan caracteres especiales o números.
+	 * @throws NotValidTimeFormatException Si el formato de la hora no es correcto (formato hh:mm).
+	 * @throws NotValidBooleanException Si no se responde correctamente en los campos de tipo booleano (sí/no).
+	 * 
+	 * @see #verificarTiempo(String, String)
+	 * @see #calcularGasHelice(int, String, String)
+	 * @see #calcularGasTurbina(int, String, String)
+	 * 
+	 * Autor: Mario Rodríguez
+	 * Versión: 1.0
+	 */
 
 	public void mostrarMenuNacional() {
 		nacionloop: while (true) {
@@ -575,6 +633,26 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Muestra el menú de opciones para gestionar vuelos internacionales y ejecuta la acción seleccionada por el usuario.
+	 * 
+	 * Este método permite realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre los vuelos internacionales
+	 * mediante un menú interactivo. El menú se ejecuta en un bucle hasta que el usuario selecciona la opción de salir (opción 5).
+	 * 
+	 * En cada operación, se validan los datos ingresados, como el formato de la hora, los nombres de destinos y compañías, 
+	 * y las respuestas booleanas, a través de excepciones personalizadas.
+	 * 
+	 * @throws NotValidInputException Si se ingresan caracteres especiales o números en campos de texto donde no son permitidos.
+	 * @throws NotValidTimeFormatException Si el formato de la hora es incorrecto (debe ser hh:mm en formato 24 horas).
+	 * @throws NotValidBooleanException Si la respuesta a una pregunta booleana (sí/no) no es válida.
+	 * 
+	 * @see #verificarTiempo(String, String)
+	 * @see #calcularGasTurbina(int, String, String)
+	 * @see #verificarRandom(String, String, String, String)
+	 * 
+	 * Autor: Mario Rodríguez
+	 * Versión: 1.0
+	 */
 	public void mostrarMenuInternacional() {
 		interloop: while (true) {
 
@@ -823,6 +901,26 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Calcula la cantidad de gasolina necesaria para un vuelo basado en el número de pasajeros y la duración del vuelo.
+	 * 
+	 * Este método determina el consumo de combustible en litros por hora de un avión de hélice, considerando dos 
+	 * tipos de aviones con diferentes capacidades de pasajeros. El cálculo se realiza en base a la duración del vuelo 
+	 * calculada a partir de la hora de salida y la hora de llegada, y se añade un 20% adicional como reserva de 
+	 * combustible.
+	 * 
+	 * @param pasajeros Número de pasajeros del vuelo, que afecta al tipo de avión utilizado y su consumo de combustible.
+	 * @param horaSalida Hora de salida del vuelo en formato "hh:mm".
+	 * @param horaLlegada Hora de llegada del vuelo en formato "hh:mm".
+	 * @return La cantidad de gasolina necesaria en litros, incluyendo la reserva.
+	 * 
+	 * @throws NumberFormatException Si el formato de las horas no es válido y no puede ser convertido a entero.
+	 * 
+	 * @see #verificarTiempo(String, String)
+	 * 
+	 * Autor: Mario Rodríguez
+	 * Versión: 1.0
+	 */
 	public double calcularGasHelice(int pasajeros, String horaSalida, String horaLlegada) {
 
 		int horaResultante = 0;
@@ -859,6 +957,26 @@ public class Controller implements ActionListener {
 		return gas;
 	}
 
+	/**
+	 * Calcula la cantidad de gasolina necesaria para un vuelo basado en el número de pasajeros y la duración del vuelo.
+	 * 
+	 * Este método determina el consumo de combustible en litros por hora de un avión de turbina, considerando 
+	 * diferentes tipos de aviones según la capacidad de pasajeros. El cálculo se realiza en base a la duración 
+	 * del vuelo calculada a partir de la hora de salida y la hora de llegada, y se añade un 20% adicional como 
+	 * reserva de combustible.
+	 * 
+	 * @param pasajeros Número de pasajeros del vuelo, que afecta al tipo de avión utilizado y su consumo de combustible.
+	 * @param horaSalida Hora de salida del vuelo en formato "hh:mm".
+	 * @param horaLlegada Hora de llegada del vuelo en formato "hh:mm".
+	 * @return La cantidad de gasolina necesaria en litros, incluyendo la reserva.
+	 * 
+	 * @throws NumberFormatException Si el formato de las horas no es válido y no puede ser convertido a entero.
+	 * 
+	 * @see #verificarTiempo(String, String)
+	 * 
+	 * Autor: Mario Rodríguez
+	 * Versión: 1.0
+	 */
 	public double calcularGasTurbina(int pasajeros, String horaSalida, String horaLlegada) {
 
 		int horaResultante = 0;
@@ -902,6 +1020,28 @@ public class Controller implements ActionListener {
 		return gas;
 	}
 
+	/**
+	 * Verifica la validez de los datos de la tripulación (capitán y segundo al mando) 
+	 * en relación con la hora de salida y la hora de llegada, asegurándose de que no 
+	 * haya conflictos en los registros de vuelos internacionales y nacionales.
+	 * 
+	 * Este método consulta dos diferentes DAO (Data Access Object) para validar que 
+	 * los nombres del capitán y del segundo al mando no están ya asignados a otro vuelo 
+	 * que tenga el mismo horario. Si se encuentra algún conflicto, el método retornará 
+	 * falso; de lo contrario, retornará verdadero.
+	 * 
+	 * @param captain Nombre del capitán del vuelo.
+	 * @param seconOnCommand Nombre del segundo al mando del vuelo.
+	 * @param horaSalida Hora de salida del vuelo en formato "hh:mm".
+	 * @param horaLlegada Hora de llegada del vuelo en formato "hh:mm".
+	 * @return true si los datos son válidos y no hay conflictos, false en caso contrario.
+	 * 
+	 * @see VueloInternacionalDAO#validarRandom(String, String, String, String)
+	 * @see VueloNacionalDAO#validarRandom(String, String, String, String)
+	 * 
+	 * Autor: Mario Rodríguez
+	 * Versión: 1.0
+	 */
 	public boolean verificarRandom(String captain, String seconOnCommand, String horaSalida, String horaLlegada) {
 		boolean valido = true;
 
