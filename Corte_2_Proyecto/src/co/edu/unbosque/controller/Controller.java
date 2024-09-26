@@ -1115,7 +1115,7 @@ public class Controller implements ActionListener {
 			vf.getVp().getInputPanel().getImgInputIOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgInputIClaro().setVisible(true);
 
-			// =====ELIMINAR========
+			// =====ELIMINAR========aaa
 			vf.getVp().getInputPanel().getImgDeleteNOscuro().setVisible(false);
 			vf.getVp().getInputPanel().getImgDeleteNClaro().setVisible(false);
 
