@@ -189,30 +189,37 @@ public class InputPanel extends JPanel {
 
 		// ETIQUETAS-------------------------------------
 		destinoField = new JTextField();
-		destinoField.setBounds(248, 255, 300, 60);
+		destinoField.setBounds(179, 234, 291, 40);
 		destinoField.setOpaque(true);
-		destinoField.setVisible(false);
+		destinoField.setVisible(true);
 
 		pasajerosField = new JTextField();
-		pasajerosField.setBounds(248, 255, 300, 60);
+		pasajerosField.setBounds(270, 403, 190, 40);
 		pasajerosField.setOpaque(true);
-		pasajerosField.setVisible(false);
+		pasajerosField.setVisible(true);
 
 		salidaField = new JTextField();
-		salidaField.setBounds(248, 255, 300, 60);
+		salidaField.setBounds(260, 490, 205, 40);
 		salidaField.setOpaque(true);
-		salidaField.setVisible(false);
+		salidaField.setVisible(true);
 
 		llegadaField = new JTextField();
-		llegadaField.setBounds(248, 255, 300, 60);
+		llegadaField.setBounds(280, 578, 185, 40);
 		llegadaField.setOpaque(true);
-		llegadaField.setVisible(false);
+		llegadaField.setVisible(true);
 
 		visaField = new JTextField();
-		visaField.setBounds(248, 255, 300, 60);
+		visaField.setBounds(248, 255, 291, 40);
 		visaField.setOpaque(true);
-		visaField.setVisible(false);
+		visaField.setVisible(true);
+		
+		
 
+		add(destinoField);
+		add(pasajerosField);
+		add(salidaField);
+		add(llegadaField);
+		add(visaField);
 		add(imgInputIOscuro);
 		add(imgInputIClaro);
 		add(imgInputNOscuro);
@@ -235,11 +242,6 @@ public class InputPanel extends JPanel {
 		add(volverBtn);
 		add(saveBtn);
 		add(companiaBtn);
-		add(destinoField);
-		add(pasajerosField);
-		add(salidaField);
-		add(llegadaField);
-		add(visaField);
 		add(imgInputIOscuro);
 		add(imgInputIClaro);
 	}
