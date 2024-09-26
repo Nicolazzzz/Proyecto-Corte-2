@@ -22,6 +22,18 @@ import java.util.Scanner;
  */
 public class FileHandler {
 
+	public static File getArchivo() {
+		return archivo;
+	}
+
+	public static void setArchivo(File archivo) {
+		FileHandler.archivo = archivo;
+	}
+
+	public static String getFolderName() {
+		return FOLDER_NAME;
+	}
+
 	private static Scanner sc;
 	private static PrintWriter pw;
 	private static File archivo;
@@ -149,4 +161,7 @@ public class FileHandler {
 		}
 		return null;
 	}
+	
+
+
 }
