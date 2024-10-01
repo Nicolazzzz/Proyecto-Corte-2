@@ -23,25 +23,80 @@ Requiere Visa: true
 
 VUELOS NACIONALES:
 
-Destino: hawai
-Compañía: Wingo
-Número de Pasajeros: 200
-Capitán a Cargo: Gabriel Aguilar
-Segundo al Mando: Lucas García
-Hora de Llegada: 08:10
-Hora de Salida: 06:20
+Destino: Cartagena
+Compañía: Copa Airlines
+Número de Pasajeros: 100
+Capitán a Cargo: Julieta Torres
+Segundo al Mando: Sofía Martínez
+Hora de Llegada: 08:20
+Hora de Salida: 07:10
+Combustible: 0.0
+Es Turbina: false
+Es Hélice: true
+
+Destino: Cartago
+Compañía: Avianca
+Número de Pasajeros: 100
+Capitán a Cargo: María Fernández
+Segundo al Mando: Sebastián Jiménez
+Hora de Llegada: 07:20
+Hora de Salida: 02:30
+Combustible: 0.0
+Es Turbina: false
+Es Hélice: true
+
+Destino: CASANARE
+Compañía: Avianca
+Número de Pasajeros: 100
+Capitán a Cargo: Benjamín Ramírez
+Segundo al Mando: Catalina Castro
+Hora de Llegada: 10:00
+Hora de Salida: 06:05
+Combustible: 0.0
+Es Turbina: false
+Es Hélice: true
+
+Destino: Choco
+Compañía: Avianca
+Número de Pasajeros: 50
+Capitán a Cargo: Amelia Morales
+Segundo al Mando: Samuel Vargas
+Hora de Llegada: 12:00
+Hora de Salida: 10:00
+Combustible: 6000.0
+Es Turbina: false
+Es Hélice: true
+
+Destino: mirandela
+Compañía: Avianca
+Número de Pasajeros: 20
+Capitán a Cargo: Samuel Vargas
+Segundo al Mando: Valentina Pérez
+Hora de Llegada: 05:30
+Hora de Salida: 01:15
 Combustible: 12000.0
 Es Turbina: false
 Es Hélice: true
 
-Destino: hawai
-Compañía: Wingo
-Número de Pasajeros: 180
-Capitán a Cargo: Amelia Morales
-Segundo al Mando: Sofía Martínez
-Hora de Llegada: 12:00
-Hora de Salida: 10:00
-Combustible: 14400.0
-Es Turbina: true
-Es Hélice: false
+Destino: choci
+Compañía: Avianca
+Número de Pasajeros: 40
+Capitán a Cargo: Santiago Gómez
+Segundo al Mando: Valentina Pérez
+Hora de Llegada: 09:20
+Hora de Salida: 07:20
+Combustible: 6000.0
+Es Turbina: false
+Es Hélice: true
+
+Destino: sipo
+Compañía: Avianca
+Número de Pasajeros: 100
+Capitán a Cargo: Martina Rodríguez
+Segundo al Mando: Benjamín Ramírez
+Hora de Llegada: 08:15
+Hora de Salida: 06:15
+Combustible: 0.0
+Es Turbina: false
+Es Hélice: true
 
